@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Casade Style Sheets -->
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
         <link rel="stylesheet" href="/app.css">
 
@@ -33,17 +33,17 @@
           </div>
         </div>
 
-<!-- 로그인 -->
-        <div class="container">
+<!-- 로그인 Modal-->
+        <div  class="container">
               <!-- Modal -->
               <div class="modal fade" id="login" role="dialog">
                 <div class="modal-dialog">
                   <!-- Modal content-->
                   <div class="modal-content">
 
-                    <div class="modal-header">
+                    <div id="modal-header" class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4><span class="glyphicon glyphicon-lock"></span>로그인</h4>
+                      <h4><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;로그인</h4>
                     </div>
 
 
@@ -67,17 +67,20 @@
                           <input  ng-disabled="main.disabled" placeholder="비밀번호" class="form-control" type="password" name="password" ng-model="main.loginData.password" ng-pattern="/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/"
                            ng-minlength="8" ng-maxlength="35" required>
                         </div>
-                        <div class="checkbox">
+                        <!-- <div class="checkbox">
                            <label><input type="checkbox" value="" checked>로그인 상태 유지</label>
-                         </div>                        <div>
-                          <button ng-disabled="main.disabled"  class="btn btn-warning btn-block" type="submit">로그인</button>
+                         </div> -->
+                         <br>
+                        <div>
+                          <button ng-disabled="main.disabled"  class="btn btn-enroll btn-block" type="submit">로그인</button>
                         </div>
                       </form>
                     </div>
+
                     <div class="modal-footer">
                       <div class="">
                         <a href="/" ng-click="main.login()">비밀번호 찾기</a>
-                        <span>&nbsp/&nbsp</span>
+                          <span>&nbsp/&nbsp</span>
                         <a ui-sref="resetusername">아이디 찾기</a>
                       </div>
                     </div>

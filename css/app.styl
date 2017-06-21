@@ -1,12 +1,44 @@
-.modal-header, h4, .close {
+.modal-header,
+h4,
+.close {
     background-color: #e96725;
-    color:white !important;
+    color: white !important;
     text-align: center;
     font-size: 30px;
 }
-.modal-footer {
+
+.modal-body {
+    margin: 10px;
+}
+
+.modal-footer,
+.modal-footer a {
     background-color: #f9f9f9;
-    color:black !important;
+    color: black !important;
+    text-decoration: none;
+}
+.modal-body input,
+.modal-body button {
+  min-height: 50px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.btn-enroll {
+  background-color: #e96725;
+  color: #ffffff;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.btn-enroll:active,
+.btn-enroll:focus {
+  color: #ffffff;
+}
+
+.btn-enroll:hover {
+  background-color: #d15c21;
+  color: #ffffff;
 }
 
 /*	--------------------------------------------------
@@ -22,6 +54,7 @@
   margin: auto;
 }
 .dizzy-gillespie::before {
+
   filter: saturate(0.3);
   display: block;
   position: absolute;
@@ -61,8 +94,8 @@
 
 
 div#logo img {
-  max-width:180px;
-  margin-top:-6px;
+  max-width: 180px;
+  margin-top: -6px;
 }
 
 /*	--------------------------------------------------
@@ -70,35 +103,36 @@ div#logo img {
   <!-- background-color: #e96725; --!>
 -------------------------------------------------- */
 .row {
-    padding:0px;
-    margin:0px;
+    padding: 0px;
+    margin: 0px;
 }
 
 div#loginInfo {
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
 
 div#loginInfo input {
-    background-color:hsla(0,0%,100%,.1);
-    border:1.5px solid #ffffff;
-    color:#ffffff;
-    min-height:40px;
+    background-color: hsla(0,0%,100%,.1);
+    border: 1.5px solid #ffffff;
+    color: #ffffff;
+    min-height: 40px;
 }
 
 div#loginInfo input:focus {
-    background-color:#eb763a;
-    min-height:40px;
+    background-color: #eb763a;
+    min-height: 40px;
 }
 
 div#loginInfo p {
-    color:#ffffff;
+    color: #ffffff;
 }
+
 div#loginInfo button {
-    background-color:#ffffff;
-    border:#000000;
-    color:#e96725;
-    width:100%;
-    min-height:40px;
+    background-color: #ffffff;
+    border: #000000;
+    color: #e96725;
+    width: 100%;
+    min-height: 40px;
 }
 
 
@@ -122,30 +156,20 @@ div#loginInfo .form-control::-webkit-input-placeholder {
   background: linear-gradient(#ed8550, #e96725); /* Standard syntax (must be last) */
 }
 
-a {
-  color:#ffffff;
-}
-a:hover {
-  text-decoration:none;
-  color:#ffffff;
-}
 
-a.nav-link {
-  color:#000000;
-}
 
 .mythumbnail {
- width:200px;
- height:200px;
- margin:20px;
+ width: 200px;
+ height: 200px;
+ margin: 20px;
 }
 
 /*	--------------------------------------------------
   <!-- header navbar-btn custom / header.html --!>
 -------------------------------------------------- */
 .navbar-btn {
- border:0px;
- color:#ffffff;
+ border: 0px;
+ color: #ffffff;
 }
 
 
@@ -165,8 +189,8 @@ a.nav-link {
 .cropArea {
   background: #E4E4E4;
   overflow: hidden;
-  width:700px;
-  height:350px;
+  width: 700px;
+  height: 50px;
 }
 
 
@@ -178,27 +202,27 @@ a.nav-link {
 
 
 div#communityWrap {
-  width:800px; padding:10px; margin:auto;
+  width: 800px; padding:10px; margin:auto;
 }
 
 div#communityContent {
-  padding:10px;
-  margin-bottom:15px;
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
-div#listTitle a{
-  text-decoration:none;
-  font-size:1.2em;
-  color:#000000;
+div#listTitle a {
+  text-decoration: none;
+  font-size: 1.2em;
+  color: #000000;
 }
 
-div#listTitle a:hover{
+div#listTitle a:hover {
   color: #e96725;
 }
 
 div#listContent a {
-  text-decoration:none;
-  color:#000000;
+  text-decoration: none;
+  color: #000000;
 }
 
 .list-contents {
@@ -211,22 +235,19 @@ margin: 1rem 0;
 }
 
 .listBorder {
-border: 1px solid  #e96725;
-margin-top:20px;
-margin-bottom:20px;
-}
-
-.main{
+border: 1px solid #e96725;
+margin-top: 20px;
+margin-bottom: 20px;
 }
 
 .main_common{
     display: inline-block;
     float: left;
-    margin-right:20px;
+    margin-right: 20px;
 }
 
 div.main_common i{
-  margin-right:5px;
+  margin-right: 5px;
 }
 
 
@@ -234,29 +255,30 @@ div.main_common i{
       <!-- 전체 스타일 커스텀  --!>
 -------------------------------------------------- */
 
-html, body {
-margin:0;
-padding:0;
-height:100%;
+html,
+body {
+margin: 0;
+padding: 0;
+height: 100%;
 font-size: 100%;
 
 }
 
 #wrap {
-    height:100%;
+    height: 100%;
 }
 
 #body {
-    width:100%;
-    min-height:100%;
+    width: 100%;
+    min-height: 100%;
     background-color: #f5f5f5;
 }
 
 #footer {
     padding: 25px 10px 25px 10px;
-    width:100%;
-    height:75px;
-    background-color: #E96725;
+    width: 100%;
+    height: 75px;
+    background-color: #e96725;
 }
 
 
@@ -264,17 +286,18 @@ font-size: 100%;
       <!-- 로그인 레이아웃 커스텀  --!>
 -------------------------------------------------- */
 
-div#loginForm{
-    min-height:100%;
-    background-color: #E96725;
-    padding-top:50px;
-    text-align:center;
+div#loginForm {
+    min-height: 100%;
+    background-color: #e96725;
+    padding-top: 50px;
+    text-align: center;
 }
+
 div#title h1 {
   margin:15px;
 }
 
-div#loginForm legend{
+div#loginForm legend {
       text-align: center;
       font-weight: 300;
       color: #444;
@@ -307,11 +330,11 @@ div#loginForm legend{
       <!-- 회원가입 레이아웃 커스텀  --!>
 -------------------------------------------------- */
 
-div#regForm{
-  min-height:100%;
-  background-color:#E96725;
-  padding-top:50px;
-  text-align:center;
+div#regForm {
+  min-height: 100%;
+  background-color: #e96725;
+  padding-top: 50px;
+  text-align: center;
 }
 
 .regForm {
@@ -319,11 +342,11 @@ div#regForm{
     margin: 0px auto;
     background-color: #ffffff;
     padding: 10px 50px 30px 50px;
-    margin-top:15px;
-    margin-bottom:15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
-@media screen and (max-width: 550px){
+@media screen and (max-width: 550px) {
   .regForm {
   width: 100%;
   background-color: #ffffff;
@@ -339,48 +362,21 @@ div#regForm{
 -------------------------------------------------- */
 
 div#mainContent {
-  padding-top:50px;
-  padding-bottom:50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 div#subContent {
-  padding:50px;
+  padding: 50px;
 }
 
 div#makeBorder {
-  margin-top:30px;
+  margin-top: 30px;
   border: 1px solid #e96725;
 }
 
 div#withBorder {
   padding: 20px 50px 50px 50px;
-}
-
-/*----------2.Headings & Buttons----------*/
-h3 {
-	font-size:1.2em;
-	font-weight:600;
-	text-transform:capitalize;
-	margin:0 0 10px 0;
-	padding:0;
-	color:#555555;
-}
-.btn-styled {
-	background-color:transparent;
-	border:#666666 1.9px solid;
-	color:#666666;
-	font-size:0.85em;
-	border-radius:30px;
-	padding:5px 13px 4px 13px;
-	margin:10px 0 10px 0;
-}
-.btn-styled:hover, .btn-styled:active  {
-	background-color:#ededed;
-	border-color:#ededed;
-	color:#555555;
-}
-.btn-styled:focus {
-	outline:0 !important;
 }
 
 
@@ -400,7 +396,7 @@ h3 {
   border-radius: 5px 5px 0 0;
   background-clip: padding-box;
   position: relative;
-  width:100%;
+  width: 100%;
 }
 
 .photo .photo-image span.photo-author {

@@ -164,7 +164,7 @@ $urlRouterProvider.otherwise('/');
                   controller: 'ArtistMenuController',
                   authenticated: false
                 },
-              }
+              } 
              })
 
             .state('app.artist.category', {

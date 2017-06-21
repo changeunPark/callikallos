@@ -6,9 +6,34 @@ h4,
   text-align: center;
   font-size: 30px;
 }
-.modal-footer {
+.modal-body {
+  margin: 10px;
+}
+.modal-footer,
+.modal-footer a {
   background-color: #f9f9f9;
   color: #000 !important;
+  text-decoration: none;
+}
+.modal-body input,
+.modal-body button {
+  min-height: 50px;
+  font-size: 1em;
+  font-weight: bold;
+}
+.btn-enroll {
+  background-color: #e96725;
+  color: #fff;
+  font-size: 1em;
+  font-weight: bold;
+}
+.btn-enroll:active,
+.btn-enroll:focus {
+  color: #fff;
+}
+.btn-enroll:hover {
+  background-color: #d15c21;
+  color: #fff;
 }
 /*	--------------------------------------------------
   <!-- custom lougout --!>
@@ -100,16 +125,6 @@ div#loginInfo .form-control::-webkit-input-placeholder {
   background: -moz-linear-gradient(#ed8550, #e96725); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#ed8550, #e96725); /* Standard syntax (must be last) */
 }
-a {
-  color: #fff;
-}
-a:hover {
-  text-decoration: none;
-  color: #fff;
-}
-a.nav-link {
-  color: #000;
-}
 .mythumbnail {
   width: 200px;
   height: 200px;
@@ -137,7 +152,7 @@ a.nav-link {
   background: #e4e4e4;
   overflow: hidden;
   width: 700px;
-  height: 350px;
+  height: 50px;
 }
 /*	--------------------------------------------------
       <!--list-title  --!>
@@ -289,33 +304,6 @@ div#makeBorder {
 }
 div#withBorder {
   padding: 20px 50px 50px 50px;
-}
-/*----------2.Headings & Buttons----------*/
-h3 {
-  font-size: 1.2em;
-  font-weight: 600;
-  text-transform: capitalize;
-  margin: 0 0 10px 0;
-  padding: 0;
-  color: #555;
-}
-.btn-styled {
-  background-color: transparent;
-  border: #666 1.9px solid;
-  color: #666;
-  font-size: 0.85em;
-  border-radius: 30px;
-  padding: 5px 13px 4px 13px;
-  margin: 10px 0 10px 0;
-}
-.btn-styled:hover,
-.btn-styled:active {
-  background-color: #ededed;
-  border-color: #ededed;
-  color: #555;
-}
-.btn-styled:focus {
-  outline: 0 !important;
 }
 /*	--------------------------------------------------
       <!-- parial-gallery photo  --!>
