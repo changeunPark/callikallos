@@ -1,0 +1,24 @@
+<div class="container">
+  <div  class="list-contents"style="padding:25px; margin-top:5%;">
+    <h2>새 글 쓰기</h2>
+    <form ng-submit="addBoard(title, content)">
+      <div class="form-group">
+        <select class="form-control" name="mySelect" id="mySelect"
+          ng-options="option.name for option in data.availableOptions track by option.id"
+          ng-model="data.selectedOption">
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input type="title" class="form-control" id="title" ng-model="title" placeholder="제목을 입력해주세요">
+      </div>
+
+      <div class="form-group">
+        <textarea class="form-control" rows="5" id="content" ng-model="content" placeholder="내용을 입력해주세요"></textarea>
+      </div>
+
+      <a ui-sref="app.board.category({code: 0})" class="btn btn-default">취소</a>
+      <button type="submit" class="btn btn-success pull-right">등록</button>
+    </form>
+  </div>
+</div>

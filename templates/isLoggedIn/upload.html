@@ -1,0 +1,109 @@
+<!-- MyPhotosController -->
+<div id="mainContent" class="container">
+  <uib-tabset active="activeJustified" justified="true">
+<!-- 이미지 업로드 -->
+    <uib-tab index="0" heading="작품">
+      <div  id="subContent">
+            <label>작품 메인 이미지</label>
+            <div  id="subContent" class="text-center">
+                  <img class="mythumbnail" src="/images/default.jpg" ng-src="{{mainThumbnail.dataUrl}}">
+                  <form ng-submit="insertPhotoTemp()">
+                    <label class="btn btn-success">이미지 찾기
+                        <input ng-disabled="loading" type="file"  file-model="file.upload" name="myfile" style="display: none;" onchange="angular.element(this).scope().mainPhotoChanged(this.files)">
+                    </label>
+                        <button ng-disabled="loading" class="btn btn-default">이미지 업로드</button>
+                  </form>
+                  <br>
+
+                  <div class="alert alert-info" ng-show="loading">이미지 업로드 중입니다.
+                  </div>
+                  <div ng-show="message">
+                      <div ng-class="alert">{{ message }}</div>
+                  </div>
+
+            </div>
+
+            <form ng-submit="insertPhoto(title, detail)">
+              <div class="form-group">
+                <label for="title">카테고리(필수)</label>
+
+                <select class="form-control" name="mySelect" id="mySelect"
+                  ng-options="option.name for option in data.availableOptions track by option.id"
+                  ng-model="data.selectedOption">
+                </select>
+              </div>
+                <div class="form-group">
+                  <label for="title">작품 제목(필수)</label>
+                  <input type="text" class="form-control" id="title" ng-model="title" placeholder="내용을 입력해주세요.">
+                </div>
+                <div class="form-group ">
+                  <label for="detail">작품 설명(필수)</label>
+                  <input type="text" class="form-control" id="detail" ng-model="detail" placeholder="내용을 입력해주세요.">
+                </div>
+
+                <div class="form-group text-center">
+                <button ng-disabled="loading" type="submit" class="btn btn-default">업로드 완료</button>
+                <a class="btn btn-default">취소</a>
+                </div>
+                <div ng-show="mainMessageStatus">
+                    <div ng-class="alert">{{ mainMessage }}</div>
+                </div>
+            </form>
+      </div>
+    </uib-tab>
+
+
+<!-- 전시 / 대회 -->
+    <uib-tab index="1" heading="전시 / 대회" >
+      <div  id="subContent"  ng-controller="UploadDisplayController">
+            <label>전시 / 대회 메인 이미지</label>
+            <div  id="subContent" class="text-center">
+                  <img class="mythumbnail" src="/images/default.jpg" ng-src="{{mainThumbnail.dataUrl}}">
+                  <form ng-submit="insertDisplayTemp()">
+                    <label class="btn btn-success">이미지 찾기
+                        <input ng-disabled="loading" type="file"  file-model="file.upload" name="myfile" style="display: none;" onchange="angular.element(this).scope().mainPhotoChanged(this.files)">
+                    </label>
+                        <button ng-disabled="loading" class="btn btn-default">이미지 업로드</button>
+                  </form>
+                  <br>
+
+                  <div class="alert alert-info" ng-show="loading">이미지 업로드 중입니다.
+                  </div>
+                  <div ng-show="displayMessage">
+                      <div ng-class="alert">{{ displayMessage }}</div>
+                  </div>
+
+            </div>
+
+            <form ng-submit="insertDisplay(title, detail)">
+              <div class="form-group">
+                <label for="title">카테고리(필수)</label>
+
+                <select class="form-control" name="mySelect" id="mySelect"
+                  ng-options="option.name for option in data.availableOptions track by option.id"
+                  ng-model="data.selectedOption">
+                </select>
+              </div>
+                <div class="form-group">
+                  <label for="title">전시 / 대회 제목(필수)</label>
+                  <input type="text" class="form-control" id="title" ng-model="title" placeholder="내용을 입력해주세요.">
+                </div>
+                <div class="form-group ">
+                  <label for="detail">전시 / 대회 설명(필수)</label>
+                  <input type="text" class="form-control" id="detail" ng-model="detail" placeholder="내용을 입력해주세요.">
+                </div>
+
+                <div class="form-group text-center">
+                <button ng-disabled="loading" type="submit" class="btn btn-default">업로드 완료</button>
+                <a class="btn btn-default">취소</a>
+                </div>
+                <div ng-show="mainMessageStatus">
+                    <div ng-class="alert">{{ mainMessage }}</div>
+                </div>
+            </form>
+      </div>
+    </uib-tab>
+
+
+  </uib-tabset>
+</div>

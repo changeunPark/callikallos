@@ -1,0 +1,51 @@
+<div id="mainContent" class="container">
+  <uib-tabset active="activeJustified" justified="true">
+    <uib-tab index="0" heading="작품정보" ng-init="getArtist()">
+  					<div  id="subContent" class="text-center">
+  							<div class="author">
+  										<img class="mythumbnail"  ng-src="{{artistInfo[0].profile_image}}">
+  								<p><h3 class="name">{{artistInfo[0].username}}</h3></p>
+  							</div>
+  					</div>
+
+  				  <div class="scrollmenu text-center">
+              <a ui-sref-active="active">작품</a>
+  				  </div>
+
+
+            <div  id="subContent">
+              <div class="row container-fluid">
+                <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="artist in artistInfo | filter:search |orderBy : data.selectedOption.sort ">
+                  <div class="card">
+                        <div class="card-image">
+                          <a ui-sref="app.gallery.show({photo_id: artist.photo_id, photo_type:artist.photo_type})" ui-sref-active="active">
+                            <img class="img-responsive" ng-src="{{artist.photo_path}}">
+                            <span class="card-type">{{artist.description}}</span>
+                          </a>
+                        </div>
+                        <div class="card-content">
+                            <p>{{artist.photo_title}}</p>
+                        </div>
+
+                        <div class="card-action">
+                           <!-- <span class="glyphicon glyphicon-heart" aria-hidden="true">{{photo.opinion_count}}</span> -->
+                            <div class="row">
+                             <div class="col-xs-12">
+                               <div id="listContent" class="main ">
+                                   <div class="main_1 main_common">
+                                       <i class="fa fa-eye" aria-hidden="true"></i>{{artist.view}}
+                                   </div>
+                                   <div class="main_2 main_common">
+                                       <i class="fa fa-comment-o" aria-hidden="true"></i>{{artist.comment_count}}
+                                   </div>
+                               </div>
+                             </div>
+                           </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+    </uib-tab>
+  </uib-tabset>
+</div>

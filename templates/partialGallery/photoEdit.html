@@ -1,0 +1,52 @@
+<!-- MyPhotosController -->
+<div  id="mainContent" class="container">
+  <uib-tabset active="activeJustified" justified="true">
+<!-- userProfile 업로드하기 -->
+    <uib-tab index="0" heading="이미지 수정">
+      <div  ng-init="getphoto();">
+        <div  id="subContent">
+            <label >작품 메인 이미지</label>
+                <div class="text-center">
+                      <img class="mythumbnail" style="height:300px;" ng-src="{{mainThumbnail.dataUrl || photo.photo_path}}">
+                      <form ng-submit="insertPhoto()">
+                        <br>
+                        <label class="btn btn-success">이미지 찾기
+                            <input type="file"  file-model="file.upload" name="myfile" style="display: none;" onchange="angular.element(this).scope().mainPhotoChanged(this.files)">
+                        </label>
+                            <button type="submit" class="btn btn-primary">이미지 변경</button>
+                      </form>
+                      <br>
+                </div>
+
+                <form ng-submit="insertPhotoInfo()">
+                  <div class="form-group">
+                    <label for="title">카테고리(필수)</label>
+
+                    <select class="form-control" name="mySelect" id="mySelect"
+                      ng-options="option.name for option in data.availableOptions track by option.id"
+                      ng-model="data.selectedOption">
+                    </select>
+                  </div>
+                    <div class="form-group">
+                      <label for="title">작품 제목(필수)</label>
+                      <input type="text" class="form-control" id="title" ng-model="photo.photo_title" value="{{photo.photo_title}}"placeholder="내용을 입력해주세요.">
+                    </div>
+                    <div class="form-group ">
+                      <label for="detail">작품 설명(필수)</label>
+                      <input type="text" class="form-control" id="detail" ng-model="photo.photo_detail" value="{{photo.photo_detail}}" placeholder="내용을 입력해주세요.">
+                    </div>
+
+                    <div class="form-group text-center">
+                    <button type="submit" class="btn btn-default">정보 변경</button>
+                    <a class="btn btn-default">취소</a>
+                    </div>
+                    <div ng-show="mainMessageStatus">
+                        <div ng-class="alert">{{ mainMessage }}</div>
+                    </div>
+                </form>
+
+          </div>
+        </div>
+    </uib-tab>
+  </uib-tabset>
+</div>

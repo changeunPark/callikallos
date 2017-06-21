@@ -1,0 +1,12 @@
+angular.module('app',[
+    'ui.router',
+    'ui.bootstrap',
+    'userControllers',
+    'userServices',
+    'mainController',
+    'authServices',
+    'emailController',
+    'resetController'
+]).config(function($httpProvider){
+  $httpProvider.interceptors.push('AuthInterceptors');
+});

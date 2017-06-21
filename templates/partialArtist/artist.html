@@ -1,0 +1,47 @@
+<div id="mainContent" class="container">
+  <uib-tabset active="activeJustified" justified="true">
+    <uib-tab index="0" heading="작품정보" ng-init="getArtist()">
+  					<div  id="subContent" class="text-center">
+  							<div class="author">
+  								<span class="thmb">
+  										<img class="mythumbnail" style="width:200px; height:200px;"  src="/images/default.jpg"  ng-src="{{photos[0].profile_image}}">
+  								</span>
+  								<p><h3 class="name">{{artistInfo[0].username}}</h3></p>
+  							</div>
+  					</div>
+
+  				  <div class="scrollmenu text-center">
+              <a ui-sref-active="active">작품</a>
+  				  </div>
+
+
+            <div id="subContent">
+                  <div class="row container-fluid">
+                    <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="artist in artistInfo">
+                      <div class="card" ng-show="{{artist.photo_id}}">
+                            <div class="card-image">
+                              <a ui-sref="app.gallery.show({photo_id: artist.photo_id, photo_type:artist.photo_type})" ui-sref-active="active">
+                                <img class="img-responsive" ng-src="{{artist.photo_path}}">
+                                <span class="card-author">By {{artist.username}}.</span>
+                              </a>
+                            </div>
+                            <div class="card-content">
+                                <p>{{artist.photo_title}}</p>
+                            </div>
+                            <div class="card-action">
+                               <!-- <span class="glyphicon glyphicon-heart" aria-hidden="true">{{photo.opinion_count}}</span> -->
+                                <div class="row">
+                                  <div class="col-xs-6 col-sm-6" style="text-align:left">
+                                   <span class="text-left">{{artist.description}}</span>
+                                 </div>
+                                 <div class="col-xs-6 col-sm-6" style="text-align:right">
+                                   <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color:#E96725;"></span>  {{artist.view}}
+                                 </div>
+                               </div>
+                            </div>
+                        </div>
+                  </div>
+            </div>
+    </uib-tab>
+  </uib-tabset>
+</div>

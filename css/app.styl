@@ -1,0 +1,865 @@
+.modal-header, h4, .close {
+    background-color: #e96725;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+}
+.modal-footer {
+    background-color: #f9f9f9;
+    color:black !important;
+}
+
+/*	--------------------------------------------------
+  <!-- custom lougout --!>
+-------------------------------------------------- */
+.dizzy-gillespie {
+  filter: saturate(3);
+  width: 0.1px;
+  height: 0.1px;
+  border: 40px solid transparent;
+  border-radius: 5px;
+  animation: loader 3s ease-in infinite, spin 1s linear infinite;
+  margin: auto;
+}
+.dizzy-gillespie::before {
+  filter: saturate(0.3);
+  display: block;
+  position: absolute;
+  z-index: -1;
+  margin-left: -40px;
+  margin-top: -40px;
+  content:'';
+  height:0.1;
+  width:0.1;
+  border: 40px solid transparent;
+  border-radius: 5px;
+  animation: loader 2s ease-in infinite reverse, spin 0.8s linear infinite reverse;
+}
+.dizzy-gillespie::after {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  margin-left: -10px;
+  margin-top: -10px;
+  content:'';
+  height:20px;
+  width:20px;
+  border-radius: 20px;
+  background-color: white;
+}
+@keyframes loader {
+  0% {border-bottom-color:transparent;border-top-color:#114357}
+  25% {border-left-color:transparent;border-right-color:#826C75}
+  50% {border-top-color:transparent;border-bottom-color:#F29492}
+  75% {border-right-color:transparent;border-left-color:#826C75}
+  100% {border-bottom-color:transparent;border-top-color:#114357}
+}
+@keyframes spin {
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(-360deg)}
+}
+
+
+div#logo img {
+  max-width:180px;
+  margin-top:-6px;
+}
+
+/*	--------------------------------------------------
+  <!-- custom color --!>
+  <!-- background-color: #e96725; --!>
+-------------------------------------------------- */
+.row {
+    padding:0px;
+    margin:0px;
+}
+
+div#loginInfo {
+  padding-bottom:10px;
+}
+
+div#loginInfo input {
+    background-color:hsla(0,0%,100%,.1);
+    border:1.5px solid #ffffff;
+    color:#ffffff;
+    min-height:40px;
+}
+
+div#loginInfo input:focus {
+    background-color:#eb763a;
+    min-height:40px;
+}
+
+div#loginInfo p {
+    color:#ffffff;
+}
+div#loginInfo button {
+    background-color:#ffffff;
+    border:#000000;
+    color:#e96725;
+    width:100%;
+    min-height:40px;
+}
+
+
+
+div#loginInfo form-control::-moz-placeholder {
+  color: #ffffff;
+  opacity: 1;
+}
+div#loginInfo .form-control:-ms-input-placeholder {
+  color: #ffffff;
+}
+div#loginInfo .form-control::-webkit-input-placeholder {
+  color: #ffffff;
+}
+
+#grad1 {
+  background: #e96725; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#ed8550, #e96725); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#ed8550, #e96725); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#ed8550, #e96725); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#ed8550, #e96725); /* Standard syntax (must be last) */
+}
+
+a {
+  color:#ffffff;
+}
+a:hover {
+  text-decoration:none;
+  color:#ffffff;
+}
+
+a.nav-link {
+  color:#000000;
+}
+
+.mythumbnail {
+ width:200px;
+ height:200px;
+ margin:20px;
+}
+
+/*	--------------------------------------------------
+  <!-- header navbar-btn custom / header.html --!>
+-------------------------------------------------- */
+.navbar-btn {
+ border:0px;
+ color:#ffffff;
+}
+
+
+/*	--------------------------------------------------
+  <!-- container custom / 전체 적용--!>
+-------------------------------------------------- */
+.container {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+/*	--------------------------------------------------
+      <!--위 / 오른쪽 / 아래쪽 / 왼쪽 --!>
+      <!-- margin / padding -->
+-------------------------------------------------- */
+
+.cropArea {
+  background: #E4E4E4;
+  overflow: hidden;
+  width:700px;
+  height:350px;
+}
+
+
+/*	--------------------------------------------------
+      <!--list-title  --!>
+
+      <!--위 / 오른쪽 / 아래쪽 / 왼쪽 --!>
+-------------------------------------------------- */
+
+
+div#communityWrap {
+  width:800px; padding:10px; margin:auto;
+}
+
+div#communityContent {
+  padding:10px;
+  margin-bottom:15px;
+}
+
+div#listTitle a{
+  text-decoration:none;
+  font-size:1.2em;
+  color:#000000;
+}
+
+div#listTitle a:hover{
+  color: #e96725;
+}
+
+div#listContent a {
+  text-decoration:none;
+  color:#000000;
+}
+
+.list-contents {
+-webkit-box-orient: vertical;
+-webkit-box-direction: normal;
+-ms-flex-direction: column;
+flex-direction: column;
+position: relative;
+margin: 1rem 0;
+}
+
+.listBorder {
+border: 1px solid  #e96725;
+margin-top:20px;
+margin-bottom:20px;
+}
+
+.main{
+}
+
+.main_common{
+    display: inline-block;
+    float: left;
+    margin-right:20px;
+}
+
+div.main_common i{
+  margin-right:5px;
+}
+
+
+/*	--------------------------------------------------
+      <!-- 전체 스타일 커스텀  --!>
+-------------------------------------------------- */
+
+html, body {
+margin:0;
+padding:0;
+height:100%;
+font-size: 100%;
+
+}
+
+#wrap {
+    height:100%;
+}
+
+#body {
+    width:100%;
+    min-height:100%;
+    background-color: #f5f5f5;
+}
+
+#footer {
+    padding: 25px 10px 25px 10px;
+    width:100%;
+    height:75px;
+    background-color: #E96725;
+}
+
+
+/*	--------------------------------------------------
+      <!-- 로그인 레이아웃 커스텀  --!>
+-------------------------------------------------- */
+
+div#loginForm{
+    min-height:100%;
+    background-color: #E96725;
+    padding-top:50px;
+    text-align:center;
+}
+div#title h1 {
+  margin:15px;
+}
+
+div#loginForm legend{
+      text-align: center;
+      font-weight: 300;
+      color: #444;
+      margin: 0 auto 45px;
+      font-size: 35px;
+      line-height: 38px;
+      text-transform: none;
+      letter-spacing: 0;
+}
+
+.loginForm {
+  margin: 0 auto;
+  width: 470px;
+  padding: 40px;
+  border-radius: 3px;
+  background: white;
+}
+
+@media screen and (max-width: 550px){
+  .loginForm {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 0;
+  padding: 10px 50px 30px 50px;
+  }
+}
+
+
+/*	--------------------------------------------------
+      <!-- 회원가입 레이아웃 커스텀  --!>
+-------------------------------------------------- */
+
+div#regForm{
+  min-height:100%;
+  background-color:#E96725;
+  padding-top:50px;
+  text-align:center;
+}
+
+.regForm {
+    width: 340px;
+    margin: 0px auto;
+    background-color: #ffffff;
+    padding: 10px 50px 30px 50px;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+@media screen and (max-width: 550px){
+  .regForm {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 0;
+  padding: 10px 50px 30px 50px;
+  }
+}
+
+
+/*	--------------------------------------------------
+      <!-- 갤러리, 아티스트  레이아웃 커스텀  --!>
+          <!--위 / 오른쪽 / 아래쪽 / 왼쪽 --!>
+-------------------------------------------------- */
+
+div#mainContent {
+  padding-top:50px;
+  padding-bottom:50px;
+}
+
+div#subContent {
+  padding:50px;
+}
+
+div#makeBorder {
+  margin-top:30px;
+  border: 1px solid #e96725;
+}
+
+div#withBorder {
+  padding: 20px 50px 50px 50px;
+}
+
+/*----------2.Headings & Buttons----------*/
+h3 {
+	font-size:1.2em;
+	font-weight:600;
+	text-transform:capitalize;
+	margin:0 0 10px 0;
+	padding:0;
+	color:#555555;
+}
+.btn-styled {
+	background-color:transparent;
+	border:#666666 1.9px solid;
+	color:#666666;
+	font-size:0.85em;
+	border-radius:30px;
+	padding:5px 13px 4px 13px;
+	margin:10px 0 10px 0;
+}
+.btn-styled:hover, .btn-styled:active  {
+	background-color:#ededed;
+	border-color:#ededed;
+	color:#555555;
+}
+.btn-styled:focus {
+	outline:0 !important;
+}
+
+
+/*	--------------------------------------------------
+      <!-- parial-gallery photo  --!>
+-------------------------------------------------- */
+
+.photo .photo-image {
+  margin-top:25px;
+  position: relative;
+  overflow: hidden;
+  transition: .5s ease;
+}
+
+
+.photo .photo-image img {
+  border-radius: 5px 5px 0 0;
+  background-clip: padding-box;
+  position: relative;
+  width:100%;
+}
+
+.photo .photo-image span.photo-author {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.photo span.photo-author {
+    color: #fff;
+    font-size: 1em;
+    font-weight: 200;
+    text-shadow: 1px 1px 2px #000000
+}
+
+/*	--------------------------------------------------
+      <!-- parial-gallery Card  --!>
+-------------------------------------------------- */
+
+.card {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.card {
+  margin-top: 25px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  background-clip: padding-box;
+}
+
+.card span.card-author {
+    color: #fff;
+    font-size: 1em;
+    font-weight: 200;
+    text-shadow: 1px 1px 2px #000000
+}
+
+.card .card-image {
+  margin-top:25px;
+  position: relative;
+  overflow: hidden;
+  transition: .5s ease;
+}
+
+
+.card .card-image img {
+  border-radius: 5px 5px 0 0;
+  background-clip: padding-box;
+  position: relative;
+  width:100%;
+  height:200px;
+}
+
+.card .card-image span.card-author {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.card .card-image span.card-type {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+}
+
+
+.card .card-content {
+  font-size: 1em;
+  font-weight: 300;
+  padding: 10px 20px 10px 20px;
+  background-clip: padding-box;
+  box-sizing: border-box;
+}
+
+.card .card-content p {
+  margin: 0;
+  color: inherit;
+}
+
+.card .card-content span.card-title {
+  line-height: 30px;
+}
+
+.card .card-action {
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  padding: 10px 20px 10px 20px;
+}
+
+
+/*	--------------------------------------------------
+      <!-- parial-artist namecard  --!>
+-------------------------------------------------- */
+
+.namecard-container {
+  margin-top:50px;
+}
+.namecard {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.namecard:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.namecard {
+  box-sizing: border-box;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border-radius: 5px;
+}
+
+
+.namecard-header {
+  border-radius: 3px;
+  position: relative;
+  top: -20px;
+  margin:15px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+
+.namecard .namecard-image {
+  margin-top:25px;
+  position: relative;
+  overflow: hidden;
+  transition: .5s ease;
+  border-radius: 3px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+}
+
+
+.namecard .namecard-image img {
+  background-clip: padding-box;
+  position: relative;
+  width:100%;
+  height:200px;
+}
+
+.namecard span.namecard-author {
+  color: #fff;
+  font-size: 1em;
+  font-weight: 200;
+  text-shadow: 1px 1px 2px #000000
+}
+
+
+.namecardContainer{
+  margin-top: -20px;
+  min-height:100px;
+}
+
+.namecard .namecard-content {
+  font-size: 1em;
+  font-weight: 300;
+  padding: 10px 20px 10px 20px;
+  background-clip: padding-box;
+  box-sizing: border-box;
+}
+
+.namecard .namecard-content p {
+  margin: 0;
+  color: inherit;
+}
+
+.namecard .namecard-action {
+  text-align:center;
+  color: #e96725;
+}
+
+
+
+
+
+/*	--------------------------------------------------
+<!-- #navbar-main --!>
+-------------------------------------------------- */
+#main-navbar.navbar-default .navbar-brand {
+    color: #e96725;
+}
+
+#main-navbar.navbar-default {
+    margin-bottom: 0px;
+    font-size: 15px;
+    background-color: rgba(248, 248, 248, 1);
+    border-bottom-width: 1px;
+}
+#main-navbar.navbar-default .navbar-nav>li>a {
+    color: rgba(0, 0, 0, 1);
+    background-color: rgba(248, 248, 248, 0);
+}
+#main-navbar.navbar-default .navbar-nav>li>a:hover,
+#main-navbar.navbar-default .navbar-nav>li>a:focus {
+    color: #E96725;
+    background-color: rgba(248, 248, 248, 0);
+}
+#main-navbar.navbar-default .navbar-nav>.active>a,
+#main-navbar.navbar-default .navbar-nav>.active>a:hover,
+#main-navbar.navbar-default .navbar-nav>.active>a:focus {
+    color: #E96725;
+    background-color: rgba(255, 255, 255, 1);
+}
+#main-navbar.navbar-default .navbar-toggle {
+    border-color: #ffffff;
+}
+#main-navbar.navbar-default .navbar-toggle:hover,
+#main-navbar.navbar-default .navbar-toggle:focus {
+    background-color: #ffffff;
+}
+#main-navbar.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ffffff;
+}
+#main-navbar.navbar-default .navbar-toggle:hover .icon-bar,
+#main-navbar.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #f8f8f8;
+}
+
+
+
+
+/*	--------------------------------------------------
+<!-- div#panel-title{ --!>
+-------------------------------------------------- */
+div#panel-title{
+    background-color: rgba(34, 34, 34, 1);
+    color:#ffffff;
+}
+div#panel-title.panel{
+  margin-bottom:0px;
+}
+
+/*	--------------------------------------------------
+<!-- div#board-navbar --!>
+-------------------------------------------------- */
+
+div#board-navbar {
+  margin-bottom:15px;
+  vertical-align: middle;
+}
+div.form-group.navbar-btn{
+  margin-right:15px;
+}
+
+/*	--------------------------------------------------
+        board 조회수 이미지 조정
+-------------------------------------------------- */
+
+span.view-count{
+  width:200px;
+  margin-right:10px;
+  text-align: right;
+}
+
+
+/*	--------------------------------------------------
+<!-- board 게시판 유저 이미지 및 텍스트 Custom  --!>
+-------------------------------------------------- */
+
+div.textarea {
+    resize: none;
+    height: 76px;
+    padding: 16px 20px 0 20px;
+    line-height: 21px;
+    border: 0;
+    background: transparent;
+    font-size: 13px;
+
+}
+
+/*	--------------------------------------------------
+<!-- board 게시판 유저 이미지 및 텍스트 Custom  --!>
+-------------------------------------------------- */
+
+.bar{
+width: 1px;
+height: 10px;
+margin: 0 5px 0 7px;
+font-size: 0;
+background: #d0d0d0;
+display: inline-block;
+vertical-align: middle;
+}
+
+/*	--------------------------------------------------
+    게시판 보여주기 커스텀
+-------------------------------------------------- */
+
+/*	--------------------------------------------------
+          게시판 리스트 커스텀
+          배경 색 rgba(34, 34, 34, 1);
+-------------------------------------------------- */
+
+div#boardrow {
+margin-top:5px;
+padding-top:5px;
+padding-bottom:5px;
+border-bottom: 1px solid #e7eaed;
+vertical-align: middle;
+}
+
+div.author_thmb > a > img {
+  border-radius: 6px;
+  width:50px;
+  height:50px;
+  float:left;
+  margin-right:15px;
+}
+
+div.author_txt > p {
+
+}
+
+div.author_border{
+  padding-top: 15px;
+  padding-bottom: 5px;
+  border-top: 1px solid #e7eaed;
+  border-bottom: 1px solid #e7eaed;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+
+
+div.comment_border {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top:25px;
+  margin-bottom:25px;
+}
+
+div.comment_list_border{
+  padding-bottom: 5px;
+  padding-top: 15px;
+  border-top: 1px solid #e7eaed;
+  border-bottom: 1px solid #e7eaed;
+}
+
+/*	--------------------------------------------------
+<!--  board-list div안에 있는 글씨 가운데 정렬 --!>
+-------------------------------------------------- */
+
+.list-sort li {
+    float: left;
+    margin-right: 20px;
+}
+
+.list-sort {
+    float: left;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 5px;
+}
+
+span.icon {
+  height: 50px;
+  vertical-align: middle;
+  padding-top: 10px;
+}
+
+
+/*	--------------------------------------------------
+              전체 스크롤 메뉴 커스텀
+-------------------------------------------------- */
+
+div.scrollmenu {
+
+/*	--------------------------------------------------
+z-index: 1;
+position: fixed; /* Set the navbar to fixed position
+top: 63px; /* Position the navbar at the top of the page
+-------------------------------------------------- */
+
+    width:100%;
+    background-color: #ffffff;
+    border-top: 1px solid #bdbdbd;
+    border-bottom: 1px solid #bdbdbd;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    margin-right: -5px;
+    font-size: 1.1em;
+}
+
+div.scrollmenu a:hover {
+    background-color: #E96725;
+    color: #ffffff
+}
+
+div.scrollmenu a.active {
+    background-color: #E96725;
+    color: #ffffff;
+}
+
+
+/*	--------------------------------------------------
+      보드 스크롤 메뉴 커스텀
+-------------------------------------------------- */
+
+div#board.scrollmenu {
+    width:100%;
+    background-color: #e96725;
+    border: 0px;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div#board.scrollmenu a {
+    display: inline-block;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    margin-right: -5px;
+    font-size: 1.1em;
+}
+
+div#board.scrollmenu a.active > span{
+  border-bottom: 1.5px solid #ffffff;
+  padding: 0;
+}
+
+div#board.scrollmenu a:hover > span{
+  border-bottom: 1.5px solid #ffffff;
+  padding: 0;
+}
+
+
+div#board.scrollmenu a:hover {
+    color: #ffffff
+}
+
+div#board.scrollmenu a.active {
+    color: #ffffff;
+}
+
+/*	--------------------------------------------------
+<!-- board profile-img 위치 조정 -->
+-------------------------------------------------- */
+
+.list-profile-img{
+    margin-top: 5px;
+    margin-right: 10px;
+    float: left;
+    background: url(../images/default.jpg) 50% 50% no-repeat; /* 50% 50% centers image in div */
+    background-size: auto 100%; /* Interchange this value depending on prefering width vs. height */
+    width: 30px;
+    height: 30px;
+}

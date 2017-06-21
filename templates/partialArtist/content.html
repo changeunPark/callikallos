@@ -1,0 +1,48 @@
+  <div class="container" ng-init="getHeaderContent()">
+    <div class="container-fluid">
+        <form class="navbar-form navbar-right hidden-xs ">
+          <input type="text" class="form-control" ng-model="search" placeholder="검색어를 입력해주세요.">
+            <select class="form-control" name="mySelect" id="mySelect"
+              ng-options="option.name for option in data.availableOptions track by option.sort"
+              ng-model="data.selectedOption" >
+            </select>
+        </form>
+    </div>
+
+      <div class="row container-fluid">
+        <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="user in allArtist | filter:search |orderBy : data.selectedOption.sort ">
+          <div class="namecard-container">
+            <div class="namecard">
+
+                  <div class="namecard-header">
+                    <div class="namecard-image">
+                      <a ui-sref="app.artist.show({artist_id: user.user_id})">
+                        <img class="img-responsive" ng-src="{{user.profile_image}}" >
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="namecardContainer">
+                    <div class="namecard-action" >
+                      <div style="color:#000000;">
+                        <h4><span>{{user.username}}</span></h4>
+                      </div>
+
+                      <div>
+                        <h5><span>{{user.description}} 작가</span></h5>
+                      </div>
+                    </div>
+                    <div class="namecard-content text-center">
+                          <i style="color:#3b5998;"class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>
+                          <i style="color:#8a3ab9; margin-left:25px; margin-right:25px;"class="fa fa-instagram fa-lg" aria-hidden="true"></i>
+                          <i style="color:#e96725;" class="fa fa-rss fa-lg" aria-hidden="true"></i>
+                    </div>
+                  </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  </div>

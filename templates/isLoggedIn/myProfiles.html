@@ -1,0 +1,171 @@
+<div id="mainContent" class="container">
+  <uib-tabset id="tab" active="activeJustified" justified="true">
+      <uib-tab index="0" heading="사용자 기본 정보" ng-init="getUserProfile()">
+    <!-- 사용자 기본 정보 -->
+    <!-- ImageUploadCtrl 구간 시작 -->
+              <div id="subContent" >
+                   <label for="username">사용자 프로필 이미지</label>
+                     <div  id="subContent" class="text-center" >
+                         <img class="mythumbnail" ng-src="{{thumbnail.dataUrl || userSetting.profile_image}}">
+                         <form ng-submit="updateProfileImage()">
+                           <p>프로필 이미지를 등록해 주세요.200 X 200 픽셀 크기의 이미지를 권장합니다.</p>
+                           <label class="btn btn-success">이미지 찾기
+                               <input type="file" ng-disabled="loading" file-model="file.upload" name="myfile" style="display: none;" onchange="angular.element(this).scope().photoChanged(this.files)">
+                           </label>
+                             <button ng-disabled="loading" type="submit" class="btn btn-primary">이미지 업로드</button>
+                         </form>
+                         <br>
+                         <div class="alert alert-info" ng-show="loading">이미지 업로드 중입니다.
+                         </div>
+
+                         <div ng-show="message">
+                             <div ng-class="alert">{{ message }}</div>
+                         </div>
+
+                     </div>
+
+    <!-- ImageUploadCtrl 구간 종료 -->
+              <form ng-submit="updateUserInfo()">
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <label for="username">사용자 아이디</label>
+                    <input type="username" class="form-control" id="username" ng-model="userSetting.username" placeholder="아이디를 입력해주세요.">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="email">이메일</label>
+                    <input type="email" class="form-control" id="email" ng-model="userSetting.email" placeholder="이메일을 입력해주세요.">
+                  </div>
+                </div>
+
+                <div class="form-group text-center">
+
+
+                  <div id="makeBorder"></div>
+                  <div id="withBorder">
+
+                    <p>캘리칼로스 작가 등록하면  작가 페이지에 작가님의 정보가 소개됩니다. <p>
+                    <label for="email">캘리칼로스 작가 등록하기</label>
+                    <input type="checkbox" ng-model="checkboxModel.value">
+                  </div>
+
+                  <div>
+                    <button ng-disabled="loading"  type="submit" class="btn btn-default">확인</button>
+                      <a ng-href="/" class="btn btn-default">취소</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </uib-tab>
+
+    <!-- 사용자 상세 정보 -->
+      <uib-tab index="1" heading="사용자 상세 정보" ng-init="getUserDetail()" ng-show="main.authorized" style="color:#000000;">
+        <div id="subContent">
+              <div ng-show="mainMessageStatus">
+                  <div ng-class="alert">{{ mainMessage }}</div>
+              </div>
+              <form ng-submit="insertUserDetail(userInfo2)">
+                    <div class="form-group">
+                      <label for="username">한 줄 소개</label>
+                      <input type="short_info" ng-model="userInfo2.short_info" class="form-control" id="username"  placeholder="내용을 입력해주세요.">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="pwd">상세소개</label>
+                      <textarea class="form-control" ng-model="userInfo2.detail_info"  rows="5" id="content" ng-model="content" placeholder="내용을 입력해주세요"></textarea>
+                    </div>
+
+                    <div class="row">
+                      <div class="form-group col-sm-4">
+                        <label for="email">대표 사이트</label>
+                        <input type="username" ng-model="userInfo2.social_site" class="form-control" id="username" placeholder="ex) 개인 블로그 및 소셜네트워크 서비스">
+                      </div>
+                      <div class="form-group col-sm-4">
+                        <label for="pwd">공개 이메일</label>
+                        <input type="username" ng-model="userInfo2.public_email" class="form-control" id="username" placeholder="ex) 홈페이지에 공개 가능한 이메일">
+                      </div>
+                      <div class="form-group col-sm-4">
+                        <label for="pwd">전문 분야</label> <span ng-show="userInfo2.user_type" style="color:#E96725;"><tt>[{{userInfo2.type_name}}]</tt></span>
+                        <select class="form-control" name="mySelect" id="mySelect"
+                          ng-options="option.name for option in data.availableOptions track by option.id"
+                          ng-model="data.selectedOption">
+                        </select>
+                      </div>
+                    </div>
+
+                    <div id="makeBorder"></div>
+                    <div id="withBorder">
+                      <p>입력하신 프로필 정보(프로필 이미지, 국가, 성별, 나이, 한 줄 소개, 대표 사이트, 공개 이메일, 활동분야, 상세 소개, SNS, 히스토리, 책)는 커뮤니케이션을 위한 회원간 공개 또는 서비스 이용 통계를 목적으로 회원탈퇴 혹은 직접 삭제 전까지 보관됩니다.</p>
+                    </div>
+
+                    <div class="form-group text-center">
+                      <button  ng-disabled="loading"  type="submit" class="btn btn-default">동의 및 저장</button>
+                      <a ng-href="/" class="btn btn-default">취소</a>
+                    </div>
+                </form>
+          </div>
+      </uib-tab>
+
+
+      <uib-tab index="2" heading="비밀번호 변경" ng-init="getUserDetail()">
+        <div id="subContent">
+              <div ng-show="mainMessageStatus">
+                  <div ng-class="alert">{{ mainMessage }}</div>
+              </div>
+              <div class="form-group">
+                <label for="username">기존 비밀번호</label>
+                <input type="short_info" ng-model="userInfo2.short_info" class="form-control" id="username"  placeholder="내용을 입력해주세요.">
+              </div>
+              <div class="form-group">
+                <label for="username">새로운 비밀번호</label>
+                <input type="short_info" ng-model="userInfo2.short_info" class="form-control" id="username"  placeholder="내용을 입력해주세요.">
+              </div>
+              <div class="form-group">
+                <label for="username">새로운 비밀번호 확인</label>
+                <input type="short_info" ng-model="userInfo2.short_info" class="form-control" id="username"  placeholder="내용을 입력해주세요.">
+              </div>
+              <div class="form-group text-center">
+              <button ng-disabled="loading"  type="submit" class="btn btn-default">비밀번호 변경</button>
+              <button ng-disabled="loading"  type="submit" class="btn btn-default">회원 탈퇴</button>
+
+              <a ng-href="/" class="btn btn-default">취소</a>
+              </div>
+        </div>
+      </uib-tab>
+
+  </uib-tabset>
+</div>
+
+
+<!-- <div class="row">
+  <div class="form-group col-sm-6">
+    <label for="pwd">관심 분야</label>
+    <select class="form-control" name="mySelect" id="mySelect"
+      ng-options="option.name for option in data.availableOptions track by option.id"
+      ng-model="data.selectedOption">
+    </select>
+  </div>
+
+
+  <div class="col-sm-6" ng-controller="ProfileController">
+    <label for="pwd">히스토리</label>
+
+    <div class="input-group" name="skillsFrm" >
+      <input type="text" class="form-control" placeholder="ex) 2017.01.01. 캘리칼로스 공모전." name="newSkill" ng-model="newSkill">
+      <div class="input-group-btn">
+        <a class="btn btn-default" ng-disabled="skillsFrm.$invalid" ng-click="addSkill()">
+          <span>추가</span>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <ul>
+        <li ng-repeat="skill in skills" class="{'fadeOut' : skill.done}" ng-model="selected">
+          <span >{{skill.title}}</span>
+          <span class="	glyphicon glyphicon-remove" ng-click="deleteSkill($index)"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div> -->
