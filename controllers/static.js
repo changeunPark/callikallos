@@ -31,13 +31,3 @@ router.get('/', function (req, res) {
 
 
 module.exports = router;
-
-
-
-// router.use(connection(mysql, {
-//   host     : '128.199.139.156',
-//   user     : 'changp0573',
-//   password : 'Parkcg0573!@',
-//   database : 'callidb'
-// }, 'single'));
-//

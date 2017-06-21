@@ -20,6 +20,7 @@ app.use('/api/gallery', require('./controllers/api/gallery'));
 app.use('/api/board', require('./controllers/api/board'));
 // =============================================================================== //
 app.use('/api/authenticate', require('./controllers/api/authenticate'));
+app.use('/api/renewToken', require('./controllers/api/renewToken'));
 app.use('/api/me', require('./controllers/api/me'));
 app.use('/api/users', require('./controllers/api/users'));
 app.use('/api/activate', require('./controllers/api/activate'));

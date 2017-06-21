@@ -1,10 +1,10 @@
-angular.module('mainController',['authServices'])
-.controller('mainCtrl', function(Auth, $timeout, $location, $state, $rootScope, $window, $interval){
+angular.module('mainController',['authServices', 'userServices'])
+.controller('mainCtrl', function(Auth, $timeout, $location, $state, $rootScope, $window, $interval, User, AuthToken){
   var app = this;
 
   app.loadme = false;
 
-  app.checkSession = function(){
+  var checkSession = function(){
     if(Auth.isLoggedIn()){
       app.checkSession = true;
       var interval = $interval(function(){
@@ -21,17 +21,21 @@ angular.module('mainController',['authServices'])
           var timeStamp = Math.floor(Date.now() / 1000);
           var timeCheck = expireTime.exp - timeStamp;
 
-          if(timeCheck <= 0){
+          if(timeCheck <= 25){
+            console.log('token has expired');
             showModal(1);
             $interval.cancel(interval);
           } else {
+            console.log('token not yet expired');
           }
         }
       }, 2000);
     }
   };
 
-  app.checkSession();
+  checkSession();
+
+
 
   var showModal = function(option){
 
@@ -72,14 +76,23 @@ angular.module('mainController',['authServices'])
 
   app.renewSession = function(){
     app.choicMade = true;
+    User.renewSession(app.user.username).then(function(data){
+      if(data.data.success){
+        AuthToken.setToken(data.data.token);
+        checkSession();
+      } else{
+        app.ModalBody = data.data.message;
+      }
+    });
     hideModal(2);
-
   };
 
   app.endSession = function(){
     app.choicMade = true;
     hideModal(2);
-
+    $timeout(function(){
+      showModal(2);
+    },500);
   };
 
   var hideModal = function(option){
@@ -94,7 +107,7 @@ angular.module('mainController',['authServices'])
   };
 
   $rootScope.$on('$stateChangeStart', function(){
-    if(!app.checkSession) app.checkSession();
+    if(!checkSession)checkSession();
 
     if(Auth.isLoggedIn()){
       app.isLoggedIn = true;
@@ -103,7 +116,7 @@ angular.module('mainController',['authServices'])
         app.loadme = true;
       });
     }else {
-      app.username = false;
+      app.user = false;
       app.isLoggedIn = false;
       app.loadme = true;
     }
@@ -125,7 +138,7 @@ angular.module('mainController',['authServices'])
             app.disabled = true;
             app.successMsg = false;
             app.isLoggedIn = true;
-            app.checkSession();
+            checkSession();
             $state.reload();
           },2000);
         }else {

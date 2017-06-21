@@ -43,5 +43,10 @@ angular.module('userServices',[])
     return $http.put('/api/savepassword', regData);
   };
 
+//  User.renewSession(username)
+  userFactory.renewSession = function(username){
+    return $http.get('/api/renewToken/'+ username);
+  };
+
   return userFactory;
 });
