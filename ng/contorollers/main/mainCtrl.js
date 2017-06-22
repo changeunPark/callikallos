@@ -21,7 +21,7 @@ angular.module('mainController',['authServices', 'userServices'])
           var timeStamp = Math.floor(Date.now() / 1000);
           var timeCheck = expireTime.exp - timeStamp;
 
-          if(timeCheck <= 25){
+          if(timeCheck <= 5){
             showModal('expired');
             $interval.cancel(interval);
           } else {
@@ -51,15 +51,18 @@ angular.module('mainController',['authServices', 'userServices'])
 // logout
       app.hideButton = true;
       app.modalHeader = '로그아웃';
+
       $("#myModal").modal({backdrop:"static"});
+
       $timeout(function(){
         Auth.logout();
-        $location.path('/');
+        $state.go('app');
+        app.isLoggedIn = false;
         hideModal('logout');
         $state.reload();
       }, 2000);
+
     } else if(option === 'login'){
-// Login
       $("#login").modal({backdrop:"static"});
 
     } else if(option ==='register'){
@@ -123,20 +126,20 @@ angular.module('mainController',['authServices', 'userServices'])
     }
   });
 
+// 로그인
   this.doLogin = function(loginData, valid){
     app.errorMsg = false;
     app.expired = false;
-    app.disabled = false;
+    app.disabled = true;
 
     if(valid){
       Auth.login(app.loginData).then(function(data){
         if(data.data.success){
+          app.disabled = true;
           app.successMsg = data.data.message;
           $timeout(function(){
             hideModal('login');
             app.loginData = null;
-            app.disabled = true;
-            app.successMsg = false;
             app.isLoggedIn = true;
             checkSession();
             $state.reload();
@@ -160,54 +163,50 @@ angular.module('mainController',['authServices', 'userServices'])
 
   };
 
-  this.regUser = function(regData, valid, confirmed){
-    app.errorMsg = false;
-    app.disabled = true;
-
-    if(valid && confirmed){
-      User.create(app.regData).then(function(data){
-        if(data.data.success){
-          app.disabled = true;
-          app.successMsg = data.data.message;
-          $timeout(function(){
-            $location.path('/');
-            hideModal('register');
-            app.loginData = null;
-            app.disabled = true;
-            app.successMsg = false;
-            app.isLoggedIn = true;
-            checkSession();
-            $state.reload();
-          },2000);
-        }else {
-          app.disabled = false;
-          app.errorMsg = data.data.message;
-        }
-      });
-
-    } else {
-         app.disabled = false; // If error occurs, remove disable lock from form
-         app.loading = false; // Stop bootstrap loading icon
-         app.errorMsg = 'Please ensure form is filled our properly'; // Display error if valid returns false
-    }
-
-  };
 
   app.login = function(){
+    app.successMsg = false;
+    app.errorMsg = false;
+    app.disabled = false;
     showModal('login');
   };
+
   app.register = function(){
     showModal('register');
   };
 
   app.loginToReg = function(){
     hideModal('register');
-    showModal('login');
+    $timeout(function(){
+      showModal('login');
+    },500);
   };
 
   app.logout = function(){
     showModal('logout');
   };
 
+  app.resend = function(){
+    hideModal('login');
+    $timeout(function(){
+      $state.go('resend');
+      app.expired = false;
+    },500);
+  };
+
+  app.resetusername = function(){
+    hideModal('login');
+    $timeout(function(){
+      $state.go('resetusername');
+    },500);
+  };
+
+  app.resetpassword = function(){
+    hideModal('login');
+    $timeout(function(){
+      $state.go('resetpassword');
+    },500);
+
+  };
 
 });

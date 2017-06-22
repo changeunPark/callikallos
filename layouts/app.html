@@ -53,7 +53,7 @@
                       </div>
                       <div class ="row show-hide-message" ng-show="main.errorMsg">
                         <div class="alert alert-danger">{{main.errorMsg}}&nbsp
-                          <a ng-show="main.expired" ui-sref="resend"><button type="button" class="btn btn-success">Resend Activated Link</button></a>
+                          <a ng-show="main.expired" ng-click="main.resend()" class="btn btn-enroll">이메일 다시 보내기</a>
                         </div>
                       </div>
                       <form name="logForm" ng-submit="main.doLogin(loginData, logForm.$valid)" novalidate>
@@ -79,9 +79,9 @@
 
                     <div class="modal-footer">
                       <div class="">
-                        <a href="/" ng-click="main.login()">비밀번호 찾기</a>
+                        <a ui-sref="app" ng-click="main.resetusername();">아이디 찾기</a>
                           <span>&nbsp/&nbsp</span>
-                        <a ui-sref="resetusername">아이디 찾기</a>
+                        <a ui-sref="app" ng-click="main.resetpassword();">비밀번호 찾기</a>
                       </div>
                     </div>
                   </div>
@@ -178,7 +178,7 @@
                   </div>
                 </div>
             </div>
-<!-- End 회원가입 Modal -->
+
 
 
         <div id="wrap" class="mainForm" ui-view>

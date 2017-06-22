@@ -1,12 +1,12 @@
-
-<div id="loginForm">
-  <div class="title">
-    <a ng-href="/">
-      <h1>Resend Activation Link</h1>
+<div id="resetForm">
+  <div>
+    <a class="go-home" ng-href="/" >
+      <p>CALLIKALLOS</p>
     </a>
   </div>
-  <div class="loginForm">
-  <br>
+
+  <div class="resetForm">
+    <p class="title">이메일 인증</p>
     <div class ="row show-hide-message" ng-show="resend.successMsg">
       <div class="alert alert-success">{{resend.successMsg}}</div>
     </div>
@@ -34,11 +34,9 @@
         <p class="help-block" ng-show="(!logForm.password.$pristine && logForm.password.$error.required) || (logForm.$submitted && logForm.password.$error.required)">값을 입력해주세요.</p>
       </div>
       <br>
-      <input ng-disabled="resend.disabled"  class="btn btn-success btn-block" type="submit" value="확인">
+      <input ng-disabled="resend.disabled"  class="btn btn-enroll btn-block" type="submit" value="확인">
       <br>
     </form>
 
-
-  </div>
-
+</div>
 </div>

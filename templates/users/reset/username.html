@@ -1,12 +1,12 @@
-
-<div id="loginForm">
-  <div class="title">
-    <a ng-href="/">
-      <h1>CALLIKALLOS</h1>
+<div id="resetForm">
+  <div>
+    <a class="go-home" ng-href="/" >
+      <p>CALLIKALLOS</p>
     </a>
   </div>
-  <div class="loginForm">
-    <h1>아이디 찾기</h1>
+
+  <div class="resetForm">
+    <p class="title">아이디 찾기</p>
     <div class ="row show-hide-message" ng-show="username.successMsg">
       <div class="alert alert-success">{{username.successMsg}}</div>
     </div>
@@ -22,13 +22,9 @@
           <input ng-disabled="username.disabled"  placeholder="이메일" class="form-control" type="text" name="email" ng-model="username.userData.email" required>
         </div>
         <div>
-          <button style="width:100%;" ng-disabled="username.disabled"  class="btn btn-success" type="submit">확인</button>
-        </div>
-        <div class="">
-          <a ui-sref="resetpassword" style="color:#000000;">비밀번호 찾기</a>
-          <span>&nbsp/&nbsp</span>
-          <a ui-sref="resetusername" style="color:#000000;">아이디 찾기</a>
+          <button style="width:100%;" ng-disabled="username.disabled"  class="btn btn-enroll" type="submit">확인</button>
         </div>
    </form>
 
+</div>
 </div>

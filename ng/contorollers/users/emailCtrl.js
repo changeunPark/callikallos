@@ -5,12 +5,14 @@ angular.module('emailController',['userServices'])
     app.successMsg = false;
     app.errorMsg = false;
     if(data.data.success){
-      app.successMsg = data.data.message + '...Redirecting';
+
+      app.disabled = true;
+      app.successMsg = data.data.message + '...메인 페이지로 이동합니다.';
       $timeout(function(){
         $state.go('app');
       },2000);
     }else {
-      app.errorMsg = data.data.message + '...Redirecting';
+      app.errorMsg = data.data.message + '...메인 페이지로 이동합니다.';
       $timeout(function(){
         $state.go('app');
       },2000);
@@ -23,7 +25,7 @@ angular.module('emailController',['userServices'])
 
 })
 
-.controller('resendCtrl', function(User){
+.controller('resendCtrl', function(User, $timeout, $state){
   app = this;
   this.checkCredentials = function(loginData){
     app.successMsg = false;
@@ -34,8 +36,11 @@ angular.module('emailController',['userServices'])
       if(data.data.success){
         User.resendLink(app.loginData).then(function(data){
           if(data.data.success){
-            app.successMsg = data.data.message;
             app.disabled = true;
+            app.successMsg = data.data.message + '...메인 페이지로 이동합니다.';
+            $timeout(function(){
+              $state.go('app');
+            },2000);
           }
         });
 
@@ -48,7 +53,7 @@ angular.module('emailController',['userServices'])
   };
 })
 
-.controller('usernameCtrl', function(User){
+.controller('usernameCtrl', function(User, $timeout, $state){
   var app = this;
   this.sendUsername = function(userData, valid){
     app.errorMsg = false;
@@ -56,7 +61,10 @@ angular.module('emailController',['userServices'])
     if(valid){
       User.sendUsername(app.userData.email).then(function(data){
         if(data.data.success){
-          app.successMsg = data.data.message;
+          app.successMsg = data.data.message + '...메인 페이지로 이동합니다.';
+          $timeout(function() {
+          $state.go('app');
+          }, 2000);
         } else {
           app.disabled = false;
           app.errorMsg = data.data.message;
@@ -64,14 +72,14 @@ angular.module('emailController',['userServices'])
       });
     } else {
       app.disabled = false;
-      app.errorMsg = 'Please enter a valid e-mail!';
+      app.errorMsg = '올바른 이메일 주소가 아닙니다.';
 
     }
 
   };
 })
 
-.controller('passwordCtrl', function(User){
+.controller('passwordCtrl', function(User, $timeout, $state){
   var app = this;
   app.sendPassword = function(resetData, valid){
     app.errorMsg = false;
@@ -79,7 +87,10 @@ angular.module('emailController',['userServices'])
     if(valid){
       User.sendPassword(app.resetData).then(function(data){
         if(data.data.success){
-          app.successMsg = data.data.message;
+          app.successMsg = data.data.message + '...메인 페이지로 이동합니다.';
+          $timeout(function() {
+          $state.go('app');
+          }, 2000);
         } else {
           app.disabled = false;
           app.errorMsg = data.data.message;
@@ -87,7 +98,7 @@ angular.module('emailController',['userServices'])
       });
     } else {
       app.disabled = false;
-      app.errorMsg = 'Please enter a valid username!';
+      app.errorMsg = '올바른 아이디가 아닙니다.';
 
     }
 
@@ -95,7 +106,7 @@ angular.module('emailController',['userServices'])
 
 })
 
-.controller('resetCtrl', function($stateParams, $scope, User, $timeout){
+.controller('resetCtrl', function($stateParams, $scope, User, $timeout, $state){
   var app = this;
 
     app = this;
@@ -107,7 +118,7 @@ angular.module('emailController',['userServices'])
         if (data.data.success) {
             app.hide = false; // Show form
             $scope.alert = 'alert alert-success'; // Set success message class
-            app.successMsg = 'Please enter a new password'; // Let user know they can enter new password
+            app.successMsg = '새로운 비밀번호를 입력해주세요.'; // Let user know they can enter new password
             $scope.username = data.data.user[0].username; // Save username in scope for use in savePassword() function
         } else {
             $scope.alert = 'alert alert-danger'; // Set success message class
@@ -132,10 +143,10 @@ angular.module('emailController',['userServices'])
                 // Check if password was saved to database
                 if (data.data.success) {
                     $scope.alert = 'alert alert-success'; // Set success message class
-                    app.successMsg = data.data.message + '...Redirecting'; // Grab success message from JSON object and redirect
+                    app.successMsg = data.data.message + '...메인 화면으로 이동합니다.'; // Grab success message from JSON object and redirect
                     // Redirect to login page after 2000 milliseconds (2 seconds)
                     $timeout(function() {
-                        $location.path('/login');
+                      $state.go('app');
                     }, 2000);
                 } else {
                     $scope.alert = 'alert alert-danger'; // Set success message class
@@ -147,7 +158,7 @@ angular.module('emailController',['userServices'])
             $scope.alert = 'alert alert-danger'; // Set success message class
             app.loading = false; // Stop loading icon
             app.disabled = false; // Enable form to allow user to resubmit
-            app.errorMsg = 'Please ensure form is filled out properly'; // Let user know form is not valid
+            app.errorMsg = '올바른 정보를 입력해주세요.'; // Let user know form is not valid
         }
     };
 });
