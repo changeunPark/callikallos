@@ -9,7 +9,7 @@
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-left">
-              <li ng-repeat="header in headers"><a ui-sref="app.{{header.description_eng}}.category({code: 0})" ui-sref-active="active">{{header.description}}</a></li>
+              <li ng-repeat="header in headers"><a ui-sref="app.{{header.description_eng}}.categories({code: 0})" ui-sref-active="active">{{header.description}}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li ng-hide="main.isLoggedIn"><a ui-sref="app" ng-click="main.login()">로그인</a></li>

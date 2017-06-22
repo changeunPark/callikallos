@@ -5,8 +5,7 @@ angular.module('app',[
     'userServices',
     'mainController',
     'authServices',
-    'emailController',
-    'resetController'
+    'emailController'
 ]).config(function($httpProvider){
   $httpProvider.interceptors.push('AuthInterceptors');
 });

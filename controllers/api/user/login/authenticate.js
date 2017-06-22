@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var bcrypt =require('bcryptjs');
 var jwt = require('jsonwebtoken');
-var config = require('../../config');
+var config = require('../../privacy/config');
 
 // Login
 // http://localhost:3000/api/authenticate

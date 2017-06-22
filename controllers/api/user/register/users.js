@@ -4,8 +4,8 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 //private
-var config = require('../../config');
-var email = require('../../email');
+var config = require('../../privacy/config');
+var email = require('../../privacy/email');
 
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');

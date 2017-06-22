@@ -1,8 +1,8 @@
 var router = require('express').Router();
 
 //private
-var config = require('../../config');
-var email = require('../../email');
+var config = require('../privacy/config');
+var email = require('../privacy/email');
 
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
@@ -19,8 +19,6 @@ var options = {
  var client = nodemailer.createTransport(sgTransport(options));
 
 // localhost/api/activate/token
-
-
 router.put('/:token', function(req, res, next){
 try{
 

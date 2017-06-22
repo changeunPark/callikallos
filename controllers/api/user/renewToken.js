@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var config = require('../../config');
+var config = require('../privacy/config');
 var jwt = require('jsonwebtoken');
 
 

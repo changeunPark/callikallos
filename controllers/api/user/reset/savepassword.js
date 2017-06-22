@@ -2,7 +2,7 @@ var router = require('express').Router();
 var bcrypt = require('bcryptjs');
 
 //private
-var email = require('../../../../email');
+var email = require('../../privacy/email');
 
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');

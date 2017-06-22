@@ -1,8 +1,8 @@
 var router = require('express').Router();
 
 //private
-var config = require('../../config');
-var email = require('../../email');
+var config = require('../privacy/config');
+var email = require('../privacy/email');
 
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');

@@ -13,22 +13,32 @@ app.use('/api/artistMenu', require('./controllers/api/menu/artistMenu'));
 app.use('/api/displayMenu', require('./controllers/api/menu/displayMenu'));
 app.use('/api/galleryMenu', require('./controllers/api/menu/galleryMenu'));
 app.use('/api/boardMenu', require('./controllers/api/menu/boardMenu'));
-// =============================================================================== //
-app.use('/api/home', require('./controllers/api/home'));
-app.use('/api/artist', require('./controllers/api/artist'));
-app.use('/api/gallery', require('./controllers/api/gallery'));
-app.use('/api/board', require('./controllers/api/board'));
-// =============================================================================== //
-app.use('/api/authenticate', require('./controllers/api/authenticate'));
-app.use('/api/renewToken', require('./controllers/api/renewToken'));
-app.use('/api/me', require('./controllers/api/me'));
-app.use('/api/users', require('./controllers/api/users'));
-app.use('/api/activate', require('./controllers/api/activate'));
-app.use('/api/resend', require('./controllers/api/resend'));
+
+// middleware
+app.use('/api/me', require('./controllers/api/middleware/me'));
+
+// categories //
+app.use('/api/home', require('./controllers/api/categories/home'));
+app.use('/api/artist', require('./controllers/api/categories/artist'));
+app.use('/api/gallery', require('./controllers/api/categories/gallery'));
+app.use('/api/board', require('./controllers/api/categories/board'));
+
+// user/reset
 app.use('/api/resetusername', require('./controllers/api/user/reset/username'));
 app.use('/api/resetpassword', require('./controllers/api/user/reset/password'));
-app.use('/api/savepassword', require('./controllers/api/user/save/password'));
-// =============================================================================== //
+app.use('/api/savepassword', require('./controllers/api/user/reset/savepassword'));
+
+// Login
+app.use('/api/authenticate', require('./controllers/api/user/login/authenticate'));
+
+// Register
+app.use('/api/users', require('./controllers/api/user/register/users'));
+
+// 부서적인 것들/
+app.use('/api/renewToken', require('./controllers/api/user/renewToken'));
+app.use('/api/activate', require('./controllers/api/user/activate'));
+app.use('/api/resend', require('./controllers/api/user/resend'));
+
 // =============================================================================== //
 app.use('/api/comment', require('./controllers/api/comment'));
 app.use('/api/opinion', require('./controllers/api/opinion'));
@@ -43,7 +53,6 @@ app.use('/api/uploadDisplayTemp', require('./controllers/api/uploadDisplayTemp')
 // =============================================================================== //
 app.use('/api/myPhotos', require('./controllers/api/myPhotos'));
 app.use('/api/myProfileImage', require('./controllers/api/myProfileImage'));
-
 
 // app.use(require('./auth'));
 app.listen(3000, function () {

@@ -1,5 +1,4 @@
 *.log
 /mysql.js
 /node_modules
-/config.js
-/email.js
+/controllers/api/privacy
