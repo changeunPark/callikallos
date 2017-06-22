@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Casade Style Sheets -->
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/app.css">
+      <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/app.css">
 
       <body ng-app="app" ng-controller='mainCtrl as main' ng-show="main.loadme" ng-cloak>
 
+<!-- Expired Token & Logout -->
         <div class="container">
           <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-              <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" ng-click="main.endSession();" class="close" data-dismiss="modal">&times;</button>
@@ -33,20 +33,54 @@
           </div>
         </div>
 
+<!-- 아티스트 등록 & 사용자 권한 부여 -->
+        <div class="container">
+          <div class="modal fade" id="upload" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">아티스트 등록</h4>
+                </div>
+                <div class="modal-body">
+                  <div class ="row show-hide-message" ng-show="main.uploadSuccessMsg">
+                    <div class="alert alert-success">{{main.uploadSuccessMsg}}</div>
+                  </div>
+                  <div class ="row show-hide-message" ng-show="main.uploaderrorMsg">
+                    <div class="alert alert-danger">{{main.uploaderrorMsg}}</div>
+                  </div>
+                  <div>
+                    <p>작품을 업로드하기 위해서는 캘리칼로스 작가 등록이 필요합니다</p>
+                  </div>
+                  <div>
+                    <p>작가 등록하시겠습니까?</p>
+                  </div>
+                  <div>
+                    <button ng-disabled="main.uploadDisabled"  class="btn btn-enroll" ng-click="main.doPermission();"><span>작가등록</span></button>
+                  </div>
+                  <div>
+                    <span class="showrule">"작가등록" 버튼을 클릭함으로써, 당신은 캘리칼로스 서비스 정책에 동의함합니다.</span>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
 <!-- 로그인 Modal-->
         <div  class="container">
-              <!-- Modal -->
               <div class="modal fade" id="login" role="dialog">
                 <div class="modal-dialog">
                   <!-- Modal content-->
                   <div class="modal-content">
-
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h4><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;로그인</h4>
                     </div>
-
-
                     <div class="modal-body">
                       <div class ="row show-hide-message" ng-show="main.successMsg">
                         <div class="alert alert-success">{{main.successMsg}}</div>
@@ -67,16 +101,12 @@
                           <input  ng-disabled="main.disabled" placeholder="비밀번호" class="form-control" type="password" name="password" ng-model="main.loginData.password" ng-pattern="/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/"
                            ng-minlength="8" ng-maxlength="35" required>
                         </div>
-                        <!-- <div class="checkbox">
-                           <label><input type="checkbox" value="" checked>로그인 상태 유지</label>
-                         </div> -->
                          <br>
                         <div>
                           <button ng-disabled="main.disabled"  class="btn btn-enroll btn-block" type="submit">로그인</button>
                         </div>
                       </form>
                     </div>
-
                     <div class="modal-footer">
                       <div class="">
                         <a ui-sref="app" ng-click="main.resetusername();">아이디 찾기</a>
@@ -85,7 +115,6 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
         </div>
@@ -97,13 +126,10 @@
                 <div class="modal-dialog">
                   <!-- Modal content-->
                   <div class="modal-content">
-
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h4><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;회원가입</h4>
                     </div>
-
-
                     <div class="modal-body">
                       <div class ="row show-hide-message" ng-show="register.successMsg">
                         <div class="alert alert-success">{{register.successMsg}}</div>
@@ -111,7 +137,6 @@
                       <div class ="row show-hide-message" ng-show="register.errorMsg">
                         <div class="alert alert-danger">{{register.errorMsg}}</div>
                       </div>
-
                       <form name="regForm" ng-submit="register.regUser(regData, regForm.$valid, confirmed)" novalidate>
                         <div ng-class = "{'has-success': (regForm.username.$valid && !regForm.username.$pristine), 'has-error': (!regForm.username.$valid && !regForm.username.$pristine) ||
                           (!regForm.username.$valid && regForm.$submitted)}">
@@ -124,7 +149,6 @@
                           </ul>
                         </div>
                         <br>
-
                         <div ng-class = "{'has-success': (regForm.email.$valid && !regForm.email.$pristine), 'has-error': (!regForm.email.$valid && !regForm.email.$pristine) ||
                           (!regForm.email.$valid && regForm.$submitted)}">
                           <label>이메일</label>
@@ -137,7 +161,6 @@
                           </ul>
                         </div>
                         <br>
-
                         <div ng-class = "{'has-success': (regForm.firstPassword.$valid && !regForm.firstPassword.$pristine), 'has-error': (!regForm.firstPassword.$valid && !regForm.firstPassword.$pristine) ||
                           (!regForm.firstPassword.$valid && regForm.$submitted)}">
                           <label>비밀번호</label>
@@ -153,7 +176,6 @@
                           </ul>
                         </div>
                         <br>
-
                         <div ng-class="{ 'has-success':confirmed && !regForm.confirmPassword.$error.required, 'has-error':(!confirmed && !regForm.confirmPassword.$error.required) || (regForm.confirmPassword.$error.required && !regForm.confirmPassword.$pristine) || (regForm.$submitted && regForm.confirmPassword.$error.required) }">
                         <label>비밀번호 확인</label>
                           <input ng-disabled="register.disabled" class="form-control" type="password" name="confirmPassword" placeholder="비밀번호를 다시 한번 입력해주세요." match="{{[firstPassword]}}" ng-change="register.regData.password = confirm" ng-model="confirm" required>
@@ -165,7 +187,6 @@
                           <span class="showrule" >"회원가입" 버튼을 클릭함으로써, 당신은 캘리칼로스의<a ui-sref="app.terms">&nbsp;이용약관</a><span>&nbsp;및&nbsp;<a  ui-sref="app.privacy">개인정보&nbsp;처리방침</a>을 동의합니다.
                         </div>
                       </form>
-
                     </div>
 <!-- modal-footer -->
               <div class="modal-footer">
@@ -178,6 +199,8 @@
                   </div>
                 </div>
             </div>
+
+<!-- End 회원가입 Modal-->
 
 
 

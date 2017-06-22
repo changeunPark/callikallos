@@ -143,6 +143,7 @@ $urlRouterProvider.otherwise('/');
                'content@': {
                 templateUrl: 'isLoggedIn/upload.html',
                 controller: 'UploadPhotoController',
+                controllerAs: 'upload',
                 authenticated: true
                }
              }

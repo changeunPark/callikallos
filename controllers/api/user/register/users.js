@@ -50,8 +50,6 @@ router.post('/', function(req, res, next){
                                 username: req.body.username,
                                 password: password,
                                 email:req.body.email,
-                                permission: req.body.permission,
-                                is_enrolled: req.body.is_enrolled,
                                 temporarytoken:tempToken
                                };
 
@@ -98,5 +96,92 @@ router.post('/', function(req, res, next){
     return next(ex);
   }
 });
+
+
+// http://localhost:3000/api/users
+// USER resetPermission
+router.put('/', function(req, res, next){
+  try{
+      req.getConnection(function(err, connection) {
+        if(err)
+        {
+          console.error('SQL Connection error: ', err);
+          return next(err);
+        }
+        else {
+          var updateSql = 'update users set ? where user_id = ?';
+
+          var updateValue = {
+            permission : 'artist',
+          };
+
+          var user_id = req.body.user_id;
+
+          connection.query(updateSql, [updateValue, user_id], function(err, results, next){
+            if(err) throw err;
+            else {
+
+              var insertSql = 'insert into my_profile set ?';
+              var inserValue = {
+                user_id: user_id
+              };
+
+              connection.query(insertSql, inserValue, function(err,results, next){
+                if(err) throw err;
+                else {
+                  res.json({success:true, message:'캘리칼로스 작가 등록되었습니다.'});
+                }
+              });
+            }
+          });
+          }
+        });
+        }
+  catch(ex){
+    console.error("Internal error: "+ex);
+    return next(ex);
+  }
+});
+
+
+// http://localhost:3000/api/users
+// USER resetPermission
+router.get('/:username', function(req, res, next){
+  try{
+      req.getConnection(function(err, connection) {
+        if(err)
+        {
+          console.error('SQL Connection error: ', err);
+          return next(err);
+        }
+        else {
+          var selectValue = req.params.username;
+          var selectSql = 'select permission from users where username = ?';
+
+          connection.query(selectSql, selectValue, function(err, results, next){
+            if(err) throw err;
+            else {
+              if(!results[0]){
+                res.json({success:false, message:'잘 못된 정보를 입력하셨습니다.'});
+              } else {
+                if(results[0].permission === 'artist'){
+                  res.json({success:true, message:'캘리칼로스 작가로 등록되어있습니다.'});
+                } else {
+                  res.json({success:false, message:'잘 못된 정보를 입력하셨습니다.'});
+                }
+              }
+
+            }
+          });
+          }
+        });
+        }
+  catch(ex){
+    console.error("Internal error: "+ex);
+    return next(ex);
+  }
+});
+
+
 
 module.exports = router;

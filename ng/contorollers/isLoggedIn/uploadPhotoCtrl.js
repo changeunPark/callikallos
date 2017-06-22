@@ -80,7 +80,7 @@ $scope.insertPhoto = function(title, detail){
   } else {
     if($scope.mainImageStatus){
       $http.post('/api/upload/',
-      { title:title, detail: detail, mainImage: $scope.mainImagePath, type: $scope.data.selectedOption.id, user_id: $scope.main.user_id})
+      { title:title, detail: detail, mainImage: $scope.mainImagePath, type: $scope.data.selectedOption.id, user_id: $scope.main.user.user_id})
       .then(function(response){
         $scope.mainMessageStatus = true;
         $scope.alert = 'alert alert-success';

@@ -3,7 +3,7 @@ angular.module('authServices',[])
 .factory('Auth', function($http, AuthToken){
     var authFactory = {};
 
-    
+
 // Auth.getUser();
     authFactory.getUser = function(){
       if(AuthToken.getToken()){

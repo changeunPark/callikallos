@@ -13,10 +13,11 @@ angular.module('userControllers',['userServices'])
               app.disabled = true;
               app.successMsg = data.data.message;
               $timeout(function(){
-                hideModal('register');
+                $("#register").modal('hide');
                 app.app.regData = null;
                 app.isLoggedIn = false;
                 checkSession();
+                $state.go('app');
                 $state.reload();
               },2000);
             }else {

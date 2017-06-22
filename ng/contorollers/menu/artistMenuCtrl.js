@@ -18,6 +18,7 @@ angular.module('app')
     $scope.getHeaderContent = function(){
       var code = $stateParams.code;
       $http.get('/api/artistMenu/'+code).then(function(response){
+        console.log(response);
             var i;
             for(i = 0; i<response.data.length;i++){
               if(response.data[i].user_type === 0){

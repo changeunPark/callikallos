@@ -2,7 +2,7 @@
 <div id="mainContent" class="container">
   <uib-tabset active="activeJustified" justified="true">
 <!-- 이미지 업로드 -->
-    <uib-tab index="0" heading="작품">
+    <uib-tab index="0" heading="작품 업로드">
       <div  id="subContent">
             <label>작품 메인 이미지</label>
             <div  id="subContent" class="text-center">
@@ -52,56 +52,52 @@
       </div>
     </uib-tab>
 
+    <uib-tab index="1" heading="작품 정보" ng-init="getArtist()">
+  					<div  id="subContent" class="text-center">
+  							<div class="author">
+  										<img class="mythumbnail"  ng-src="{{artistInfo[0].profile_image}}">
+  								<p><h3 class="name">{{artistInfo[0].username}}</h3></p>
+  							</div>
+  					</div>
 
-<!-- 전시 / 대회 -->
-    <uib-tab index="1" heading="전시 / 대회" >
-      <div  id="subContent"  ng-controller="UploadDisplayController">
-            <label>전시 / 대회 메인 이미지</label>
-            <div  id="subContent" class="text-center">
-                  <img class="mythumbnail" src="/images/default.jpg" ng-src="{{mainThumbnail.dataUrl}}">
-                  <form ng-submit="insertDisplayTemp()">
-                    <label class="btn btn-success">이미지 찾기
-                        <input ng-disabled="loading" type="file"  file-model="file.upload" name="myfile" style="display: none;" onchange="angular.element(this).scope().mainPhotoChanged(this.files)">
-                    </label>
-                        <button ng-disabled="loading" class="btn btn-default">이미지 업로드</button>
-                  </form>
-                  <br>
+  				  <div class="scrollmenu text-center">
+              <a ui-sref-active="active">작품</a>
+  				  </div>
 
-                  <div class="alert alert-info" ng-show="loading">이미지 업로드 중입니다.
+
+            <div  id="subContent">
+              <div class="row container-fluid">
+                <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="artist in artistInfo | filter:search |orderBy : data.selectedOption.sort ">
+                  <div class="card">
+                        <div class="card-image">
+                          <a ui-sref="app.gallery.show({photo_id: artist.photo_id, photo_type:artist.photo_type})" ui-sref-active="active">
+                            <img class="img-responsive" ng-src="{{artist.photo_path}}">
+                            <span class="card-type">{{artist.description}}</span>
+                          </a>
+                        </div>
+                        <div class="card-content">
+                            <p>{{artist.photo_title}}</p>
+                        </div>
+
+                        <div class="card-action">
+                           <!-- <span class="glyphicon glyphicon-heart" aria-hidden="true">{{photo.opinion_count}}</span> -->
+                            <div class="row">
+                             <div class="col-xs-12">
+                               <div id="listContent" class="main ">
+                                   <div class="main_1 main_common">
+                                       <i class="fa fa-eye" aria-hidden="true"></i>{{artist.view}}
+                                   </div>
+                                   <div class="main_2 main_common">
+                                       <i class="fa fa-comment-o" aria-hidden="true"></i>{{artist.comment_count}}
+                                   </div>
+                               </div>
+                             </div>
+                           </div>
+                        </div>
+                    </div>
                   </div>
-                  <div ng-show="displayMessage">
-                      <div ng-class="alert">{{ displayMessage }}</div>
-                  </div>
-
-            </div>
-
-            <form ng-submit="insertDisplay(title, detail)">
-              <div class="form-group">
-                <label for="title">카테고리(필수)</label>
-
-                <select class="form-control" name="mySelect" id="mySelect"
-                  ng-options="option.name for option in data.availableOptions track by option.id"
-                  ng-model="data.selectedOption">
-                </select>
               </div>
-                <div class="form-group">
-                  <label for="title">전시 / 대회 제목(필수)</label>
-                  <input type="text" class="form-control" id="title" ng-model="title" placeholder="내용을 입력해주세요.">
-                </div>
-                <div class="form-group ">
-                  <label for="detail">전시 / 대회 설명(필수)</label>
-                  <input type="text" class="form-control" id="detail" ng-model="detail" placeholder="내용을 입력해주세요.">
-                </div>
-
-                <div class="form-group text-center">
-                <button ng-disabled="loading" type="submit" class="btn btn-default">업로드 완료</button>
-                <a class="btn btn-default">취소</a>
-                </div>
-                <div ng-show="mainMessageStatus">
-                    <div ng-class="alert">{{ mainMessage }}</div>
-                </div>
-            </form>
-      </div>
+            </div>
     </uib-tab>
 
 

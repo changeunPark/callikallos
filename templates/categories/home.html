@@ -8,19 +8,26 @@
 </div>
 
 <!-- 로그인 하지 않았을 때 -->
-<div id="main-banner"  class="jumbotron" ng-hide="main.isLoggedIn">
+<!-- This Area is visible on an EXTRA SMALL screen. -->
+<div class="visible-xs">
+  <a ui-sref="app.intro">
+    <img style="width:100%;"class="img-responsive center-block" ng-src="/images/banner.gif">
+  </a>
+</div>
+
+<!-- This Area is hidden on an EXTRA SMALL screen. -->
+<div id="main-banner"  class="jumbotron hidden-xs" ng-hide="main.isLoggedIn">
 
   <div class="container">
     <div class="row">
       <div class="col-md-7">
         <div>
           <div>
-            <p class="title">당신의 글씨로</p>
-            <p>아름다움을 더 해주세요.</p>
+            <p class="title">당신의 글씨로,<br>아름다움이 더 해집니다.</p>
           </div>
           <div>
             <a ui-sref="app.intro">
-            <img class="img-responsive center-block" ng-src="/images/banner.gif">
+            <img  class="img-responsive center-block img-rounded" ng-src="/images/banner.gif">
             </a>
           </div>
         </div>
@@ -28,7 +35,7 @@
 
 <!-- 회원가입 -->
     <div class="col-xs-12 col-md-5" ng-controller="regCtrl as register">
-              <div style="background-color:#ffffff; padding:30px;">
+              <div class="register" >
 
                 <div class ="row show-hide-message" ng-show="register.successMsg">
                   <div class="alert alert-success">{{register.successMsg}}</div>
@@ -92,7 +99,7 @@
 </div>
 
 
-<!-- 항상 유지 -->
+<!-- main content -->
 <div>
   <div class="container" ng-controller="HomeCtrl as home">
     <div>

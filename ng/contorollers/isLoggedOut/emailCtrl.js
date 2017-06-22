@@ -5,7 +5,6 @@ angular.module('emailController',['userServices'])
     app.successMsg = false;
     app.errorMsg = false;
     if(data.data.success){
-
       app.disabled = true;
       app.successMsg = data.data.message + '...메인 페이지로 이동합니다.';
       $timeout(function(){
@@ -16,13 +15,8 @@ angular.module('emailController',['userServices'])
       $timeout(function(){
         $state.go('app');
       },2000);
-
     }
-
   });
-
-
-
 })
 
 .controller('resendCtrl', function(User, $timeout, $state){
@@ -43,13 +37,11 @@ angular.module('emailController',['userServices'])
             },2000);
           }
         });
-
       }else {
         app.disabled = false;
         app.errorMsg = data.data.message;
       }
     });
-
   };
 })
 
@@ -73,9 +65,7 @@ angular.module('emailController',['userServices'])
     } else {
       app.disabled = false;
       app.errorMsg = '올바른 이메일 주소가 아닙니다.';
-
     }
-
   };
 })
 
@@ -99,17 +89,13 @@ angular.module('emailController',['userServices'])
     } else {
       app.disabled = false;
       app.errorMsg = '올바른 아이디가 아닙니다.';
-
     }
-
   };
-
 })
 
 .controller('resetCtrl', function($stateParams, $scope, User, $timeout, $state){
   var app = this;
 
-    app = this;
     app.hide = true; // Hide form until token can be verified to be valid
 
     // Function to check if token is valid and get the user's info from database (runs on page load)

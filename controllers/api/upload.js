@@ -19,6 +19,7 @@ try{
           photo_path:req.body.mainImage,
           photo_type:req.body.type
         };
+        console.log(insertValue);
         connection.query(insertSql, insertValue, function (error, results, next) {
         // databases에서  select 문으로 중복된 사용자 찾아야함.
             if(err){

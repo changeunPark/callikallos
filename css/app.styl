@@ -1,4 +1,126 @@
 
+
+.mythumbnail {
+ width: 200px;
+ height: 200px;
+ margin: 20px;
+}
+
+
+.btn-enroll {
+  background-color: #e96725;
+  color: #ffffff;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.btn-enroll:active,
+.btn-enroll:focus {
+  color: #ffffff;
+}
+
+.btn-enroll:hover {
+  background-color: #d15c21;
+  color: #ffffff;
+}
+
+
+
+/*	--------------------------------------------------
+  <!-- container custom / 전체 적용--!>
+-------------------------------------------------- */
+.container {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+
+/*	--------------------------------------------------
+      <!-- 전체 스타일 커스텀  --!>
+-------------------------------------------------- */
+
+html,
+body {
+margin: 0;
+padding: 0;
+height: 100%;
+font-size: 100%;
+
+}
+
+#wrap {
+    height: 100%;
+}
+
+#body {
+    width: 100%;
+    min-height: 100%;
+    background-color: #f5f5f5;
+}
+
+#footer {
+    padding: 25px 10px 25px 10px;
+    width: 100%;
+    height: 75px;
+    background-color: #e96725;
+}
+
+
+
+
+/*	--------------------------------------------------
+  <!-- Start custom main-banner --!>
+-------------------------------------------------- */
+
+div#main-banner {
+  background: #e96725; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#ed8550, #e96725); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#ed8550, #e96725); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#ed8550, #e96725); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#ed8550, #e96725); /* Standard syntax (must be last) */
+  padding:50px 0px 50px 0px;
+}
+
+
+div#main-banner .title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 25px;
+    color:#ffffff;
+}
+
+
+div#main-banner img {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+div#main-banner .register {
+    background-color: #ffffff;
+    padding: 30px;
+}
+
+div#main-banner .btn-enroll,
+div#register .btn-enroll {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+div#main-banner .showrule,
+div#register .showrule,
+div#upload .showrule {
+    font-size: 0.8em;
+    padding: 5px;
+}
+
+/*	--------------------------------------------------
+  <!-- End custom main-banner --!>
+-------------------------------------------------- */
+
+/*	--------------------------------------------------
+  <!-- Start custom Modal --!>
+-------------------------------------------------- */
+
 .modal-header,
 h4,
 .close {
@@ -27,25 +149,12 @@ h4,
   font-weight: bold;
 }
 
-.btn-enroll {
-  background-color: #e96725;
-  color: #ffffff;
-  font-size: 1em;
-  font-weight: bold;
-}
-
-.btn-enroll:active,
-.btn-enroll:focus {
-  color: #ffffff;
-}
-
-.btn-enroll:hover {
-  background-color: #d15c21;
-  color: #ffffff;
-}
+/*	--------------------------------------------------
+  <!-- End custom Modal --!>
+-------------------------------------------------- */
 
 /*	--------------------------------------------------
-  <!-- custom lougout --!>
+  <!-- Start custom lougout --!>
 -------------------------------------------------- */
 .dizzy-gillespie {
   filter: saturate(3);
@@ -95,135 +204,16 @@ h4,
   100% {transform: rotate(-360deg)}
 }
 
-
-div#logo img {
-  max-width: 180px;
-  margin-top: -6px;
-}
-
 /*	--------------------------------------------------
-  <!-- custom color --!>
-  <!-- background-color: #e96725; --!>
+  <!-- End custom lougout --!>
 -------------------------------------------------- */
-.row {
-    padding: 0px;
-    margin: 0px;
-}
-
-div#loginInfo {
-  padding-bottom: 10px;
-}
-
-div#loginInfo input {
-    background-color: hsla(0,0%,100%,.1);
-    border: 1.5px solid #ffffff;
-    color: #ffffff;
-    min-height: 40px;
-}
-
-div#loginInfo input:focus {
-    background-color: #eb763a;
-    min-height: 40px;
-}
-
-div#loginInfo p {
-    color: #ffffff;
-}
-
-div#loginInfo button {
-    background-color: #ffffff;
-    border: #000000;
-    color: #e96725;
-    width: 100%;
-    min-height: 40px;
-}
 
 
-
-div#loginInfo form-control::-moz-placeholder {
-  color: #ffffff;
-  opacity: 1;
-}
-div#loginInfo .form-control:-ms-input-placeholder {
-  color: #ffffff;
-}
-div#loginInfo .form-control::-webkit-input-placeholder {
-  color: #ffffff;
-}
-
-#main-banner {
-  background: #e96725; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(#ed8550, #e96725); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#ed8550, #e96725); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#ed8550, #e96725); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#ed8550, #e96725); /* Standard syntax (must be last) */
-  padding:50px 0px 50px 0px;
-}
-
-div#main-banner .title {
-  font-size: 2em;
-  font-weight: bold;
-  margin-top: 25px;
-  color:#ffffff;
-}
-
-div#main-banner .btn-enroll,
- div#register .btn-enroll {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-
-div#main-banner .showrule,
- div#register .showrule {
-  font-size: 0.8em;
-  padding: 5px;
-}
-
-
-
-.mythumbnail {
- width: 200px;
- height: 200px;
- margin: 20px;
-}
-
-/*	--------------------------------------------------
-  <!-- header navbar-btn custom / header.html --!>
--------------------------------------------------- */
-.navbar-btn {
- border: 0px;
- color: #ffffff;
-}
 
 
 /*	--------------------------------------------------
-  <!-- container custom / 전체 적용--!>
+      <!-- Start custom board-list --!>
 -------------------------------------------------- */
-.container {
-  padding-right: 0px;
-  padding-left: 0px;
-}
-
-/*	--------------------------------------------------
-      <!--위 / 오른쪽 / 아래쪽 / 왼쪽 --!>
-      <!-- margin / padding -->
--------------------------------------------------- */
-
-.cropArea {
-  background: #E4E4E4;
-  overflow: hidden;
-  width: 700px;
-  height: 50px;
-}
-
-
-/*	--------------------------------------------------
-      <!--list-title  --!>
-
-      <!--위 / 오른쪽 / 아래쪽 / 왼쪽 --!>
--------------------------------------------------- */
-
 
 div#communityWrap {
   width: 800px; padding:10px; margin:auto;
@@ -274,40 +264,13 @@ div.main_common i{
   margin-right: 5px;
 }
 
-
 /*	--------------------------------------------------
-      <!-- 전체 스타일 커스텀  --!>
+      <!-- End custom board-list --!>
 -------------------------------------------------- */
 
-html,
-body {
-margin: 0;
-padding: 0;
-height: 100%;
-font-size: 100%;
-
-}
-
-#wrap {
-    height: 100%;
-}
-
-#body {
-    width: 100%;
-    min-height: 100%;
-    background-color: #f5f5f5;
-}
-
-#footer {
-    padding: 25px 10px 25px 10px;
-    width: 100%;
-    height: 75px;
-    background-color: #e96725;
-}
-
 
 /*	--------------------------------------------------
-      <!-- resetForm 레이아웃 커스텀  --!>
+      <!-- Start Custom resetForm --!>
 -------------------------------------------------- */
 
 div#resetForm {
@@ -360,12 +323,14 @@ div#resetForm button {
   }
 }
 
-
+/*	--------------------------------------------------
+      <!-- End Custom resetForm --!>
+-------------------------------------------------- */
 
 
 /*	--------------------------------------------------
+      <!-- Start Custom resetForm --!>
       <!-- 갤러리, 아티스트  레이아웃 커스텀  --!>
-          <!--위 / 오른쪽 / 아래쪽 / 왼쪽 --!>
 -------------------------------------------------- */
 
 div#mainContent {
@@ -386,9 +351,13 @@ div#withBorder {
   padding: 20px 50px 50px 50px;
 }
 
+/*	--------------------------------------------------
+      <!-- End Custom resetForm --!>
+      <!-- 갤러리, 아티스트  레이아웃 커스텀  --!>
+-------------------------------------------------- */
 
 /*	--------------------------------------------------
-      <!-- parial-gallery photo  --!>
+      <!-- Start Custom parial-gallery --!>
 -------------------------------------------------- */
 
 .photo .photo-image {
@@ -421,7 +390,11 @@ div#withBorder {
 }
 
 /*	--------------------------------------------------
-      <!-- parial-gallery Card  --!>
+      <!-- End Custom parial-gallery --!>
+-------------------------------------------------- */
+
+/*	--------------------------------------------------
+      <!-- Start Custom parial-gallery Card  --!>
 -------------------------------------------------- */
 
 .card {
@@ -501,7 +474,12 @@ div#withBorder {
 
 
 /*	--------------------------------------------------
-      <!-- parial-artist namecard  --!>
+      <!-- End Custom parial-gallery Card  --!>
+-------------------------------------------------- */
+
+
+/*	--------------------------------------------------
+      <!-- Start Custom parial-artist namecard  --!>
 -------------------------------------------------- */
 
 .namecard-container {
@@ -583,6 +561,9 @@ div#withBorder {
 
 
 
+/*	--------------------------------------------------
+    <!-- End Custom parial-artist namecard  --!>
+-------------------------------------------------- */
 
 
 /*	--------------------------------------------------
@@ -630,41 +611,6 @@ div#withBorder {
 
 
 
-
-/*	--------------------------------------------------
-<!-- div#panel-title{ --!>
--------------------------------------------------- */
-div#panel-title{
-    background-color: rgba(34, 34, 34, 1);
-    color:#ffffff;
-}
-div#panel-title.panel{
-  margin-bottom:0px;
-}
-
-/*	--------------------------------------------------
-<!-- div#board-navbar --!>
--------------------------------------------------- */
-
-div#board-navbar {
-  margin-bottom:15px;
-  vertical-align: middle;
-}
-div.form-group.navbar-btn{
-  margin-right:15px;
-}
-
-/*	--------------------------------------------------
-        board 조회수 이미지 조정
--------------------------------------------------- */
-
-span.view-count{
-  width:200px;
-  margin-right:10px;
-  text-align: right;
-}
-
-
 /*	--------------------------------------------------
 <!-- board 게시판 유저 이미지 및 텍스트 Custom  --!>
 -------------------------------------------------- */
@@ -677,7 +623,6 @@ div.textarea {
     border: 0;
     background: transparent;
     font-size: 13px;
-
 }
 
 /*	--------------------------------------------------
@@ -694,81 +639,6 @@ display: inline-block;
 vertical-align: middle;
 }
 
-/*	--------------------------------------------------
-    게시판 보여주기 커스텀
--------------------------------------------------- */
-
-/*	--------------------------------------------------
-          게시판 리스트 커스텀
-          배경 색 rgba(34, 34, 34, 1);
--------------------------------------------------- */
-
-div#boardrow {
-margin-top:5px;
-padding-top:5px;
-padding-bottom:5px;
-border-bottom: 1px solid #e7eaed;
-vertical-align: middle;
-}
-
-div.author_thmb > a > img {
-  border-radius: 6px;
-  width:50px;
-  height:50px;
-  float:left;
-  margin-right:15px;
-}
-
-div.author_txt > p {
-
-}
-
-div.author_border{
-  padding-top: 15px;
-  padding-bottom: 5px;
-  border-top: 1px solid #e7eaed;
-  border-bottom: 1px solid #e7eaed;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-
-
-div.comment_border {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-top:25px;
-  margin-bottom:25px;
-}
-
-div.comment_list_border{
-  padding-bottom: 5px;
-  padding-top: 15px;
-  border-top: 1px solid #e7eaed;
-  border-bottom: 1px solid #e7eaed;
-}
-
-/*	--------------------------------------------------
-<!--  board-list div안에 있는 글씨 가운데 정렬 --!>
--------------------------------------------------- */
-
-.list-sort li {
-    float: left;
-    margin-right: 20px;
-}
-
-.list-sort {
-    float: left;
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 5px;
-}
-
-span.icon {
-  height: 50px;
-  vertical-align: middle;
-  padding-top: 10px;
-}
 
 
 /*	--------------------------------------------------

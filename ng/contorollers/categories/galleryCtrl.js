@@ -43,7 +43,7 @@ $scope.data = {
 // 개별 사진 관련된 이미지 가져오기 || 선택한 이미지와 같은 분류의 이미지 가져오기
   $scope.getRelatedPic = function(){
     var code = $stateParams.photo_type;
-    $http.get('/api/galleryHeader/'+code).then(function(response){
+    $http.get('/api/galleryMenu/'+code).then(function(response){
       $scope.photos = response.data;
     });
   };

@@ -4,6 +4,23 @@ angular.module('mainController',['authServices', 'userServices'])
 
   app.loadme = false;
 
+  $rootScope.$on('$stateChangeStart', function(){
+    if(!checkSession)checkSession();
+
+    if(Auth.isLoggedIn()){
+      app.isLoggedIn = true;
+      Auth.getUser().then(function(data){
+        app.user = data.data;
+        app.loadme = true;
+      });
+    }else {
+      app.user = false;
+      app.isLoggedIn = false;
+      app.loadme = true;
+    }
+  });
+
+
   var checkSession = function(){
     if(Auth.isLoggedIn()){
       app.checkSession = true;
@@ -34,14 +51,33 @@ angular.module('mainController',['authServices', 'userServices'])
   checkSession();
 
 
+    app.renewSession = function(){
+      app.choicMade = true;
+      User.renewSession(app.user.username).then(function(data){
+        if(data.data.success){
+          AuthToken.setToken(data.data.token);
+          checkSession();
+        } else{
+          app.ModalBody = data.data.message;
+        }
+      });
+      hideModal('logout');
+    };
+
+    app.endSession = function(){
+      app.choicMade = true;
+      hideModal('logout');
+      $timeout(function(){
+        showModal('logout');
+      },500);
+    };
+
 
   var showModal = function(option){
-
     app.choiceMade = false;
     app.modalHeader = undefined;
     app.modalBody = undefined;
     app.hideButton = false;
-
 // check token expired
     if(option ===  'expired' ){
       app.modalHeader = 'Timeout Warning';
@@ -51,9 +87,7 @@ angular.module('mainController',['authServices', 'userServices'])
 // logout
       app.hideButton = true;
       app.modalHeader = '로그아웃';
-
       $("#myModal").modal({backdrop:"static"});
-
       $timeout(function(){
         Auth.logout();
         $state.go('app');
@@ -61,12 +95,15 @@ angular.module('mainController',['authServices', 'userServices'])
         hideModal('logout');
         $state.reload();
       }, 2000);
-
     } else if(option === 'login'){
+// Login
       $("#login").modal({backdrop:"static"});
-
     } else if(option ==='register'){
+// Register
       $("#register").modal({backdrop:"static"});
+    } else if(option ==='upload'){
+// enrollArtist
+      $("#upload").modal({backdrop:"static"});
     }
       $timeout(function(){
         if(!app.choicMade){
@@ -74,27 +111,6 @@ angular.module('mainController',['authServices', 'userServices'])
         }
       }, 4000);
 
-  };
-
-  app.renewSession = function(){
-    app.choicMade = true;
-    User.renewSession(app.user.username).then(function(data){
-      if(data.data.success){
-        AuthToken.setToken(data.data.token);
-        checkSession();
-      } else{
-        app.ModalBody = data.data.message;
-      }
-    });
-    hideModal('logout');
-  };
-
-  app.endSession = function(){
-    app.choicMade = true;
-    hideModal('logout');
-    $timeout(function(){
-      showModal('logout');
-    },500);
   };
 
   var hideModal = function(option){
@@ -107,24 +123,11 @@ angular.module('mainController',['authServices', 'userServices'])
       $("#login").modal('hide');
     } else if(option === 'register'){
       $("#register").modal('hide');
+    } else if(option === 'upload'){
+      $("#upload").modal('hide');
     }
   };
 
-  $rootScope.$on('$stateChangeStart', function(){
-    if(!checkSession)checkSession();
-
-    if(Auth.isLoggedIn()){
-      app.isLoggedIn = true;
-      Auth.getUser().then(function(data){
-        app.user = data.data;
-        app.loadme = true;
-      });
-    }else {
-      app.user = false;
-      app.isLoggedIn = false;
-      app.loadme = true;
-    }
-  });
 
 // 로그인
   this.doLogin = function(loginData, valid){
@@ -163,6 +166,38 @@ angular.module('mainController',['authServices', 'userServices'])
 
   };
 
+// 사용자에게 권한 부여
+  this.doPermission = function(){
+    app.uploadDisabled = true;
+    app.uploaderrorMsg = false;
+    User.resetPermission(app.user).then(function(data){
+      if(data.data.success){
+        app.uploadDisabled = true;
+        app.uploadSuccessMsg = data.data.message;
+        $timeout(function(){
+          hideModal('upload');
+        },2000);
+      } else {
+        app.uploadDisabled = false;
+        app.uploaderrorMsg = '잘못된 정보가 입력되었습니다.';
+      }
+    });
+  };
+
+
+// 사용자의 권한 여부 확인
+  app.upload = function(){
+    app.choicMade = true;
+    User.checkPermission(app.user.username).then(function(data){
+      if(data.data.success){
+         $state.go('app.upload');
+         app.permission = true;
+      } else {
+        showModal('upload');
+      }
+    });
+  };
+
 
   app.login = function(){
     app.successMsg = false;
@@ -174,6 +209,8 @@ angular.module('mainController',['authServices', 'userServices'])
   app.register = function(){
     showModal('register');
   };
+
+
 
   app.loginToReg = function(){
     hideModal('register');
