@@ -118,12 +118,30 @@ div#loginInfo .form-control:-ms-input-placeholder {
 div#loginInfo .form-control::-webkit-input-placeholder {
   color: #fff;
 }
-#grad1 {
+#main-banner {
   background: #e96725; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(#ed8550, #e96725); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#ed8550, #e96725); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#ed8550, #e96725); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#ed8550, #e96725); /* Standard syntax (must be last) */
+  padding: 50px 0px 50px 0px;
+}
+div#main-banner .title {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 25px;
+  color: #fff;
+}
+div#main-banner .btn-enroll,
+div#register .btn-enroll {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+div#main-banner .showrule,
+div#register .showrule {
+  font-size: 0.8em;
+  padding: 5px;
 }
 .mythumbnail {
   width: 200px;
@@ -256,31 +274,6 @@ div#loginForm legend {
 }
 @media screen and (max-width: 550px) {
   .loginForm {
-    width: 100%;
-    background-color: #fff;
-    border-radius: 0;
-    padding: 10px 50px 30px 50px;
-  }
-}
-/*	--------------------------------------------------
-      <!-- 회원가입 레이아웃 커스텀  --!>
--------------------------------------------------- */
-div#regForm {
-  min-height: 100%;
-  background-color: #e96725;
-  padding-top: 50px;
-  text-align: center;
-}
-.regForm {
-  width: 340px;
-  margin: 0px auto;
-  background-color: #fff;
-  padding: 10px 50px 30px 50px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-@media screen and (max-width: 550px) {
-  .regForm {
     width: 100%;
     background-color: #fff;
     border-radius: 0;

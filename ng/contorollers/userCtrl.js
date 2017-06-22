@@ -1,5 +1,5 @@
 angular.module('userControllers',['userServices'])
-.controller('regCtrl', function ( $http, $location, $timeout,User, Auth ) {
+.controller('regCtrl', function ( $http, $location, $timeout, User, Auth, $state) {
     var app = this;
 
     this.regUser = function(regData, valid, confirmed){
@@ -12,7 +12,8 @@ angular.module('userControllers',['userServices'])
             app.disabled = true;
             app.successMsg = data.data.message;
             $timeout(function(){
-              $location.path('/');
+              $("#register").modal('hide');
+              $state.reload();
             },2000);
           }else {
             app.disabled = false;
@@ -23,10 +24,38 @@ angular.module('userControllers',['userServices'])
       } else {
            app.disabled = false; // If error occurs, remove disable lock from form
            app.loading = false; // Stop bootstrap loading icon
-           app.errorMsg = 'Please ensure form is filled our properly'; // Display error if valid returns false
+           app.errorMsg = '입력창에 올바른 정보를 입력해주세요.'; // Display error if valid returns false
       }
 
     };
+
+    this.bannerRegUser = function(regData, valid){
+      app.errorMsg = false;
+      app.disabled = true;
+
+      if(valid){
+        User.create(app.regData).then(function(data){
+          if(data.data.success){
+            app.disabled = true;
+            app.successMsg = data.data.message;
+            $timeout(function(){
+              $state.go('app');
+              $state.reload();
+            },2000);
+          }else {
+            app.disabled = false;
+            app.errorMsg = data.data.message;
+          }
+        });
+
+      } else {
+           app.disabled = false; // If error occurs, remove disable lock from form
+           app.loading = false; // Stop bootstrap loading icon
+           app.errorMsg = '입력창에 올바른 정보를 입력해주세요.'; // Display error if valid returns false
+      }
+
+    };
+
 
 });
 

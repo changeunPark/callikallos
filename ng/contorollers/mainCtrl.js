@@ -22,11 +22,9 @@ angular.module('mainController',['authServices', 'userServices'])
           var timeCheck = expireTime.exp - timeStamp;
 
           if(timeCheck <= 25){
-            console.log('token has expired');
-            showModal(1);
+            showModal('expired');
             $interval.cancel(interval);
           } else {
-            console.log('token not yet expired');
           }
         }
       }, 2000);
@@ -45,30 +43,31 @@ angular.module('mainController',['authServices', 'userServices'])
     app.hideButton = false;
 
 // check token expired
-    if(option ===  1 ){
+    if(option ===  'expired' ){
       app.modalHeader = 'Timeout Warning';
       app.modalBody = 'Your session will expired in 5 minutes. Would you like to renew your session?';
       $("#myModal").modal({backdrop:"static"});
-    } else if(option === 2){
+    } else if(option === 'logout'){
 // logout
       app.hideButton = true;
-      app.modalHeader = '로그아웃...';
+      app.modalHeader = '로그아웃';
       $("#myModal").modal({backdrop:"static"});
       $timeout(function(){
         Auth.logout();
         $location.path('/');
-        hideModal(2);
+        hideModal('logout');
         $state.reload();
       }, 2000);
-    } else if(option === 3){
+    } else if(option === 'login'){
 // Login
       $("#login").modal({backdrop:"static"});
 
+    } else if(option ==='register'){
+      $("#register").modal({backdrop:"static"});
     }
       $timeout(function(){
         if(!app.choicMade){
-          console.log('LOGGED OuT!!!');
-          hideModal(2);
+          hideModal('logout');
         }
       }, 4000);
 
@@ -84,25 +83,27 @@ angular.module('mainController',['authServices', 'userServices'])
         app.ModalBody = data.data.message;
       }
     });
-    hideModal(2);
+    hideModal('logout');
   };
 
   app.endSession = function(){
     app.choicMade = true;
-    hideModal(2);
+    hideModal('logout');
     $timeout(function(){
-      showModal(2);
+      showModal('logout');
     },500);
   };
 
   var hideModal = function(option){
 
-    if(option === 1){
+    if(option === 'expired'){
       $("#myModal").modal('hide');
-    } else if(option === 2){
+    } else if(option === 'logout'){
       $("#myModal").modal('hide');
-    } else if(option === 3){
+    } else if(option === 'login'){
       $("#login").modal('hide');
+    } else if(option === 'register'){
+      $("#register").modal('hide');
     }
   };
 
@@ -132,8 +133,7 @@ angular.module('mainController',['authServices', 'userServices'])
         if(data.data.success){
           app.successMsg = data.data.message;
           $timeout(function(){
-            $location.path('/');
-            hideModal(3);
+            hideModal('login');
             app.loginData = null;
             app.disabled = true;
             app.successMsg = false;
@@ -160,12 +160,53 @@ angular.module('mainController',['authServices', 'userServices'])
 
   };
 
+  this.regUser = function(regData, valid, confirmed){
+    app.errorMsg = false;
+    app.disabled = true;
+
+    if(valid && confirmed){
+      User.create(app.regData).then(function(data){
+        if(data.data.success){
+          app.disabled = true;
+          app.successMsg = data.data.message;
+          $timeout(function(){
+            $location.path('/');
+            hideModal('register');
+            app.loginData = null;
+            app.disabled = true;
+            app.successMsg = false;
+            app.isLoggedIn = true;
+            checkSession();
+            $state.reload();
+          },2000);
+        }else {
+          app.disabled = false;
+          app.errorMsg = data.data.message;
+        }
+      });
+
+    } else {
+         app.disabled = false; // If error occurs, remove disable lock from form
+         app.loading = false; // Stop bootstrap loading icon
+         app.errorMsg = 'Please ensure form is filled our properly'; // Display error if valid returns false
+    }
+
+  };
+
   app.login = function(){
-    showModal(3);
+    showModal('login');
+  };
+  app.register = function(){
+    showModal('register');
+  };
+
+  app.loginToReg = function(){
+    hideModal('register');
+    showModal('login');
   };
 
   app.logout = function(){
-    showModal(2);
+    showModal('logout');
   };
 
 
