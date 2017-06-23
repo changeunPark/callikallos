@@ -1,0 +1,55 @@
+<div id="resetForm">
+  <div>
+    <a class="go-home" ng-href="/" >
+      <p>CALLIKALLOS</p>
+    </a>
+  </div>
+
+<div class="resetForm">
+    <div>
+      <p class="title">약관 동의</p>
+    </div>
+    <div class ="row show-hide-message" ng-show="register.successMsg">
+      <div class="alert alert-success">{{register.successMsg}}</div>
+    </div>
+    <div class ="row show-hide-message" ng-show="register.errorMsg">
+      <div class="alert alert-danger">{{register.errorMsg}}</div>
+    </div>
+    <form name="regForm" ng-submit="register.regStep1(register.regData)" novalidate>
+        <div class="row">
+          <div class="col-sm-8">
+            <span>캘리칼로스 이용약관 동의</span><span>(필수)</span>
+          </div>
+          <div class="col-sm-4 text-right">
+            <label class="switch">
+            <input type="checkbox" ng-model="register.regData.terms">
+            <div class="slider round"></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <span>개인정보 수집 및 이용에 대한 안내</span><span>(필수)</span>
+          </div>
+          <div class="col-sm-4 text-right">
+            <label class="switch">
+            <input type="checkbox" ng-model="register.regData.privacy">
+            <div class="slider round"></div>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <div class="row">
+            <div class="col-sm-6">
+              <button ui-sref="app" class="btn btn-block btn-default">비동의</button>
+            </div>
+            <div class="col-sm-6">
+              <button type="submit" class="btn btn-block btn-enroll">동의</button>
+            </div>
+          </div>
+        </div>
+  </form>
+</div>
+</div>

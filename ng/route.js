@@ -18,6 +18,24 @@ $urlRouterProvider.otherwise('/');
              }
             })
 
+            .state('registerStep1',
+             {
+               url: '/register/step1',
+               controller: 'regCtrl',
+               controllerAs: 'register',
+               templateUrl: '/isLoggedOut/registerStep1.html',
+               authenticated: false
+            })
+
+            .state('registerStep2',
+             {
+               url: '/register/step2',
+               controller: 'regCtrl',
+               controllerAs: 'register',
+               templateUrl: '/isLoggedOut/registerStep2.html',
+               authenticated: false
+            })
+
 
             .state('resetusername',
             {
@@ -60,22 +78,6 @@ $urlRouterProvider.otherwise('/');
               controllerAs: 'resend'
             })
 
-
-            .state('login',
-            {
-              url: '/login',
-              templateUrl: '/isLoggedOut/login.html',
-              authenticated: false
-            })
-
-           .state('register',
-            {
-              url: '/register',
-              controller: 'regCtrl',
-              controllerAs: 'register',
-              templateUrl: '/isLoggedOut/register.html',
-              authenticated: false
-           })
 
             .state('app.intro',
             {

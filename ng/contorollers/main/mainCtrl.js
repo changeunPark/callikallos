@@ -90,7 +90,6 @@ angular.module('mainController',['authServices', 'userServices'])
       $("#myModal").modal({backdrop:"static"});
       $timeout(function(){
         Auth.logout();
-        $state.go('app');
         app.isLoggedIn = false;
         hideModal('logout');
         $state.reload();
@@ -98,10 +97,7 @@ angular.module('mainController',['authServices', 'userServices'])
     } else if(option === 'login'){
 // Login
       $("#login").modal({backdrop:"static"});
-    } else if(option ==='register'){
-// Register
-      $("#register").modal({backdrop:"static"});
-    } else if(option ==='upload'){
+    }  else if(option ==='upload'){
 // enrollArtist
       $("#upload").modal({backdrop:"static"});
     }
@@ -121,8 +117,6 @@ angular.module('mainController',['authServices', 'userServices'])
       $("#myModal").modal('hide');
     } else if(option === 'login'){
       $("#login").modal('hide');
-    } else if(option === 'register'){
-      $("#register").modal('hide');
     } else if(option === 'upload'){
       $("#upload").modal('hide');
     }
@@ -166,23 +160,6 @@ angular.module('mainController',['authServices', 'userServices'])
 
   };
 
-// 사용자에게 권한 부여
-  this.doPermission = function(){
-    app.uploadDisabled = true;
-    app.uploaderrorMsg = false;
-    User.resetPermission(app.user).then(function(data){
-      if(data.data.success){
-        app.uploadDisabled = true;
-        app.uploadSuccessMsg = data.data.message;
-        $timeout(function(){
-          hideModal('upload');
-        },2000);
-      } else {
-        app.uploadDisabled = false;
-        app.uploaderrorMsg = '잘못된 정보가 입력되었습니다.';
-      }
-    });
-  };
 
 
 // 사용자의 권한 여부 확인
@@ -190,7 +167,7 @@ angular.module('mainController',['authServices', 'userServices'])
     app.choicMade = true;
     User.checkPermission(app.user.username).then(function(data){
       if(data.data.success){
-         $state.go('app.upload');
+        $state.go('app.upload');
          app.permission = true;
       } else {
         showModal('upload');
@@ -198,25 +175,31 @@ angular.module('mainController',['authServices', 'userServices'])
     });
   };
 
+  // 사용자에게 권한 부여
+    this.doPermission = function(){
+      app.uploadDisabled = true;
+      app.uploaderrorMsg = false;
+      User.resetPermission(app.user).then(function(data){
+        if(data.data.success){
+          app.uploadDisabled = true;
+          app.uploadSuccessMsg = data.data.message;
+          $timeout(function(){
+            hideModal('upload');
+            $state.go('app.upload');
+          },2000);
+        } else {
+          app.uploadDisabled = false;
+          app.uploaderrorMsg = '잘못된 정보가 입력되었습니다.';
+        }
+      });
+    };
+
 
   app.login = function(){
     app.successMsg = false;
     app.errorMsg = false;
     app.disabled = false;
     showModal('login');
-  };
-
-  app.register = function(){
-    showModal('register');
-  };
-
-
-
-  app.loginToReg = function(){
-    hideModal('register');
-    $timeout(function(){
-      showModal('login');
-    },500);
   };
 
   app.logout = function(){

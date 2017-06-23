@@ -1,3 +1,68 @@
+/*	--------------------------------------------------
+                <!-- 전체 적용--!>
+                 color: #e96725;
+
+-------------------------------------------------- */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #e96725;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #e96725;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+
 
 
 .mythumbnail {
@@ -71,6 +136,22 @@ font-size: 100%;
 /*	--------------------------------------------------
   <!-- Start custom main-banner --!>
 -------------------------------------------------- */
+ .banner-image img {
+  background-clip: padding-box;
+  position: relative;
+}
+
+ .banner-image span.banner-author {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px 25px 5px 15px;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 200;
+  text-shadow: 1px 1px 2px #000000
+}
+
 
 div#main-banner {
   background: #e96725; /* For browsers that do not support gradients */
@@ -85,8 +166,13 @@ div#main-banner {
 div#main-banner .title {
     font-size: 2em;
     font-weight: bold;
-    margin-top: 25px;
+    margin-top: 10%;
     color:#ffffff;
+}
+
+div#main-banner .intro {
+color:#ffffff;
+
 }
 
 
@@ -277,7 +363,6 @@ div#resetForm {
     min-height: 100%;
     background-color: #e96725;
     padding-top: 50px;
-    text-align: center;
 }
 
 div#resetForm a.go-home {
@@ -285,20 +370,32 @@ div#resetForm a.go-home {
   font-weight: bold;
   text-decoration: none;
   color: #ffffff;
+  text-align: center;
+
 }
 
 div#resetForm p.title {
  font-size:2em;
  font-weight:bold;
+ text-align: center;
+
 }
 
+div#resetForm label {
+  margin-left:5px;
+}
 
-div#resetForm input,
+div#resetForm input {
+    min-height: 50px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
 div#resetForm button {
-  min-height: 50px;
-  font-size: 1em;
-  font-weight: bold;
-  margin:5px;
+    min-height: 50px;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top:10px;
 }
 
 .resetForm {

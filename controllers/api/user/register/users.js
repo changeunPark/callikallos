@@ -110,11 +110,9 @@ router.put('/', function(req, res, next){
         }
         else {
           var updateSql = 'update users set ? where user_id = ?';
-
           var updateValue = {
             permission : 'artist',
           };
-
           var user_id = req.body.user_id;
 
           connection.query(updateSql, [updateValue, user_id], function(err, results, next){

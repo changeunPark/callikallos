@@ -2,8 +2,24 @@ angular.module('userControllers',['userServices'])
 .controller('regCtrl', function ( $http, $location, $timeout, User, Auth, $state) {
     var app = this;
 
+      this.regStep1 = function(regData){
+        app.errorMsg = false;
+        if(!regData){
+          app.errorMsg = '약관에 동의해야만 회원가입을 진행할 수 있습니다.';
+        } else {
+          if((regData.terms) && (regData.privacy)) {
+                app.successMsg = '약관에 성공적으로 동의하셨습니다.';
+                app.disabled = true;
+                $state.go('registerStep2');
+          } else {
+                app.errorMsg = '약관에 동의해야만 회원가입을 진행할 수 있습니다.';
+                app.disabled = false;
+          }
+        }
+
+      };
     // 회원가입
-      this.regUser = function(regData, valid, confirmed){
+      this.regStep2 = function(regData, valid, confirmed){
         app.errorMsg = false;
         app.disabled = true;
 
@@ -14,12 +30,10 @@ angular.module('userControllers',['userServices'])
               app.successMsg = data.data.message;
               $timeout(function(){
                 $("#register").modal('hide');
-                app.app.regData = null;
+                app.regData = null;
                 app.isLoggedIn = false;
-                checkSession();
                 $state.go('app');
-                $state.reload();
-              },2000);
+              },3000);
             }else {
               app.disabled = false;
               app.errorMsg = data.data.message;
