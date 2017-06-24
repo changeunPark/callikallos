@@ -521,6 +521,7 @@ div#withBorder {
 <!-- #navbar-main --!>
 -------------------------------------------------- */
 #main-navbar.navbar-default .navbar-brand {
+  background-color: #fff;
   color: #e96725;
 }
 #main-navbar.navbar-default {
@@ -528,6 +529,14 @@ div#withBorder {
   font-size: 15px;
   background-color: #f8f8f8;
   border-bottom-width: 1px;
+}
+@media screen and (min-width: 320px) {
+  .container-fluid>.navbar-collapse,
+  .container-fluid>.navbar-header,
+  .container>.navbar-collapse,
+  .container>.navbar-header {
+    margin: 0px;
+  }
 }
 #main-navbar.navbar-default .navbar-nav>li>a {
   color: #000;
@@ -541,22 +550,21 @@ div#withBorder {
 #main-navbar.navbar-default .navbar-nav>.active>a,
 #main-navbar.navbar-default .navbar-nav>.active>a:hover,
 #main-navbar.navbar-default .navbar-nav>.active>a:focus {
-  color: #e96725;
+  color: #fff;
   background-color: #fff;
 }
 #main-navbar.navbar-default .navbar-toggle {
-  border-color: #fff;
+  border: 0px;
 }
-#main-navbar.navbar-default .navbar-toggle:hover,
 #main-navbar.navbar-default .navbar-toggle:focus {
-  background-color: #fff;
+  background-color: #e96725;
 }
 #main-navbar.navbar-default .navbar-toggle .icon-bar {
-  background-color: #fff;
+  background-color: #e96725;
 }
 #main-navbar.navbar-default .navbar-toggle:hover .icon-bar,
 #main-navbar.navbar-default .navbar-toggle:focus .icon-bar {
-  background-color: #f8f8f8;
+  background-color: #fff;
 }
 /*	--------------------------------------------------
 <!-- board 게시판 유저 이미지 및 텍스트 Custom  --!>
