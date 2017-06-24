@@ -527,7 +527,7 @@ div#withBorder {
 #main-navbar.navbar-default {
   margin-bottom: 0px;
   font-size: 15px;
-  background-color: #f8f8f8;
+  background-color: #fff;
   border-bottom-width: 1px;
 }
 @media screen and (min-width: 320px) {
@@ -540,12 +540,12 @@ div#withBorder {
 }
 #main-navbar.navbar-default .navbar-nav>li>a {
   color: #000;
-  background-color: rgba(248,248,248,0);
+  background-color: #fff;
 }
 #main-navbar.navbar-default .navbar-nav>li>a:hover,
 #main-navbar.navbar-default .navbar-nav>li>a:focus {
   color: #e96725;
-  background-color: rgba(248,248,248,0);
+  background-color: #fff;
 }
 #main-navbar.navbar-default .navbar-nav>.active>a,
 #main-navbar.navbar-default .navbar-nav>.active>a:hover,
@@ -554,15 +554,15 @@ div#withBorder {
   background-color: #fff;
 }
 #main-navbar.navbar-default .navbar-toggle {
+  background-color: #fff;
   border: 0px;
-}
-#main-navbar.navbar-default .navbar-toggle:focus {
-  background-color: #e96725;
 }
 #main-navbar.navbar-default .navbar-toggle .icon-bar {
   background-color: #e96725;
 }
-#main-navbar.navbar-default .navbar-toggle:hover .icon-bar,
+#main-navbar.navbar-default .navbar-toggle:focus {
+  background-color: #e96725;
+}
 #main-navbar.navbar-default .navbar-toggle:focus .icon-bar {
   background-color: #fff;
 }
