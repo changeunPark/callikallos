@@ -52,7 +52,7 @@ angular.module('mainController',['authServices', 'userServices'])
 
 
     app.renewSession = function(){
-      app.choicMade = true;
+      app.choiceMade = true;
       User.renewSession(app.user.username).then(function(data){
         if(data.data.success){
           AuthToken.setToken(data.data.token);
@@ -65,7 +65,7 @@ angular.module('mainController',['authServices', 'userServices'])
     };
 
     app.endSession = function(){
-      app.choicMade = true;
+      app.choiceMade = true;
       hideModal('logout');
       $timeout(function(){
         showModal('logout');
@@ -102,7 +102,7 @@ angular.module('mainController',['authServices', 'userServices'])
       $("#upload").modal({backdrop:"static"});
     }
       $timeout(function(){
-        if(!app.choicMade){
+        if(!app.choiceMade){
           hideModal('logout');
         }
       }, 4000);
@@ -155,7 +155,7 @@ angular.module('mainController',['authServices', 'userServices'])
     } else {
       app.disabled = false; // If error occurs, remove disable lock from form
       app.loading = false; // Stop bootstrap loading icon
-      app.errorMsg = 'Please ensure form is filled our properly'; // Display error if valid returns false
+      app.errorMsg = '올바른 정보를 입력해주세요.'; // Display error if valid returns false
     }
 
   };
@@ -163,20 +163,26 @@ angular.module('mainController',['authServices', 'userServices'])
 
 
 // 사용자의 권한 여부 확인
-  app.upload = function(){
-    app.choicMade = true;
-    User.checkPermission(app.user.username).then(function(data){
-      if(data.data.success){
-        $state.go('app.upload');
-         app.permission = true;
-      } else {
-        showModal('upload');
-      }
-    });
+  this.upload = function(){
+  app.choiceMade = true;
+    if(app.user.permission === 'artist'){
+      $state.go('app.upload');
+    } else {
+      User.checkPermission(app.user.username).then(function(data){
+        if(data.data.success){
+          $state.go('app.upload');
+           app.permission = true;
+        } else {
+          showModal('upload');
+        }
+      });
+    }
+
   };
 
   // 사용자에게 권한 부여
     this.doPermission = function(){
+      app.choiceMade = true;
       app.uploadDisabled = true;
       app.uploaderrorMsg = false;
       User.resetPermission(app.user).then(function(data){

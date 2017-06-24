@@ -99,6 +99,52 @@
               </div>
             </div>
     </uib-tab>
+    <uib-tab index="2" heading="작가 정보" ng-init="getUserDetail()" style="color:#000000;">
+      <div id="subContent">
+            <div ng-show="mainMessageStatus">
+                <div ng-class="alert">{{ mainMessage }}</div>
+            </div>
+            <form ng-submit="insertUserDetail(userInfo2)">
+                  <div class="form-group">
+                    <label for="username">한 줄 소개</label>
+                    <input type="short_info" ng-model="userInfo2.short_info" class="form-control" id="username"  placeholder="내용을 입력해주세요.">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pwd">상세소개</label>
+                    <textarea class="form-control" ng-model="userInfo2.detail_info"  rows="5" id="content" ng-model="content" placeholder="내용을 입력해주세요"></textarea>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-sm-4">
+                      <label for="email">대표 사이트</label>
+                      <input type="username" ng-model="userInfo2.social_site" class="form-control" id="username" placeholder="ex) 개인 블로그 및 소셜네트워크 서비스">
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label for="pwd">공개 이메일</label>
+                      <input type="username" ng-model="userInfo2.public_email" class="form-control" id="username" placeholder="ex) 홈페이지에 공개 가능한 이메일">
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label for="pwd">전문 분야</label> <span ng-show="userInfo2.user_type" style="color:#E96725;"><tt>[{{userInfo2.type_name}}]</tt></span>
+                      <select class="form-control" name="mySelect" id="mySelect"
+                        ng-options="option.name for option in data.availableOptions track by option.id"
+                        ng-model="data.selectedOption">
+                      </select>
+                    </div>
+                  </div>
+
+                  <div id="makeBorder"></div>
+                  <div id="withBorder">
+                    <p>입력하신 프로필 정보(프로필 이미지, 국가, 성별, 나이, 한 줄 소개, 대표 사이트, 공개 이메일, 활동분야, 상세 소개, SNS, 히스토리, 책)는 커뮤니케이션을 위한 회원간 공개 또는 서비스 이용 통계를 목적으로 회원탈퇴 혹은 직접 삭제 전까지 보관됩니다.</p>
+                  </div>
+
+                  <div class="form-group text-center">
+                    <button  ng-disabled="loading"  type="submit" class="btn btn-default">동의 및 저장</button>
+                    <a ng-href="/" class="btn btn-default">취소</a>
+                  </div>
+              </form>
+        </div>
+    </uib-tab>
 
 
   </uib-tabset>
