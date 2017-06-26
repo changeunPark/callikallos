@@ -1,6 +1,9 @@
 var app = angular.module('app');
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 $urlRouterProvider.otherwise('/');
+// $locationProvider.html5Mode(true);
+
+
  $stateProvider
            .state('app', {
              url: '/',
@@ -10,7 +13,7 @@ $urlRouterProvider.otherwise('/');
                controller: 'MainMenuController'
                },
                'content': {
-               templateUrl: '/categories/home.html'
+               templateUrl: '../categories/home.html'
                },
                'footer': {
                templateUrl: '/company/footer.html'
@@ -340,6 +343,5 @@ $urlRouterProvider.otherwise('/');
              }
            }
          });
-        //  $locationProvider.html5Mode(true);
 
 });

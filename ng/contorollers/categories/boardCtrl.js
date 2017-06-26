@@ -18,7 +18,7 @@ angular.module('app')
   $scope.addBoard = function(title, content){
 // employess 제대로 동작하는지 확인 필요
       var board_type = $scope.data.selectedOption.id;
-      $http.post('/api/boardMenu',
+      $http.post('api/boardMenu',
       { title:title, content: content, board_type: board_type})
       .then(function(response){          // 정상 작동하였습니다.
       });
@@ -28,7 +28,7 @@ angular.module('app')
 	$scope.showBoard = function(){
   // 보드 아이디 전송
   var id = $stateParams.board_id;
-    $http.get('/api/board/'+id).then(function(response){
+    $http.get('api/board/'+id).then(function(response){
 // 사용자가 작성한 게시물입니다.
     if(response.data[1].success){
       $scope.userArticle = true;
@@ -46,7 +46,7 @@ angular.module('app')
   // 값을 삭제하는 함수
 	$scope.deleteBoard = function(){
     var id = $stateParams.board_id;
-		$http.delete('/api/board/'+id).then(function(response){
+		$http.delete('api/board/'+id).then(function(response){
         $location.path('app.board.category({code: 0})');
 		});
 	};
@@ -54,7 +54,7 @@ angular.module('app')
   	// 값을 수정하는 함수
   	$scope.updateBoard = function(){
   		var id = $stateParams.board_id;
-  		$http.put('/api/board/'+id , $scope.board).then(function(response){
+  		$http.put('api/board/'+id , $scope.board).then(function(response){
   			$scope.board = response.data;
         $location.path('board');
   		});
