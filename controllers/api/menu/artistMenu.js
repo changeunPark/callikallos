@@ -43,7 +43,7 @@ try{
       }
       else {
         var selectSql = 'select my_profile.*, users.permission, users.profile_image, users.username, user_type.description from ((my_profile left join users on users.user_id = my_profile.user_id) inner join user_type on my_profile.user_type = user_type.code) where user_type = ?;';
-        var selectValue = 'moderator';
+        var selectValue = 'artist';
         var selectCode = req.params.code;
 
         if(selectCode === '0'){

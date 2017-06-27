@@ -23,7 +23,7 @@ var profileupload = multer({
 
 
 // 기존에 미리 생성한 유저 테이블에 이미지 파일 경로 저장하기
-router.put('/', function(req, res, next){
+router.put('/:user_id', function(req, res, next){
 try{
 
     req.getConnection(function(err, connection) {
@@ -48,12 +48,12 @@ try{
 		                res.json({ success: false, message: '선택된 파일이 없습니다.' });
 		            } else {
 											var dbfilePath = '/images/profiles/';
-                      var user_id = req.auth.user_id;
+                      // var user_id = req.auth.user_id;
               				var updateValue = {
                         profile_image: dbfilePath + req.file.filename
               				};
               				var updateRecord = 'UPDATE users SET ? WHERE user_id = ?';
-              				// connection.query('UPDATE * FROM employee WHERE id = ?', [id], function (err, employee) {
+                      var user_id = req.params.user_id;
               					connection.query(updateRecord, [updateValue, user_id], function (err, response) {
 		                	if(err) throw err;
 		                	else {

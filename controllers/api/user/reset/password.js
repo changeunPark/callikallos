@@ -109,11 +109,11 @@ try{
 
 
                 var email = {
-                  from: 'awesome@bar.com',
+                  from: 'callikallos@gmail.com',
                   to: userInfo.email,
-                  subject:'Localhost Reset Password Request',
-                  text: 'Hello'+ userInfo.username + ', You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="http://localhost:3000/#!/reset/'+ userInfo.token+'">http://localhost:3000/#!/reset/</a>',
-                  html: 'Hello<strong>'+ userInfo.username + '</strong>, <br><br> You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="http://localhost:3000/#!/reset/'+userInfo.token+'">http://localhost:3000/reset/</a>'
+                  subject:'캘리칼로스 비밀번호 변경',
+                  text: '안녕하세요 '+ userInfo.username + '님, 최근 요청한 비밀번호 변경관련한 이메일 입니다. 비밀번호 변경을 위해 아래의 링크를 클릭해주세요.<br><br><a href="http://localhost:3000/#!/reset/'+ userInfo.token+'">http://localhost:3000/#!/reset/</a>',
+                  html: '안녕하세요 <strong>'+ userInfo.username + '</strong>, <br><br> 최근 요천한 비밀번호 변경 관련 이메일입니다. 비밀번호 변경을 위해 아래의 링크를 확인해주세요. <br><br><a href="http://localhost:3000/#!/reset/'+userInfo.token+'">http://localhost:3000/reset/</a>'
 
                 };
 
@@ -125,7 +125,7 @@ try{
                   }
                 });
 
-                res.status(201).send({success: true, message: 'Please check your e-mail for password reset link'});
+                res.status(201).send({success: true, message: '비밀번호 변경을 위한 이메일 확인해주세요.'});
 
 
               }

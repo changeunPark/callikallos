@@ -1,4 +1,4 @@
-angular.module('emailController',['userServices'])
+angular.module('emailControllers',['userServices'])
 .controller('emailCtrl', function($stateParams, User, $timeout, $state){
   var app = this;
   User.activeAccount($stateParams.token).then(function(data){

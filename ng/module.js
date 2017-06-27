@@ -2,10 +2,10 @@ angular.module('app',[
     'ui.router',
     'ui.bootstrap',
     'userControllers',
-    'userServices',
-    'mainController',
-    'authServices',
-    'emailController'
+    'mainControllers',
+    'emailControllers',
+    'artistControllers',
+    'ngImgCrop'
 ]).config(function($httpProvider){
   $httpProvider.interceptors.push('AuthInterceptors');
 });

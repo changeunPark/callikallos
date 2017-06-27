@@ -50,11 +50,11 @@ try{
                 };
 
                 var email = {
-                  from: 'awesome@bar.com',
+                  from: 'callikallos@gmail.com',
                   to: userInfo.email,
-                  subject:'Localhost Username Request',
-                  text: 'Hello'+ userInfo.username + ', You recently requeseted your username. Please save it in your files ! <br> your Id : ' + userInfo.username,
-                  html: 'Hello<strong>'+ userInfo.username + '</strong> You recently requeseted your username. Please save it in your files! <br> your Id : ' + userInfo.username
+                  subject:'캘리칼로스 아이디 찾기',
+                  text: '안녕하세요 '+ userInfo.username + ', 최근 당신이 요청한 아이디 찾기에 요청에 대한 답변입니다. 당신의 아이디는 : ' + userInfo.username + '입니다.',
+                  html: '안녕하세요 '+ userInfo.username + ', 최근 당신이 요청한 아이디 찾기에 요청에 대한 답변입니다. 당신의 아이디는 : ' + userInfo.username + '입니다.'
                 };
 
                 client.sendMail(email, function(err, info){

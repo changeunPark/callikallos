@@ -49,7 +49,7 @@ try{
                   // 여기서 프로필 이미지인지 작품 이미지인지 구별해서 보내면 되겠네. API 재사용? 이런걸 말하는건가?
 											var dbfilePath = '/images/photos/';
                       var photo_path = dbfilePath + req.file.filename;
-                      res.status(201).send([photo_path,{success:true, message:'이미지가 업로드 되었습니다.'}]);
+                      res.status(201).send({success:true, message:'이미지가 업로드 되었습니다.', photo_path: photo_path});
 			            }
 			      	}
 			    });

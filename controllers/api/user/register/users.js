@@ -65,11 +65,11 @@ router.post('/', function(req, res, next){
                     } else{
 
                       var email = {
-                        from: 'awesome@bar.com',
+                        from: 'callikallos@gmail.com',
                         to: req.body.email,
-                        subject:'Localhost Activation Link',
-                        text: 'Hello'+ req.body.username + ', Thank you for REGISTERATION http://localhost:3000/activate/' + insertValue.temporarytoken,
-                        html: 'Hello<strong>'+ req.body.username + '</strong>, <br><br> Thank you for REGISTERATION<br><a href="http://localhost:3000/#!/activate/'+insertValue.temporarytoken+'">http://localhost:3000/activate</a>'
+                        subject:'캘리칼로스 이메일 인증관련 메일입니다.',
+                        text: '안녕하세요 '+ req.body.username + ', 캘리칼로스에 가입하신걸 환영합니다. http://callikallos/activate/' + insertValue.temporarytoken,
+                        html: '안녕하세요 <strong>'+ req.body.username + '</strong>, <br><br>캘리칼로스에 회원가입하신걸 진심으로 감사드립니다.<br> 이메일 인증을 위해 아래의 링크를 클릭해 회원가입을 완료해주세요.<br><a href="http://localhost:3000/#!/activate/'+insertValue.temporarytoken+'">http://localhost:3000/activate</a>'
                       };
 
                       client.sendMail(email, function(err, info){

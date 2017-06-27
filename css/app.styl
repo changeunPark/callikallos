@@ -4,12 +4,16 @@
 
 -------------------------------------------------- */
 
-.mythumbnail {
- width: 200px;
- height: 200px;
- margin: 20px;
-}
 
+div.image-default img{
+  min-width: 250px;
+  min-height: 250px;
+  max-widht: 300px;
+  max-height: 300px;
+  margin: 15px;
+  border-radius: 5px;
+
+}
 
 .btn-enroll {
   background-color: #e96725;
@@ -147,7 +151,6 @@ div#upload .showrule {
 -------------------------------------------------- */
 
 .modal-header,
-h4,
 .close {
     background-color: #e96725;
     color: white !important;
@@ -155,6 +158,14 @@ h4,
     font-size: 30px;
 }
 
+p.modal-title {
+  color: white !important;
+  text-align: center;
+  font-size: 30px;
+  margin: 0px;
+  padding: 0px;
+
+}
 
 .modal-body {
     margin: 10px;
@@ -426,6 +437,7 @@ div#subContent {
 
 div#makeBorder {
   margin-top: 30px;
+  margin-bottom: 30px;
   border: 1px solid #e96725;
 }
 
@@ -586,14 +598,12 @@ div#withBorder {
 .namecard-header {
   border-radius: 3px;
   position: relative;
-  top: -20px;
   margin:15px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 
 .namecard .namecard-image {
-  margin-top:25px;
   position: relative;
   overflow: hidden;
   transition: .5s ease;
@@ -670,8 +680,8 @@ div#withBorder {
     .container>.navbar-header {
         margin:0px;
     }
-}
 
+}
 
 
 #main-navbar.navbar-default .navbar-nav>li>a {

@@ -91,19 +91,9 @@ angular.module('app')
 
 // my_profiles & my_photos
   $scope.getUserProfile= function(){
-    $http.get('/api/myProfileTap1/').then(function(response){
-// 작가 등록을 했을 때
-      if(response.data.permission === 'admin' || response.data.permission === 'moderator'){
-        $scope.checkboxModel = {
-         value : true
-        };
-        $scope.userSetting = response.data;
-      } else {
-        $scope.checkboxModel = {
-         value : false
-        };
-        $scope.userSetting = response.data;
-      }
+    var username = $scope.user;
+    $http.get('/api/myProfileTap1/'+username).then(function(response){
+      console.log(response);
     });
 };
 
@@ -184,7 +174,6 @@ angular.module('app')
 
 // 프로필 이미지를 업데이트하는 함수
     $scope.updateProfileImage = function(){
-        $scope.$emit('LOAD');
         var fd = new FormData();
         fd.append('myfile', $scope.file.upload);
           $http.put('/api/myProfileImage/', fd,{

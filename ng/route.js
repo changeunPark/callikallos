@@ -82,6 +82,45 @@ $urlRouterProvider.otherwise('/');
             })
 
 
+
+  // 유저 작품 모아 놓은 곳  / 작품 정보
+            .state('app.photos', {
+              url: 'photos',
+              views:{
+                'content@': {
+                  templateUrl: 'isLoggedIn/artistPhotos.html',
+                  controller: 'PhotosController',
+                  authenticated: false
+                }
+              }
+             })
+
+  // 유저 프로필 모아 놓은 곳  / 계정 정보
+           .state('app.profiles', {
+             url: 'profiles',
+             views:{
+               'content@': {
+                templateUrl: 'isLoggedIn/userProfiles.html',
+                controller: 'profileCtrl',
+                controllerAs: 'profile'
+               }
+             }
+            })
+
+// 등록된 작가가 작품 업로드 하는 곳
+           .state('app.artistProfiles', {
+             url: 'artist',
+             views:{
+               'content@': {
+                templateUrl: 'isLoggedIn/artistProfiles.html',
+                controller: 'artistCtrl',
+                controllerAs: 'artist',
+                authenticated: true
+               }
+             }
+            })
+
+
             .state('app.intro',
             {
               url: 'intro',
@@ -116,43 +155,7 @@ $urlRouterProvider.otherwise('/');
             })
 
 
-// 유저 프로필 모아 놓은 곳  / 계정 정보
-         .state('app.profiles', {
-           url: 'profiles',
-           views:{
-             'content@': {
-              templateUrl: 'isLoggedIn/myProfiles.html',
-              controller: 'ProfileController',
-              authenticated: true
-             }
-           }
-          })
 
-// 유저 작품 모아 놓은 곳  / 작품 정보
-          .state('app.photos', {
-            url: 'photos',
-            views:{
-              'content@': {
-                templateUrl: 'isLoggedIn/myPhotos.html',
-                controller: 'PhotosController',
-                authenticated: false
-              }
-            }
-           })
-
-
-// 업로드 하는 곳
-           .state('app.upload', {
-             url: 'upload',
-             views:{
-               'content@': {
-                templateUrl: 'isLoggedIn/upload.html',
-                controller: 'UploadPhotoController',
-                controllerAs: 'upload',
-                authenticated: true
-               }
-             }
-            })
 
 
 // ==================  artist / gallery / exhibition / board ============================ //

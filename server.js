@@ -1,11 +1,17 @@
+var compression = require('compression');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
+app.use(compression());
 app.use(bodyParser.json());
 app.use(express.static('image'));
 app.use('/', require('./controllers/static'));
 
+
+// 새로 추가
+app.use('/api/userProfiles', require('./controllers/api/userProfiles'));
+app.use('/api/artistProfiles', require('./controllers/api/artistProfiles'));
 // 전체 메뉴
 app.use('/api/header', require('./controllers/api/menu/header'));
 // ============================== 부 메뉴 ======================================== //

@@ -128,11 +128,11 @@ try{
               };
 
               var email = {
-                from: 'awesome@bar.com',
+                from: 'callikalls@gmail.com',
                 to: userInfo.email,
-                subject:'Localhost Activation Link',
-                text: 'Hello'+ userInfo.username + ', Thank you for REGISTERATION http://localhost:3000/activate/' + userInfo.token,
-                html: 'Hello<strong>'+ userInfo.username + '</strong>, <br><br> Thank you for REGISTERATION<br><a href="http://localhost:3000/#!/activate/'+userInfo.token+'">http://localhost:3000/activate/#!/</a>'
+                subject:'캘리칼로스 사용자 이메일 인증',
+                text: '안녕하세요'+ userInfo.username + ', 캘리칼로스에 방문해 주신걸 진심으로 환영합니다. http://localhost:3000/activate/' + userInfo.token,
+                html: '안녕하세요 <strong>'+ userInfo.username + '</strong>, <br><br> 캘리칼로스에 방문해 주신걸 진심으로 환영합니다. 이메일 인증을 위해 아래의 링크를 확인해주세요. <br><a href="http://localhost:3000/#!/activate/'+userInfo.token+'">http://localhost:3000/activate/#!/</a>'
               };
 
               client.sendMail(email, function(err, info){

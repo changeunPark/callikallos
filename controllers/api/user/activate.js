@@ -59,11 +59,11 @@ try{
             if(err) throw err;
             else {
               var email = {
-                from: 'awesome@bar.com',
+                from: 'callikallos@gmail.com',
                 to: userInfo.email,
-                subject:'Localhost Activation Link',
-                text: 'Hello'+ userInfo.username + ', Your account has been successfuly activated!',
-                html: 'Hello<strong>'+ userInfo.username + '</strong> Your account has been successfully activated!'
+                subject:'캘리칼로스 회원가입이 성공적으로 마무리 되었습니다.',
+                text: '안녕하세요 '+ userInfo.username + ', 당신의 캘리칼로스 계정이 성공적으로 마무리되었습니다.',
+                html: '안녕하세요 '+ userInfo.username + ', 당신의 캘리칼로스 계정이 성공적으로 마무리되었습니다.'
               };
 
               client.sendMail(email, function(err, info){

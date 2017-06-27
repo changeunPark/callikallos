@@ -1,4 +1,4 @@
-angular.module('mainController',['authServices', 'userServices'])
+angular.module('mainControllers',['authServices', 'userServices'])
 .controller('mainCtrl', function(Auth, $timeout, $location, $state, $rootScope, $window, $interval, User, AuthToken){
   var app = this;
 
@@ -10,10 +10,20 @@ angular.module('mainController',['authServices', 'userServices'])
     if(Auth.isLoggedIn()){
       app.isLoggedIn = true;
       Auth.getUser().then(function(data){
-        app.user = data.data;
-        app.loadme = true;
+        if(data.data.permission === 'admin') {
+          app.admin = true;
+          app.user = data.data;
+          app.loadme = true;
+        } else if(data.data.permission === 'artist') {
+          app.artist = true;
+          app.user = data.data;
+          app.loadme = true;
+        } else {
+          app.user = data.data;
+          app.loadme = true;
+        }
       });
-    }else {
+    } else {
       app.user = false;
       app.isLoggedIn = false;
       app.loadme = true;
@@ -166,11 +176,11 @@ angular.module('mainController',['authServices', 'userServices'])
   this.upload = function(){
   app.choiceMade = true;
     if(app.user.permission === 'artist'){
-      $state.go('app.upload');
+      $state.go('app.artistProfiles');
     } else {
       User.checkPermission(app.user.username).then(function(data){
         if(data.data.success){
-          $state.go('app.upload');
+          $state.go('app.artistProfiles');
            app.permission = true;
         } else {
           showModal('upload');
@@ -191,7 +201,7 @@ angular.module('mainController',['authServices', 'userServices'])
           app.uploadSuccessMsg = data.data.message;
           $timeout(function(){
             hideModal('upload');
-            $state.go('app.upload');
+            $state.go('app.artistProfiles');
           },2000);
         } else {
           app.uploadDisabled = false;

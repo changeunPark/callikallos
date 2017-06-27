@@ -1,7 +1,7 @@
 var router = require('express').Router();
 
 // 계정정보
-router.get('/', function(req, res, next){
+router.get('/:username', function(req, res, next){
 try{
 
     req.getConnection(function(err, connection) {
@@ -25,7 +25,9 @@ try{
             'permission',
             'is_enrolled'
           ];
-          connection.query(selectSql, [selectValue, req.auth.user_id], function (err, result, next) {
+
+          var username = req.params.username;
+          connection.query(selectSql, [selectValue, username], function (err, result, next) {
           if(err){
             console.error('SQL error: ', err);
             return next(err);

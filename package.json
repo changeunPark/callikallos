@@ -6,6 +6,7 @@
     "angular-sanitize": "^1.6.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.0",
+    "compression": "^1.6.2",
     "express": "^4.15.2",
     "express-myconnection": "^1.0.4",
     "gulp": "^3.9.1",

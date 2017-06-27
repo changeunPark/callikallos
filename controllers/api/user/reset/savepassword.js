@@ -67,11 +67,11 @@ try{
               else {
                 console.log(result);
                 var email = {
-                  from : 'callikallos Staff, staff@callikallos.com',
+                  from : 'callikallos Staff, calliksallos@gmail.com',
                   to: userInfo.email,
-                  subject: 'callikallos Reset Password',
-                  text: 'Hello'+userInfo.username+',This e-mail is to notify you that your password was recently reset at callikallos.com',
-                  html: 'Hello<string>'+userInfo.username+'</strong>, <br><br>This e-mail is to notify you that your password was recently reset at callikallos.com'
+                  subject: '캘리칼로스 비밀번호 변경 완료',
+                  text: '안녕하세요 '+userInfo.username+', 이 이메일은 최근 당신이 callikallos.com에서 변경한 비밀번호에 대한 확인 이메일입니다. <br>비밀번호가 성공적으로 변경되었습니다.',
+                  html: '안녕하세요 '+userInfo.username+', 이 이메일은 최근 당신이 callikallos.com에서 변경한 비밀번호에 대한 확인 이메일입니다. <br>비밀번호가 성공적으로 변경되었습니다.'
                 };
 
                 client.sendMail(email, function(err, info){

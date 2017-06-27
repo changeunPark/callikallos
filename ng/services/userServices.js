@@ -58,5 +58,20 @@ angular.module('userServices',[])
     return $http.get('/api/users/'+username);
   };
 
+
+// reset / check / renew / save / send // resend
+
+// Create // read // update // delete //
+
+// User.readProfiles(username)
+  userFactory.readProfiles = function(username){
+    return $http.get('/api/userProfiles/'+username);
+  };
+
+// User.updateProfiles(updateData)
+  userFactory.updateProfiles = function(updateData){
+    return $http.put('/api/userProfiles', updateData);
+  };
+
   return userFactory;
 });

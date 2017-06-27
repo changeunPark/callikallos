@@ -7,6 +7,7 @@
         <!-- Casade Style Sheets -->
       <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="/css/ng-img-crop.css">
       <link rel="stylesheet" href="/app.css">
 
       <body ng-app="app" ng-controller='mainCtrl as main' ng-show="main.loadme" ng-cloak>
@@ -33,42 +34,6 @@
           </div>
         </div>
 
-<!-- 아티스트 등록 & 사용자 권한 부여 -->
-        <div class="container">
-          <div class="modal fade" id="upload" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">아티스트 등록</h4>
-                </div>
-                <div class="modal-body">
-                  <div class ="row show-hide-message" ng-show="main.uploadSuccessMsg">
-                    <div class="alert alert-success">{{main.uploadSuccessMsg}}</div>
-                  </div>
-                  <div class ="row show-hide-message" ng-show="main.uploaderrorMsg">
-                    <div class="alert alert-danger">{{main.uploaderrorMsg}}</div>
-                  </div>
-                  <div>
-                    <p>작품을 업로드하기 위해서는 캘리칼로스 작가 등록이 필요합니다</p>
-                  </div>
-                  <div>
-                    <p>작가 등록하시겠습니까?</p>
-                  </div>
-                  <div>
-                    <button ng-disabled="main.uploadDisabled"  class="btn btn-enroll" ng-click="main.doPermission();"><span>작가등록</span></button>
-                  </div>
-                  <div>
-                    <span class="showrule">"작가등록" 버튼을 클릭함으로써, 당신은 캘리칼로스 서비스 정책에 동의함합니다.</span>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
 <!-- 로그인 Modal-->
         <div  class="container">
               <div class="modal fade" id="login" role="dialog">
@@ -77,7 +42,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;로그인</h4>
+                      <p class="model-title"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;로그인</p>
                     </div>
                     <div class="modal-body">
                       <div class ="row show-hide-message" ng-show="main.successMsg">
@@ -117,32 +82,38 @@
               </div>
         </div>
 
-<!-- 회원가입 모달 -->
-        <div  class="container" ng-controller="regCtrl as register">
-              <!-- Modal -->
-              <div class="modal fade" id="register" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;회원가입</h4>
-                    </div>
-                    <div>
-<!-- modal-footer -->
-              <div class="modal-footer">
-                <div class="">
-                  <a ui-sref="app" ng-click="main.loginToReg();">캘리칼로스 회원이신가요?</a>
+<!-- 아티스트 등록 & 사용자 권한 부여 -->
+        <div class="container">
+          <div class="modal fade" id="upload" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">아티스트 등록</h4>
+                </div>
+                <div class="modal-body">
+                  <div class ="row show-hide-message" ng-show="main.uploadSuccessMsg">
+                    <div class="alert alert-success">{{main.uploadSuccessMsg}}</div>
+                  </div>
+                  <div class ="row show-hide-message" ng-show="main.uploaderrorMsg">
+                    <div class="alert alert-danger">{{main.uploaderrorMsg}}</div>
+                  </div>
+                  <div>
+                    <p>작품을 업로드하기 위해서는 캘리칼로스 작가 등록이 필요합니다</p>
+                  </div>
+                  <div>
+                    <button ng-disabled="main.uploadDisabled"  class="btn btn-enroll" ng-click="main.doPermission();"><span>작가등록</span></button>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
                 </div>
               </div>
-                    </div>
-<!-- End Modal content-->
-                  </div>
-                </div>
             </div>
+          </div>
         </div>
 
-<!-- End 회원가입 Modal-->
+
 
 
 
@@ -157,6 +128,7 @@
 
         <script src="/js/jquery-3.1.1.min.js"></script>
         <script src="/angular/angular.min.js"></script>
+        <script src="/js/ng-img-crop.js"></script>
         <script src="/js/angular-ui-router.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/ui-bootstrap.min.js"></script>
