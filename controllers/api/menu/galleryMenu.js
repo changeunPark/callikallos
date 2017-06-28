@@ -19,7 +19,11 @@ try{
             return next(err);
           }
 					else {
-            res.json(result);
+            if(!result){
+              res.json({success:false, message:'정보를 불러오지 못하였습니다.'});
+            } else {
+              res.json({success:true, message:'정보를 불러왔습니다.', result:result});
+            }
 					}
 				});
 
@@ -34,7 +38,7 @@ catch(ex){
 
 
 
-router.get('/:code', function(req, res, next){
+router.get('/:photo_type', function(req, res, next){
 try{
 
     req.getConnection(function(err, connection) {
@@ -45,7 +49,7 @@ try{
       }
       else {
         var selectSql = 'select B.*, (select username from users where user_id = B.user_id) as username, (select description from photo_type where code = B.photo_type) as description, (select profile_image from users where user_id = B.user_id) as profile_image, (select count(*) from comment where photo_id = B.photo_id) as comment_count, (select count(*) from opinion where photo_id = B.photo_id) as opinion_count from my_photos B where photo_type = ?;';
-        var selectValue = req.params.code;
+        var selectValue = req.params.photo_type;
         if(selectValue === '0'){
           selectSql = 'select B.*, (select username from users where user_id = B.user_id) as username, (select description from photo_type where code = B.photo_type) as description, (select profile_image from users where user_id = B.user_id) as profile_image, (select count(*) from comment where photo_id = B.photo_id) as comment_count, (select count(*) from opinion where photo_id = B.photo_id) as opinion_count from my_photos B;';
           connection.query(selectSql, function (err, result, next) {
@@ -53,8 +57,11 @@ try{
     						res.send(err);
           }
 					else {
-
-            res.status(201).send(result);
+            if(!result){
+              res.json({success:false, message:'정보를 불러오지 못 하였습니다.'});
+            } else {
+              res.json({success:true, message:'정보를 불러왔습니다.', result: result});
+            }
 					}
 				});
         }
@@ -65,8 +72,11 @@ try{
                 res.send(err);
           }
           else {
-
-            res.status(201).send(result);
+            if(!result){
+              res.json({success:false, message:'정보를 불러오지 못 하였습니다.'});
+            } else {
+              res.json({success:true, message:'정보를 불러왔습니다.', result: result});
+            }
           }
         });
         }

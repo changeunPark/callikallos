@@ -3,110 +3,135 @@
   <uib-tabset active="activeJustified" justified="true">
 <!-- 이미지 업로드 -->
     <uib-tab index="0" heading="작품 업로드">
-      <div  id="subContent">
-        <div class ="row show-hide-message" ng-show="artist.successMsg">
-          <div class="alert alert-success">{{artist.successMsg}}</div>
+      <div  id="subContent" ng-controller="uploadCtrl as upload">
+        <div class ="row show-hide-message" ng-show="upload.successMsg">
+          <div class="alert alert-success">{{upload.successMsg}}</div>
         </div>
-        <div class ="row show-hide-message" ng-show="artist.errorMsg">
-          <div class="alert alert-danger">{{artist.errorMsg}}</div>
+        <div class ="row show-hide-message" ng-show="upload.errorMsg">
+          <div class="alert alert-danger">{{upload.errorMsg}}</div>
         </div>
+
 
             <div class="row">
               <div class="col-sm-6">
                 <label>작품 메인 이미지</label>
                 <div class="text-center">
                     <div class="image-default">
-                      <img src="/images/default.jpg" ng-src="{{artist.mainThumbnail.dataUrl}}">
+                      <img class="img-responsive center-block" src="/images/default.jpg" ng-src="{{upload.mainThumbnail.dataUrl}}">
                     </div>
-                      <form ng-submit="artist.readPhoto()">
+                      <form ng-submit="upload.readPhoto()">
                         <label class="btn btn-success">이미지 찾기
-                            <input ng-disabled="artist.disabled"  type="file" file-model="artist.file.upload" name="myfile" style="display: none;" onchange="angular.element(this).scope().artist.mainPhotoChanged(this.files)">
+                            <input ng-disabled="upload.disabled"  type="file" file-model="upload.file.upload" name="myfile" style="display: none;" onchange="angular.element(this).scope().upload.mainPhotoChanged(this.files)">
                         </label>
-                            <button ng-disabled="artist.disabled"  class="btn btn-default">이미지 업로드</button>
+                            <button ng-disabled="upload.disabled"  class="btn btn-default">이미지 업로드</button>
                       </form>
                       <br>
-
                       <div class="alert alert-info" ng-show="loading">이미지 업로드 중입니다.
                       </div>
+
+
                 </div>
               </div>
               <div class="col-sm-6">
-                <label>썸네일</label>
+                <!-- <div  ng-controller = "ImageCropCtrl as crop">
+                  <label>썸네일</label>
+                  <button class="btn btn-default" ng-click="crop.imageCrop()">crop</button>
+
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div>Select an image file: <input type="file" id="fileInput" /></div>
+
+                        <div class="cropArea">
+                          <ui-cropper image="myImage" area-type="rectangle" cropject="crobject"></ui-cropper>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="image-cropper" ng-hide="!myImage" style="width: {{crobject.areaCoords.w}}px;
+                    height: {{crobject.areaCoords.h}}px;">
+                          <img alt="myimage" width="500" height="350" style="left: -{{crobject.areaCoords.x}}px; top:-{{crobject.areaCoords.y}}px" ng-src="{{myImage}}" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
 
             </div>
           </div>
 
 
             <div>
-                <form ng-submit="artist.createPhoto(artist.uploadData)">
+                <form ng-submit="upload.createPhoto(upload.uploadData)">
                   <div class="form-group">
                     <label for="title">카테고리(필수)</label>
 
-                    <select  ng-disabled="artist.disabled"  class="form-control" name="mySelect" id="mySelect"
-                      ng-options="option.name for option in artist.data.availableOptions track by option.id"
-                      ng-model="artist.data.selectedOption">
+                    <select  ng-disabled="upload.disabled"  class="form-control" name="mySelect" id="mySelect"
+                      ng-options="option.name for option in upload.data.availableOptions track by option.id"
+                      ng-model="upload.data.selectedOption">
                     </select>
                   </div>
                     <div class="form-group">
                       <label for="title">작품 제목(필수)</label>
-                      <input ng-disabled="artist.disabled"  type="text" class="form-control" id="title" ng-model="artist.uploadData.title" placeholder="내용을 입력해주세요.">
+                      <input ng-disabled="upload.disabled"  type="text" class="form-control" id="title" ng-model="upload.uploadData.title" placeholder="내용을 입력해주세요.">
                     </div>
                     <div class="form-group ">
                       <label for="detail">작품 설명(필수)</label>
-                      <input ng-disabled="artist.disabled"  type="text" class="form-control" id="detail" ng-model="artist.uploadData.detail" placeholder="내용을 입력해주세요.">
+                      <input ng-disabled="upload.disabled"  type="text" class="form-control" id="detail" ng-model="upload.uploadData.detail" placeholder="내용을 입력해주세요.">
                     </div>
 
                     <div id="makeBorder"></div>
 
                     <div class="form-group text-center">
-                      <button ng-disabled="artist.disabled"  type="submit" class="btn btn-enroll">작품 업로드</button>
+                      <button ng-disabled="upload.disabled"  type="submit" class="btn btn-enroll">작품 업로드</button>
                     </div>
                 </form>
             </div>
       </div>
     </uib-tab>
 
-    <uib-tab index="1" heading="작가 정보" ng-init="getUserDetail()" >
-      <div id="subContent">
-            <div ng-show="mainMessageStatus">
-                <div ng-class="alert">{{ mainMessage }}</div>
+    <uib-tab index="1" heading="작가 정보">
+      <div id="subContent" ng-init="artistProfile.readAristProfile()">
+            <div class ="row show-hide-message" ng-show="artistProfile.successMsg">
+              <div class="alert alert-success">{{artistProfile.successMsg}}</div>
             </div>
-            <form ng-submit="artist.createAristInfo(artist.artistData)">
+            <div class ="row show-hide-message" ng-show="artistProfile.errorMsg">
+              <div class="alert alert-danger">{{artistProfile.errorMsg}}</div>
+            </div>
+            <form ng-submit="artistProfile.updateAristProfile(artistProfile.artistData)">
                   <div class="form-group">
-                    <label for="username">한 줄 소개</label>
-                    <input type="short_info" ng-model="artist.artistData.short_info" class="form-control" id="username"  placeholder="내용을 입력해주세요.">
+                    <label for="username">한 줄 소개</label><span>(필수)</span>
+                    <input ng-disabled="artistProfile.disabled"   type="short_info" ng-model="artistProfile.artistData.short_info" class="form-control" id="username"  placeholder="내용을 입력해주세요.">
                   </div>
 
                   <div class="form-group">
-                    <label for="pwd">상세소개</label>
-                    <textarea class="form-control" ng-model="artist.artistData.detail_info"  rows="5" id="content" ng-model="content" placeholder="내용을 입력해주세요"></textarea>
+                    <label for="pwd">상세소개</label><span>(필수)</span>
+                    <textarea ng-disabled="artistProfile.disabled"   class="form-control" ng-model="artistProfile.artistData.detail_info"  rows="5" id="content" ng-model="content" placeholder="내용을 입력해주세요"></textarea>
                   </div>
 
                   <div class="row">
                     <div class="form-group col-sm-4">
                       <label for="email">대표 사이트</label>
-                      <input type="username" ng-model="artist.artistData.social_site" class="form-control" id="username" placeholder="ex) 개인 블로그 및 소셜네트워크 서비스">
+                      <input ng-disabled="artistProfile.disabled"  type="username" ng-model="artistProfile.artistData.social_site" class="form-control" id="username" placeholder="ex) 개인 블로그 및 소셜네트워크 서비스">
                     </div>
                     <div class="form-group col-sm-4">
                       <label for="pwd">공개 이메일</label>
-                      <input type="username" ng-model="artist.artistData.public_email" class="form-control" id="username" placeholder="ex) 홈페이지에 공개 가능한 이메일">
+                      <input ng-disabled="artistProfile.disabled"  type="username" ng-model="artistProfile.artistData.public_email" class="form-control" id="username" placeholder="ex) 홈페이지에 공개 가능한 이메일">
                     </div>
-                    <div class="form-group col-sm-4">
-                      <label for="pwd">전문 분야</label> <span ng-show="artistData.user_type" style="color:#E96725;"><tt>[{{artistData.type_name}}]</tt></span>
-                      <select class="form-control" name="mySelect" id="mySelect"
-                        ng-options="option.name for option in artist.data.availableOptions track by option.id"
-                        ng-model="artist.data.selectedOption">
+
+                    <!-- <div class="form-group col-sm-4">
+                      <label for="pwd">전문 분야</label> <span style="color:#E96725;"><tt>[{{artistProfile.artistData.type_name}}]</tt></span>
+                      <select ng-disabled="artistProfile.disabled"  class="form-control" name="mySelect" id="mySelect"
+                        ng-options="option.name for option in artistProfile.data.availableOptions track by option.id"
+                        ng-model="artistProfile.data.selectedOption">
                       </select>
-                    </div>
+                    </div> -->
+
                   </div>
 
                   <div id="makeBorder"></div>
-                  <div id="withBorder">
-                    <p>입력하신 프로필 정보(프로필 이미지, 국가, 성별, 나이, 한 줄 소개, 대표 사이트, 공개 이메일, 활동분야, 상세 소개, SNS, 히스토리, 책)는 커뮤니케이션을 위한 회원간 공개 또는 서비스 이용 통계를 목적으로 회원탈퇴 혹은 직접 삭제 전까지 보관됩니다.</p>
-                  </div>
 
                   <div class="form-group text-center">
-                    <button  ng-disabled="artist.disabled"  type="submit" class="btn btn-default">동의 및 저장</button>
+                    <button  ng-disabled="artistProfile.disabled"  type="submit" class="btn btn-enroll">작가 정보 변경</button>
                   </div>
               </form>
         </div>

@@ -1,18 +1,18 @@
 <!-- gallery.ctrl -->
 <div  id="mainContent" class="container" style="width:50%;">
-		<div ng-init="getphoto()">
+		<div>
 					<div class="navbar-form container">
 						<div class="navbar-left">
-							 <h3>#{{photo.photo_id}}. <strong>{{ photo.photo_title }}</strong></h3>
-	 							<span>{{photo.description}}</span>
+							 <h3>#{{galleryphoto.photoData.photo_id}}. <strong>{{galleryphoto.photoData.photo_title}}</strong></h3>
+	 							<span>{{galleryphoto.photoData.description}}</span>
  								<div class="bar"></div>
-								 <span>{{photo.created | date : 'yyyy년 MM월 dd일'}}</span>
+								 <span>{{galleryphoto.photoData.created | date : 'yyyy년 MM월 dd일'}}</span>
 								<div class="bar"></div>
-							 <span>조회 {{photo.view}}</span>
+							 <span>조회 {{galleryphoto.photoData.view}}</span>
 						</div>
 						<div class="navbar-right" ng-show="userArticle">
 							<div class="form-group navbar-btn">
-								<a ui-sref="app.gallery.edit({photo_id: photo.photo_id})" class="btn btn-success">Edit  </a>
+								<a ui-sref="app.galleryphoto.edit({photo_id: photo.photo_id})" class="btn btn-success">Edit  </a>
 								<a ng-click="deletePhoto({id: photo.board_id})" class="btn btn-danger">Delete </a>
 							</div>
 						</div>
@@ -23,74 +23,54 @@
 				<div class="navbar-form container">
 					<div class="photo container-fluid">
 						<div class="photo-image">
-							<a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
-								<img class="img-responsive center-block" ng-src="{{photo.photo_path}}" alt=""><span class="mask"></span>
-								<span class="photo-author">Copyright {{photo.created | date : 'yyyy'}}. {{photo.username}} all rights reserved.</span>
-							</a>
+								<img class="img-responsive center-block" ng-src="{{galleryphoto.photoData.photo_path}}" alt="{{galleryphoto.photoData.photo_title}}"><span class="mask"></span>
+								<span class="photo-author">Copyright {{galleryphoto.photoData.created | date : 'yyyy'}}. {{galleryphoto.photoData.username}} all rights reserved.</span>
 						</div>
 					</div>
 				</div>
 				<div class="navbar-form container text-center">
-					<h4>{{photo.photo_detail}}</h4>
+					<h4>{{galleryphoto.photoData.photo_detail}}</h4>
 				</div>
-
-<!--
-				<div class="text-center">
-						<a class="btn btn-warning"><span class="glyphicon glyphicon-heart"></span></a>
-				</div> -->
-
 				<div class="col-sm-12 author_border">
-
-
-
-<!-- PhotosController, myPhtos.js -->
-						<!-- <div ng-controller="PhotosController" style="padding-bottom:10px;">
-								<div ng-init="showPhotos()">
-										<div class="row">
-												<div class="col-md-3" ng-repeat="photo in photos | limitTo: 4">
-														<div class="card">
-																	<div class="card-image">
-																		<a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
-																			<img class="img-responsive" ng-src="{{photo.photo_path}}">
-																		</a>
-																	</div>
-														</div>
-												</div>
-									</div>
-							</div>
-						</div> -->
+					<!-- Media middle -->
+					<div class="media">
+					  <div class="media-left">
+					    <img ng-src="{{galleryphoto.photoData.profile_image}}" class="media-object" style="width:60px; height:60px;">
+					  </div>
+					  <div class="media-body media-bottom">
+					    <h4 class="media-heading">{{galleryphoto.photoData.username}}</h4>
+					    <p>{{galleryphoto.photoData.author_detail}}</p>
+					  </div>
+					</div>
 				</div>
-
-
 		</div>
 
 
 
 <!--  댓글 기능 추가해야합니다.-->
 <!-- 댓글 기능 -->
-	<div class="content-coment" ng-controller="CommentController" style="margin-top:100px;">
+	<div class="content-coment" ng-controller="commentCtrl as comment" style="margin-top:100px;">
 		<!-- 사용자가 로그인 하였을 때-->
-			<div ng-if="main.isLoginIn"class="col-sm-12">
-				<form name="commentForm" novalidate>
+			<div ng-if="main.isLoggedIn" class="col-sm-12">
+				<form name="commentForm" >
 						<div class="input-group " ng-class = "{'has-success': (commentForm.comment.$valid && !commentForm.comment.$pristine), 'has-error': (!commentForm.comment.$valid && !commentForm.comment.$pristine) ||
 				      (!commentForm.comment.$valid && commentForm.$submitted)}">
 						    <textarea class="form-control custom-control" rows="2" style="resize:none" placeholder="댓글은 1,000자까지 작성할 수 있으며 주제와 무관한 댓글, 악성 댓글은 삭제될 수 있습니다."
-						    	id="comment"  name = "comment" ng-model="comment" required=""></textarea>
-									<p class="help-block" ng-show="(!commentForm.comment.$pristine && commentForm.comment.$error.required) || (commentForm.$submitted && commentForm.comment.$error.required)">This filed is required</p>
-						    <span ng-click="addComment({comment:comment, photo_id: photo.photo_id}, commentForm.$valid)" class="input-group-addon btn btn-primary">댓글 작성</span>
+						    	id="comment"  name = "comment" ng-model="comment.commentData"></textarea>
+						    <span ng-click="comment.createComment({comment:comment.commentData, photo_id: galleryphoto.photoData.photo_id})" class="input-group-addon btn btn-primary">댓글 작성</span>
 						</div>
 				</form>
 		</div>
 
 		<!-- 사용자가 로그인 하지않았을 때-->
-			<div ng-if="!main.isLoginIn"class="col-sm-12">
+			<div ng-if="!main.isLoggedIn"class="col-sm-12">
 				<form name="commentForm" novalidate>
 						<div class="input-group " ng-class = "{'has-success': (commentForm.comment.$valid && !commentForm.comment.$pristine), 'has-error': (!commentForm.comment.$valid && !commentForm.comment.$pristine) ||
 							(!commentForm.comment.$valid && commentForm.$submitted)}">
-								<textarea ng-disabled="!main.isLoginIn"  class="form-control custom-control" rows="2" style="resize:none" placeholder="로그인 후 댓글 작성이 가능합니다."
-									id="comment"  name = "comment" ng-model="comment" required=""></textarea>
+								<textarea ng-disabled="!main.isLoggedIn"  class="form-control custom-control" rows="2" style="resize:none" placeholder="로그인 후 댓글 작성이 가능합니다."
+									id="comment"  name = "comment" required=""></textarea>
 									<p class="help-block" ng-show="(!commentForm.comment.$pristine && commentForm.comment.$error.required) || (commentForm.$submitted && commentForm.comment.$error.required)">This filed is required</p>
-								<span ng-disabled="!main.isLoginIn"  ng-click="addComment(comment, commentForm.$valid)" class="input-group-addon btn btn-primary">댓글 작성</span>
+								<span ng-disabled="!main.isLoggedIn"  ng-click="galleryphoto.createComment(comment, commentForm.$valid)" class="input-group-addon btn btn-primary">댓글 작성</span>
 						</div>
 				</form>
 		</div>
@@ -98,7 +78,6 @@
 		<br>
 
 				<div class="col-sm-12 comment_border" ng-init="getComment()">
-
 								<div ng-show="photo.comment_count">
 									<p>댓글 {{photo.comment_count}}</p>
 								</div>
@@ -128,33 +107,30 @@
 
 </div>
 
+		<div id="mainContent" class="container">
 
-
-		<div id="mainContent" class="container"  ng-init="getRelatedPic()" ng-show="">
-
-		    <div class="row container-fluid">
-		      <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="photo in photos | filter:search |orderBy : data.selectedOption.sort ">
-						<div>
-							<p>관련 작품</p>
-						</div>
-		        <div class="card">
+		    <div class="row">
+					<div>
+						<p>관련 작품</p>
+					</div>
+		      <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="photo in galleryphoto.photosData">
+						<div class="card">
 		              <div class="card-image">
 		                <a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
 		                  <img class="img-responsive" ng-src="{{photo.photo_path}}">
-		                  <span class="card-author">By {{photo.username}}.</span>
+		                  <span class="card-author">By {{photo.username}}</span>
 		                </a>
 		              </div>
 		              <div class="card-content">
 		                  <p>{{photo.photo_title}}</p>
 		              </div>
 		              <div class="card-action">
-		                 <!-- <span class="glyphicon glyphicon-heart" aria-hidden="true">{{photo.opinion_count}}</span> -->
 		                  <div class="row">
 		                    <div class="col-xs-6 col-sm-6" style="text-align:left">
 		                     <span class="text-left">{{photo.description}}</span>
 		                   </div>
 		                   <div class="col-xs-6 col-sm-6" style="text-align:right">
-		                     <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color:#E96725;"></span>  {{photo.view}}
+		                      <i class="fa fa-heart" aria-hidden="true" style="color:#E96725;"></i>  {{photo.view}}
 		                   </div>
 		                 </div>
 		              </div>

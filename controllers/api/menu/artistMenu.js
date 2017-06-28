@@ -18,7 +18,11 @@ try{
             return next(err);
           }
 					else {
-            res.json(result);
+            if(!result){
+              res.json({success:false, message:'정보를 불러오지 못하였습니다.'});
+            } else {
+              res.json({success:true, message:'정보를 불러왔습니다.', result:result});
+            }
 					}
 				});
 
@@ -32,7 +36,7 @@ catch(ex){
 });
 
 
-router.get('/:code', function(req, res, next){
+router.get('/:user_type', function(req, res, next){
 try{
 
     req.getConnection(function(err, connection) {
@@ -44,7 +48,7 @@ try{
       else {
         var selectSql = 'select my_profile.*, users.permission, users.profile_image, users.username, user_type.description from ((my_profile left join users on users.user_id = my_profile.user_id) inner join user_type on my_profile.user_type = user_type.code) where user_type = ?;';
         var selectValue = 'artist';
-        var selectCode = req.params.code;
+        var selectCode = req.params.user_type;
 
         if(selectCode === '0'){
           selectSql = 'select my_profile.*, users.permission, users.profile_image, users.username, user_type.description from ((my_profile left join users on users.user_id = my_profile.user_id) inner join user_type on my_profile.user_type = user_type.code) where permission =?;';
@@ -53,8 +57,11 @@ try{
     						res.send(err);
           }
 					else {
-
-            res.status(201).send(result);
+            if(!result){
+              res.json({success:false, message:'정보를 불러오지 못 하였습니다.'});
+            } else {
+              res.json({success:true, message:'정보를 불러왔습니다.', result: result});
+            }
 					}
 				});
         }
@@ -65,8 +72,11 @@ try{
                 res.send(err);
           }
           else {
-
-            res.status(201).send(result);
+            if(!result){
+              res.json({success:false, message:'정보를 불러오지 못 하였습니다.'});
+            } else {
+              res.json({success:true, message:'정보를 불러왔습니다.', result: result});
+            }
           }
         });
         }

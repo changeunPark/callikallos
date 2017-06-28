@@ -5,7 +5,10 @@ angular.module('app',[
     'mainControllers',
     'emailControllers',
     'artistControllers',
-    'ngImgCrop'
+    'gallertControllers',
+    'commentControllers',
+    'boardControllers',
+    'uiCropper'
 ]).config(function($httpProvider){
   $httpProvider.interceptors.push('AuthInterceptors');
 });

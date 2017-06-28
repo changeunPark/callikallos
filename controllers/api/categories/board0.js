@@ -117,18 +117,64 @@ try{
       else {
         var selectSql = 'select B.*,  (select username from users where user_id = B.user_id) as username, (select profile_image from users where user_id = B.user_id) as profile_image, (select count(*) from comment where board_id = B.board_id) as comment_count from board B WHERE board_id = ?;';
         var selectValue = req.params.board_id;
+        var updateRecord = 'update board set view = view + 1 where board_id = ?';
 
-           connection.query(selectSql, selectValue, function (err, result, next) {
-             if(err){
-                 res.send(err);
-             } else {
-               if(!result){
-                 res.json({success:false, message:'정보를 불러오지 못하였습니다.'});
-               } else {
-                 res.json({success:true, message:'정보를 불러왔습니다.', result:result[0]});
-               }
-             }
-           });
+// 사용자가 로그인 하지 않은 상태입니다.
+            if(!req.headers['x-auth']){
+                connection.query(selectSql, selectValue, function (err, result, next) {
+                  if(err){
+                      res.send(err);
+                  } else {
+
+                    // 새로고침 눌렀을 때 오류 잡아야 함
+                    connection.query(updateRecord, selectValue, function(err, result, next){
+                      if(err){
+                        console.log(err);
+                      } else {
+                        if(!result){
+                          res.json({success:false, message:'정보를 불러오지 못하였습니다.'});
+                        } else {
+                          res.json({success:true, message:'정보를 불러왔습니다.', result:result});
+                        }
+                      }
+                    });
+
+                    res.status(201).send([result, {success:false, message:'사용자가 로그인하지 않은 상태입니다.'}]);
+                  }
+              });
+            }
+
+// 사용자가 로그인한 상태입니다.
+           else {
+               connection.query(selectSql, selectValue, function (err, result, next) {
+                 if(err){
+                     res.send(err);
+                 } else {
+                   if(result[0].user_id === req.auth.user_id)
+                   {
+                     // 새로고침 눌렀을 때 오류 잡아야 함
+                     connection.query(updateRecord, selectValue, function(err, result, next){
+                       if(err){
+                         console.log(err);
+                       } else {
+                         // 작동 완료
+                       }
+                     });
+                     res.status(201).send([result, {success:true, message:'사용자가 작성한 게시물입니다.'}]);
+                   } else {
+                     // 새로고침 눌렀을 때 오류 잡아야 함
+                     connection.query(selectSql, selectValue, function(err, result, next){
+                       if(err){
+                         console.log(err);
+                       } else {
+                         // 작동 완료
+                       }
+                     });
+                     res.status(201).send([result, {success:false, message:'사용자가 작성한 게시물이 아닙니다.'}]);
+                   }
+                 }
+               });
+           }
          }
     });
 }

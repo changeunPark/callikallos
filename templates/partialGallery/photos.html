@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="container-fluid">
+        <form class="navbar-form navbar-right hidden-xs ">
+          <input type="text" class="form-control" ng-model="search" placeholder="검색어를 입력해주세요.">
+            <select class="form-control" name="mySelect" id="mySelect"
+              ng-options="option.name for option in galleryPhotos.data.availableOptions track by option.sort"
+              ng-model="galleryPhotos.data.selectedOption" >
+            </select>
+        </form>
+
+    </div>
+
+    <div class="row container-fluid">
+      <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="photo in galleryPhotos.photoData | filter:search |orderBy : data.selectedOption.sort ">
+        <div class="card">
+              <div class="card-image">
+                <a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
+                  <img class="img-responsive" ng-src="{{photo.photo_path}}">
+                  <span class="card-author">By {{photo.username}}</span>
+                </a>
+              </div>
+              <div class="card-content">
+                  <p>{{photo.photo_title}}</p>
+              </div>
+              <div class="card-action">
+                  <div class="row">
+                    <div class="col-xs-6 col-sm-6" style="text-align:left">
+                     <span class="text-left">{{photo.description}}</span>
+                   </div>
+                   <div class="col-xs-6 col-sm-6" style="text-align:right">
+                      <i class="fa fa-heart" aria-hidden="true" style="color:#E96725;"></i>  {{photo.view}}
+                   </div>
+                 </div>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>

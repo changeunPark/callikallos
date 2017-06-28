@@ -52,9 +52,17 @@ angular.module('userControllers',['userServices'])
 })
 
 .controller('profileCtrl', function($scope, User, $timeout, $state, $http){
-
-
   var app = this;
+
+// 기본 사용자 정보 가져오는 함수
+  var username = $scope.main.user.username;
+  User.readProfiles(username).then(function(data){
+    if(data.data.success){
+      app.readData = data.data.profiles;
+    } else {
+      app.errorMsg = data.data.message;
+    }
+  });
 
 
 // 유저 프로필 사진 변경 함수
@@ -80,48 +88,42 @@ angular.module('userControllers',['userServices'])
 
 // 프로필 이미지를 업데이트하는 함수
     this.updateProfileImage = function(){
-        var fd = new FormData();
-        var user_id = $scope.main.user.user_id;
-        fd.append('myfile', app.file.upload);
-          $http.put('/api/myProfileImage/'+user_id,  fd, {
-          transformRequest: angular.identity,
-          headers: {'Content-Type': undefined}
-        }).then(function(data){
-          if (data.data.success) {
-              app.successMsg = data.data.message;
-              app.errorMsg = false;
-              app.file = {};
-          } else {
-              app.errorMsg = data.data.message;
-              app.successMsg = false;
-              app.file = {};
-            }
-          });
-        };
-
-
-
-
-  this.readProfile = function(){
-    var username = $scope.main.user.username;
-    User.readProfiles(username).then(function(data){
-      if(data.data.success){
-        app.readData = data.data.profiles;
-      } else {
-        app.errorMsg = data.data.message;
-      }
-    });
+      app.errorMsg = false;
+      app.disabled = true;
+      $scope.$emit('LOAD');
+      var fd = new FormData();
+      var user_id = $scope.main.user.user_id;
+      fd.append('myfile', app.file.upload);
+        $http.put('/api/uploadTemp/'+user_id,  fd, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
+      }).then(function(data){
+        if (data.data.success) {
+            $scope.$emit('UNLOAD');
+            app.successMsg = data.data.message;
+            app.file = {};
+            $timeout(function(){
+              $state.reload();
+            }, 1000);
+        } else {
+            $scope.$emit('UNLOAD');
+            app.disabled = false;
+            app.errorMsg = data.data.message;
+            app.file = {};
+          }
+      });
   };
 
+// 프로필 정보 변경
   this.updateProfile = function(){
     app.errorMsg = false;
     app.disabled = true;
     app.readData.user_id = $scope.main.user.user_id;
     User.updateProfiles(app.readData).then(function(data){
       if(data.data.success){
-        app.successMsg = data.data.message + '메인 페이지로 이동합니다.';
+        app.successMsg = data.data.message;
         $timeout(function(){
-          $state.go('app');
+          $state.reload();
         },2000);
       } else {
         app.errorMsg = data.data.message;
@@ -131,49 +133,3 @@ angular.module('userControllers',['userServices'])
   };
 
 });
-
-
-
-// if(valid){
-//   var permission = 'user';
-//   var is_enrolled = '0';
-// // 작가로 등록했을 경우
-//   if($scope.isEnrolled === true){
-//     permission = 'moderator';
-//     is_enrolled = '1';
-//     UserSvc.register(username, email, password, permission, is_enrolled)
-//     .then(function (user) {
-//       if(user){
-//         $scope.$emit('login', user);
-// // 작가 등록하기
-//         UserSvc.created();
-//         $state.go('app.profiles');
-//       }
-//       else {
-//         $scope.regStatus = true;
-//         $scope.regMessage = $rootScope.message;
-//       }
-//     });
-//   }
-// // 작가로 등록하지 않았을 경우
-//   else {
-//     permission = 'user';
-//     is_enrolled = '0';
-//     UserSvc.register(username, email, password, permission, is_enrolled)
-//     .then(function (user) {
-//       if(user){
-//         $scope.$emit('login', user);
-//         $state.go('app');
-//       }
-//       else {
-//         $scope.regStatus = true;
-//         $scope.regMessage = $rootScope.message;
-//       }
-//     });
-//   }
-// }
-// else{
-//   $scope.regStatus = true;
-//   $scope.regMessage = "사용자의 정보를 입력하여주세요";
-// }
-// };

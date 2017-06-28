@@ -3,13 +3,23 @@
                  color: #e96725;
 
 -------------------------------------------------- */
+.image-cropper {
+  position: relative;
+  overflow: hidden;
+}
+.image-cropper img {
+  position: relative;
+}
+.cropArea {
+  background: #e4e4e4;
+  overflow: hidden;
+  width: 500px;
+  height: 350px;
+}
 div.image-default img {
-  min-width: 250px;
-  min-height: 250px;
-  max-widht: 300px;
-  max-height: 300px;
-  margin: 15px;
   border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .btn-enroll {
   background-color: #e96725;

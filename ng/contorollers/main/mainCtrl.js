@@ -1,8 +1,16 @@
 angular.module('mainControllers',['authServices', 'userServices'])
-.controller('mainCtrl', function(Auth, $timeout, $location, $state, $rootScope, $window, $interval, User, AuthToken){
+.controller('mainCtrl', function(Auth, $timeout, $location, $state, $rootScope, $scope, $window, $interval, User, AuthToken){
   var app = this;
 
   app.loadme = false;
+
+  $scope.$on('LOAD', function(){
+    $scope.loading = true;
+  });
+
+  $scope.$on('UNLOAD', function(){
+    $scope.loading = false;
+  });
 
   $rootScope.$on('$stateChangeStart', function(){
     if(!checkSession)checkSession();
@@ -11,11 +19,11 @@ angular.module('mainControllers',['authServices', 'userServices'])
       app.isLoggedIn = true;
       Auth.getUser().then(function(data){
         if(data.data.permission === 'admin') {
-          app.admin = true;
+          app.permission = true;
           app.user = data.data;
           app.loadme = true;
         } else if(data.data.permission === 'artist') {
-          app.artist = true;
+          app.permission = true;
           app.user = data.data;
           app.loadme = true;
         } else {
@@ -67,16 +75,17 @@ angular.module('mainControllers',['authServices', 'userServices'])
         if(data.data.success){
           AuthToken.setToken(data.data.token);
           checkSession();
+          hideModal('expired');
         } else{
           app.ModalBody = data.data.message;
+          hideModal('expired');
         }
       });
-      hideModal('logout');
     };
 
     app.endSession = function(){
       app.choiceMade = true;
-      hideModal('logout');
+      hideModal('expired');
       $timeout(function(){
         showModal('logout');
       },500);

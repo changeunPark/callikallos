@@ -83,7 +83,7 @@ catch(ex){
 }
 });
 
-router.get('/:code', function(req, res, next){
+router.get('/:board_type', function(req, res, next){
 try{
 
     req.getConnection(function(err, connection) {
@@ -94,14 +94,17 @@ try{
       }
       else {
         var selectSql = 'select B.*,  (select username from users where user_id = B.user_id) as username, (select count(*) from comment where board_id = B.board_id) as comment_count, (select count(*) from opinion where board_id = B.board_id) as opinion_count, (select description from board_type where code = B.board_type) as description from board B where board_type = ?;';
-        var selectValue = req.params.code;
+        var selectValue = req.params.board_type;
           connection.query(selectSql, selectValue, function (err, result, next) {
           if(err){
                 res.send(err);
           }
           else {
-
-            res.status(201).send(result);
+            if(!result){
+              res.json({success:false, message:'정보를 불러오지 못하였습니다.'});
+            } else {
+              res.json({success:true, message:'정보를 불러왔습니다.', result:result});
+            }
           }
         });
 

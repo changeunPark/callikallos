@@ -1,0 +1,83 @@
+<div ng-init="getHeaderContent()">
+
+    <div class="text-center" style="background-color:#e96725; padding:20px;color:#ffffff; margin-bottom:20px;" >
+        <div>
+          <form class="navbar-form hidden-xs">
+            <input style="width:800px; margin:auto; height:50px;"type="text" class="form-control" ng-model="search" placeholder="검색어를 입력해주세요.">
+          </form>
+        </div>
+    </div>
+
+    <div id="communityWrap" class="container" >
+    <!-- 새 글쓰기 및 조건문 -->
+          <div class="">
+            <div id="communityContent" class="row">
+                <div class="col-sm-8">
+                  <div id="listContent"class="main">
+                        <div class="main_0 main_common" style="padding-top:8px; color:#e96725;">
+                          <span>게시물 {{boards.boardDatas.length}}개</span>
+                        </div>
+                        <div class="main_1 main_common" style="padding-top:8px;">
+                          <span>정렬 :</span>
+                        </div>
+                      <div class="main_2 main_common">
+                        <select class="form-control" style="margin:0px; " name="mySelect" id="mySelect"
+                          ng-options="option.name for option in boards.data.availableOptions track by option.sort"
+                          ng-model="boards.data.selectedOption" >
+                        </select>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4 text-right">
+                  <a ui-sref="app.board.create" class="btn btn-warning">게시물 등록</a>
+                </div>
+            </div>
+
+          </div>
+
+
+    <!-- list 구분선 -->
+
+          <div class="listBorder">
+          </div>
+
+    <!-- 커뮤니티 정보 -->
+            <div class="">
+                <div ng-repeat="board in boards.boardDatas" >
+                  <div id="communityContent" class="row">
+                      <div class="col-sm-8">
+                        <div id="listTitle" class="">
+                          <a  ui-sref="app.board.show({board_id: board.board_id})" >
+                            {{board.title.substring(0, 30)}}
+                          </a>
+                        </div>
+                        <div id="listContent"class="main">
+                            <div class="main_0 main_common" style="color:#e96725;">
+                              <span>답변 {{board.comment_count}}</span>
+                            </div>
+
+                            <div class="main_1 main_common">
+                                <i class="fa fa-eye" aria-hidden="true"></i>{{board.view}}
+                            </div>
+
+                            <div class="main_2 main_common">
+                                <i class="fa fa-comment-o" aria-hidden="true"></i>{{board.comment_count}}
+                            </div>
+
+                            <div class="main_3 main_common">
+                              <a ui-sref="app.artist.show({artist_id: user.user_id})">
+                                <i class="fa fa-user" aria-hidden="true"></i><span>{{board.username}}</span>
+                              </a>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-4 text-right">
+                        <span>{{board.created | date : 'yyyy년 MM월 dd일'}}</span>
+                      </div>
+                  </div>
+               </div>
+            </div>
+    </div>
+</div>

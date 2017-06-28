@@ -52,7 +52,7 @@ try{
                   } else if(!user[0].active){
                     res.status(201).send({success: false, message: '이메일 인증이 확인되지않았습니다.', expired:true});
                   } else{
-                    var token = jwt.sign({username:user[0].username, user_id:user[0].user_id, permission:user[0].permission}, config.secret, {expiresIn: '2h'});
+                    var token = jwt.sign({username:user[0].username, user_id:user[0].user_id, permission:user[0].permission}, config.secret, {expiresIn: '6h'});
                     res.status(201).send({success: true, message: '안녕하세요.'+user[0].username+'님, '+'메인 화면으로 이동합니다.', token:token});
                   }
                 });

@@ -140,33 +140,37 @@ try{
         return next(err);
       }
       else {
-          var insertValue = {
-            user_id: req.auth.user_id,
-            photo_id: req.body.photo_id,
-            board_id: req.body.board_id,
-  					content: req.body.comment
-  				};
 
           console.log(req.body);
-// 오류 처리해주어야 함
-  				var insertSql = 'INSERT INTO comment set ?';
-// 로그인 하기 전 상태
-          if(!req.headers['x-auth']){
-            res.status(401).send({success: false, message: '로그인 후 댓글 작성이 가능합니다.'});
-          }
-// 로그인 한 상태
-          else {
-            //Incsert a record.
-    					connection.query(insertSql, insertValue, function(err, result, next){
-              if(err) {
-                res.status(401).send('해당 댓글에 정보가 올바르지 않습니다.');
-              }
-    					else {
-                // 빈칸일 때 오류 잡기
-                res.status(201).send({success: true, message: '덧글이 정상 등록되었습니다..'});
-    					}
-    				});
-          }
+          console.log(req.decoded);
+
+//           var insertValue = {
+//             user_id: req.auth.user_id,
+//             photo_id: req.body.photo_id,
+//             board_id: req.body.board_id,
+//   					content: req.body.comment
+//   				};
+//
+//           console.log(req.body);
+// // 오류 처리해주어야 함
+//   				var insertSql = 'INSERT INTO comment set ?';
+// // 로그인 하기 전 상태
+//           if(!req.headers['x-auth']){
+//             res.status(401).send({success: false, message: '로그인 후 댓글 작성이 가능합니다.'});
+//           }
+// // 로그인 한 상태
+//           else {
+//             //Incsert a record.
+//     					connection.query(insertSql, insertValue, function(err, result, next){
+//               if(err) {
+//                 res.status(401).send('해당 댓글에 정보가 올바르지 않습니다.');
+//               }
+//     					else {
+//                 // 빈칸일 때 오류 잡기
+//                 res.status(201).send({success: true, message: '덧글이 정상 등록되었습니다..'});
+//     					}
+//     				});
+//           }
 
         }
     });

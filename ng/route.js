@@ -83,18 +83,6 @@ $urlRouterProvider.otherwise('/');
 
 
 
-  // 유저 작품 모아 놓은 곳  / 작품 정보
-            .state('app.photos', {
-              url: 'photos',
-              views:{
-                'content@': {
-                  templateUrl: 'isLoggedIn/artistPhotos.html',
-                  controller: 'PhotosController',
-                  authenticated: false
-                }
-              }
-             })
-
   // 유저 프로필 모아 놓은 곳  / 계정 정보
            .state('app.profiles', {
              url: 'profiles',
@@ -102,23 +90,39 @@ $urlRouterProvider.otherwise('/');
                'content@': {
                 templateUrl: 'isLoggedIn/userProfiles.html',
                 controller: 'profileCtrl',
-                controllerAs: 'profile'
+                controllerAs: 'profile',
+                authenticated: false
+
                }
              }
             })
 
-// 등록된 작가가 작품 업로드 하는 곳
+// 작가 작품 모아 놓은 곳
+          .state('app.photos', {
+            url: 'photos',
+            views:{
+              'content@': {
+                templateUrl: 'isLoggedIn/artistPhotos.html',
+                controller: 'artistPhotoCtrl',
+                controllerAs: 'artistPhoto',
+                authenticated: false
+              }
+            }
+           })
+
+// 등록된 작가의 작품 업로드 & 작가 프로필
            .state('app.artistProfiles', {
              url: 'artist',
              views:{
                'content@': {
                 templateUrl: 'isLoggedIn/artistProfiles.html',
-                controller: 'artistCtrl',
-                controllerAs: 'artist',
+                controller: 'artistProfileCtrl',
+                controllerAs: 'artistProfile',
                 authenticated: true
                }
              }
             })
+
 
 
             .state('app.intro',
@@ -166,23 +170,26 @@ $urlRouterProvider.otherwise('/');
               views:{
                 'content@': {
                   templateUrl: 'categories/artist.html',
-                  controller: 'ArtistController',
+                  controller: 'artistsCtrl',
+                  controllerAs: 'artists',
                   authenticated: false
                 },
                 'artist-header@app.artist':{
                   templateUrl: '/menues/subMenu.html',
-                  controller: 'ArtistMenuController',
+                  controller: 'artistTapCtrl',
+                  controllerAs: 'artistTap',
                   authenticated: false
                 },
               }
              })
 
             .state('app.artist.categories', {
-              url: '/categories=:code',
+              url: '/category=:code',
               views: {
                 'detail@app.artist':{
-                  templateUrl: '/partialArtist/content.html',
-                  controller: 'ArtistMenuController',
+                  templateUrl: '/partialArtist/artists.html',
+                  controller: 'artistsCtrl',
+                  controllerAs: 'artists',
                   authenticated: false
                 }
               }
@@ -193,7 +200,8 @@ $urlRouterProvider.otherwise('/');
                views:{
                  'content@':{
                    templateUrl: '/partialArtist/artist.html',
-                   controller: 'ArtistController',
+                   controller: 'artistPhotoCtrl',
+                   controllerAs: 'artistPhoto',
                    authenticated: false
                  }
                }
@@ -205,37 +213,39 @@ $urlRouterProvider.otherwise('/');
           .state('app.gallery', {
             url: 'gallery',
             views:{
-              'content@': {
-                templateUrl: 'categories/gallery.html',
-                controller: 'GalleryController',
-                authenticated: false
-              },
               'gallery-header@app.gallery':{
                 templateUrl: '/menues/subMenu.html',
-                controller: 'GalleryMenuController',
+                controller: 'galleryTapCtrl',
+                controllerAs: 'galleryTap'
+              },
+              'content@': {
+                templateUrl: 'categories/gallery.html',
+                controller: 'galleryPhotosCtrl',
+                controllerAs: 'galleryPhotos',
                 authenticated: false
               }
             }
            })
 
           .state('app.gallery.categories', {
-            url: '/categories=:code',
+            url: '/category=:code',
             views: {
               'detail@app.gallery':{
-                templateUrl: '/partialGallery/content.html',
-                controller: 'GalleryMenuController',
+                templateUrl: '/partialGallery/photos.html',
+                controller: 'galleryPhotosCtrl',
+                controllerAs: 'galleryPhotos',
                 authenticated: false
               }
             }
           })
 
            .state('app.gallery.show', {
-             url: '/categories=:photo_type/photos:photo_id',
+             url: '/category=:photo_type/photo:photo_id',
              views:{
                'content@':{
                  templateUrl: '/partialGallery/photo.html',
-                 controller: 'GalleryController',
-                 authenticated: false
+                 controller: 'galleryPhotoCtrl',
+                 controllerAs: 'galleryphoto',
                }
              }
             })
@@ -245,8 +255,8 @@ $urlRouterProvider.otherwise('/');
               views:{
                 'content@':{
                   templateUrl: '/partialGallery/photoEdit.html',
-                  controller: 'GalleryController',
-                  authenticated: true
+                  controller: 'galleryPhotoCtrl',
+                  controllerAs: 'galleryphoto',
                 }
               }
              })
@@ -270,7 +280,7 @@ $urlRouterProvider.otherwise('/');
                })
 
               .state('app.display.categories', {
-                url: '/categories=:code',
+                url: '/category=:code',
                 views: {
                   'detail@app.display':{
                     templateUrl: '/partialDisplay/content.html',
@@ -289,23 +299,25 @@ $urlRouterProvider.otherwise('/');
               views:{
                 'content@': {
                   templateUrl: 'categories/board.html',
-                  controller: 'BoardController',
+                  controller: 'boardsCtrl',
+                  controllerAs: 'boards',
                   authenticated: false
                 },
                 'board-header@app.board':{
                   templateUrl: '/menues/boardMenu.html',
-                  controller: 'BoardMenuController',
+                  controller: 'boardTapCtrl',
                   authenticated: false
                 },
               }
              })
 
             .state('app.board.categories', {
-              url: '/categories=:code',
+              url: '/category=:code',
               views: {
                 'content@app.board':{
-                  templateUrl: '/partialBoard/content.html',
-                  controller: 'BoardMenuController',
+                  templateUrl: '/partialBoard/boards.html',
+                  controller: 'boardsCtrl',
+                  controllerAs: 'boards',
                   authenticated: false
                 }
               }
@@ -316,8 +328,9 @@ $urlRouterProvider.otherwise('/');
               url:'/create',
               views:{
                 'content@app.board':{
-                  controller: 'BoardController',
                   templateUrl:'/partialBoard/boardCreate.html',
+                  controller: 'boardCtrl',
+                  controllerAs: 'board',
                   authenticated: true
                 }
               }
@@ -328,8 +341,9 @@ $urlRouterProvider.otherwise('/');
              url: '/:board_id',
              views:{
                'content@app.board':{
-                 controller: 'BoardController',
-                 templateUrl: 'partialBoard/article.html',
+                 templateUrl: 'partialBoard/board.html',
+                 controller: 'boardCtrl',
+                 controllerAs: 'board',
                  authenticated: false,
                }
              }
@@ -340,8 +354,9 @@ $urlRouterProvider.otherwise('/');
              url: '/edit/:board_id',
              views:{
                'content@app.board':{
-               controller: 'BoardController',
                templateUrl: 'partialBoard/boardUpdate.html',
+               controller: 'boardCtrl',
+               controllerAs: 'board',
                authenticated: true
              }
            }

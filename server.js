@@ -9,9 +9,11 @@ app.use(express.static('image'));
 app.use('/', require('./controllers/static'));
 
 
-// 새로 추가
+// 사용자 및 작가 정보
 app.use('/api/userProfiles', require('./controllers/api/userProfiles'));
 app.use('/api/artistProfiles', require('./controllers/api/artistProfiles'));
+app.use('/api/artistPhotos', require('./controllers/api/artistPhotos'));
+
 // 전체 메뉴
 app.use('/api/header', require('./controllers/api/menu/header'));
 // ============================== 부 메뉴 ======================================== //
@@ -47,18 +49,11 @@ app.use('/api/resend', require('./controllers/api/user/resend'));
 
 // =============================================================================== //
 app.use('/api/comment', require('./controllers/api/comment'));
-app.use('/api/opinion', require('./controllers/api/opinion'));
 // =============================================================================== //
-app.use('/api/myProfileTap1', require('./controllers/api/myProfileTap1'));
-app.use('/api/myProfileTap2', require('./controllers/api/myProfileTap2'));
-// =============================================================================== //
-app.use('/api/upload', require('./controllers/api/upload'));
 app.use('/api/uploadTemp', require('./controllers/api/uploadTemp'));
 app.use('/api/uploadDisplay', require('./controllers/api/uploadDisplay'));
 app.use('/api/uploadDisplayTemp', require('./controllers/api/uploadDisplayTemp'));
 // =============================================================================== //
-app.use('/api/myPhotos', require('./controllers/api/myPhotos'));
-app.use('/api/myProfileImage', require('./controllers/api/myProfileImage'));
 
 // app.use(require('./auth'));
 app.listen(3000, function () {
