@@ -1,73 +1,61 @@
-<div id="subContent" class="container">
-<div id="communityWrap">
-
 <!-- 게시물 정보 -->
-			<div>
-				<div style="border:1px solid #dcdcdc;">
-							<div id="communityContent" class="row" style="padding:0px; margin:0px;">
+		<div style="padding:50px;">
+			<div style="width:700px; margin:auto;">
+				<div style="border:1px solid #dcdcdc; padding:25px;">
 								<!-- Right-aligned -->
-								<div class="media" style="padding:10px;">
+
+								<div class="media">
+								  <div class="media-left">
+										<a ui-sref="app.artist.show({artist_id: boardDatas.user_id})">
+											<img class="img-rounded" style="width:50px; height:50px;" ng-src="{{board.boardDatas.profile_image}}" alt="">
+										</a>								  </div>
+								  <div class="media-body media-middle">
+								    <h4 class="media-heading">{{board.boardDatas.username}}</h4>
+								  </div>
+								</div>
+
+
+								<div class="media">
 								  <div class="media-body media-bottom">
-								    <h3 class="media-heading">#{{board.boardDatas.board_id}}.&nbsp;{{board.boardDatas.title.substring(0, 30)}}</h3>
-								    <span>{{board.boardDatas.username}}</span><div class="bar"></div><span>{{board.boardDatas.created | date : 'yyyy년 MM월 dd일'}}</span><div class="bar"></div><span>조회수 {{board.boardDatas.view}}</span>
+										<div style="font-weight:bold;">
+								      <h1 class="media-heading">{{board.boardDatas.title}}제목입니다.</h1>
+										</div>
+										<div style="margin-top: 15px; margin-bottom: 15px; color:#969696;  font-size:0.9em;">
+								    	<span>{{board.boardDatas.created | date : 'yyyy년 MM월 dd일'}}</span><div class="bar"></div><span><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{board.boardDatas.view}}</span>
+										</div>
 								  </div>
 
 								  <div class="media-right media-middle">
-										<a ui-sref="app.artist.show({artist_id: boardDatas.user_id})">
-											<img style="width:80px; height:80px;" ng-src="{{board.boardDatas.profile_image}}" alt=""><span class="mask"></span>
-										</a>
 								  </div>
 								</div>
 
-
-							</div>
-
-							<div id="communityContent" class="row"  style="padding:0px; margin:0px;">
-								<div class="col-sm-12" style=" padding:20px;">
+								<div>
 									<p>{{board.boardDatas.content}}.</p>
 								</div>
-							</div>
 					</div>
-			</div>
-
-<!-- 게시물 정보 종료-->
-<div id="makeBorder"></div>
 
 
-<!-- 댓글 기능 -->
-<div id="communityContent" class="row">
+						<div style="margin-top:100px; margin-bottom: 5px;">
 
-					<div class="col-sm-12">
-<!-- 좋아요 및 댓글 개수 -->
+						<div id="summernote"></div>
+							<div class="media" style="padding:5px;">
+								<div class="media-body media-bottom">
+									<div style="color:#e96725;">
+										<p>댓글 0</p>
+									</div>
+
+								</div>
+								<div class="media-right">
+									<button class="btn btn-enroll">댓글 작성</button>
+								</div>
+							</div>
+						</div>
+
+
+
 								<div ng-show="board.comment_count">
 										<p>댓글 {{board.comment_count}}</p>
 										<br>
-								</div>
-
-<!-- 사용자가 로그인 하였을 때-->
-								<div ng-if="main.isLoginIn">
-									<form name="commentForm" novalidate>
-											<div class="input-group " ng-class = "{'has-success': (commentForm.comment.$valid && !commentForm.comment.$pristine), 'has-error': (!commentForm.comment.$valid && !commentForm.comment.$pristine) ||
-									      (!commentForm.comment.$valid && commentForm.$submitted)}">
-											    <textarea class="form-control custom-control" rows="2" style="resize:none" placeholder="댓글은 1,000자까지 작성할 수 있으며 주제와 무관한 댓글, 악성 댓글은 삭제될 수 있습니다."
-											    	id="comment"  name = "comment" ng-model="comment" required=""></textarea>
-														<p class="help-block" ng-show="(!commentForm.comment.$pristine && commentForm.comment.$error.required) || (commentForm.$submitted && commentForm.comment.$error.required)">This filed is required</p>
-											    <span ng-click="addComment({comment:comment, board_id: board.board_id}, commentForm.$valid)" class="input-group-addon btn btn-primary">댓글 작성</span>
-											</div>
-									</form>
-								</div>
-
-<!-- 사용자가 로그인 하지않았을 때-->
-								<div ng-if="!main.isLoginIn">
-										<form name="commentForm" novalidate>
-												<div class="input-group " ng-class = "{'has-success': (commentForm.comment.$valid && !commentForm.comment.$pristine), 'has-error': (!commentForm.comment.$valid && !commentForm.comment.$pristine) ||
-													(!commentForm.comment.$valid && commentForm.$submitted)}">
-														<textarea ng-disabled="!main.isLoginIn"  class="form-control custom-control" rows="2" style="resize:none" placeholder="로그인 후 댓글 작성이 가능합니다."
-															id="comment"  name = "comment" ng-model="comment" required=""></textarea>
-															<p class="help-block" ng-show="(!commentForm.comment.$pristine && commentForm.comment.$error.required) || (commentForm.$submitted && commentForm.comment.$error.required)">This filed is required</p>
-														<span ng-disabled="!main.isLoginIn"  ng-click="addComment(comment, commentForm.$valid)" class="input-group-addon btn btn-primary">댓글 작성</span>
-												</div>
-										</form>
 								</div>
 
 								<div class="comment_border" ng-init="getComment()">
@@ -88,9 +76,5 @@
 														</div>
 												</div>
 								</div>
-							</div>
-
-</div>
-<!-- 댓글 종료 -->
-</div>
+			</div>
 </div>

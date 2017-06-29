@@ -17,6 +17,7 @@ router.use(morgan('dev'));
 router.use(express.static(__dirname + '/../assets'));
 router.use(express.static(__dirname + '/../templates'));
 router.use(express.static(__dirname + '/../node_modules'));
+router.use(express.static(__dirname + '/../bower_components'));
 
 router.use(connection(mysql, {
   host     : mysqlInfo.host,

@@ -24,9 +24,31 @@ angular.module('boardControllers',['boardServices'])
    });
 })
 
-.controller('boardCtrl', function($stateParams, Board){
+.controller('boardCtrl', function($stateParams, Board, $scope){
     // 보드 아이디 전송
     var app = this;
+    $scope.text = "hello world";
+    $(document).ready(function() {
+
+      $('#summernote').summernote({
+        lang: 'ko-KR', // default: 'en-US'
+        height : 100, // 에디터의 높이
+        minHeight : null,
+        maxHeight : null,
+        focus : true,
+        placeholder: '댓글은 1,000자까지 작성할 수 있으며 주제와 무관한 댓글, 악성 댓글은 삭제될 수 있습니다.',
+        toolbar: [
+  // [groupName, [list of button]]
+          ['style', ['bold', 'italic', 'underline', 'clear']],
+          ['font', ['strikethrough', 'superscript', 'subscript']],
+          ['fontsize', ['fontsize']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['height', ['height']]
+        ]
+      });
+    });
+
     var board_id = $stateParams.board_id;
     Board.readBoard(board_id).then(function(data){
       if(data.data.success){

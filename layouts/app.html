@@ -8,6 +8,9 @@
       <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
       <link rel="stylesheet" type="text/css" href="/css/ui-cropper.css">
+      <link rel="stylesheet" type="text/css" href="/css/summernote.css">
+      <link rel='stylesheet' href="/fonts/summernote.ttf">
+
       <link rel="stylesheet" href="/app.css">
 
       <body ng-app="app" ng-controller='mainCtrl as main' ng-show="main.loadme" ng-cloak>
@@ -95,6 +98,7 @@
                   <div class ="row show-hide-message" ng-show="main.uploadSuccessMsg">
                     <div class="alert alert-success">{{main.uploadSuccessMsg}}</div>
                   </div>
+
                   <div class ="row show-hide-message" ng-show="main.uploaderrorMsg">
                     <div class="alert alert-danger">{{main.uploaderrorMsg}}</div>
                   </div>
@@ -132,6 +136,8 @@
         <script src="/js/angular-ui-router.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/ui-bootstrap.min.js"></script>
+        <script src="/js/summernote.js"></script>
+        <script src="/js/summernote-ko-KR.js"></script>
         <script src="./app.js"></script>
 
 
