@@ -1,6 +1,6 @@
 var router = require('express').Router();
 
-router.get('/:user_id', function(req, res, next){
+router.get('/:artist_id', function(req, res, next){
 try{
 
     req.getConnection(function(err, connection) {
@@ -11,7 +11,7 @@ try{
       }
       else {
         var selectSql = 'select B.*,  (select description from photo_type where code = B.photo_type) as description from my_photos B where user_id = ?';
-        var selectValue = req.params.user_id;
+        var selectValue = req.params.artist_id;
 
           connection.query(selectSql, selectValue, function (err, result, next) {
           if(err){

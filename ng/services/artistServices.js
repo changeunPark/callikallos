@@ -29,13 +29,13 @@ angular.module('artistServices',[])
   };
 
 // Artist.readArtistProfile(user_id)
-  artistFactory.readArtistProfile = function(user_id){
-    return $http.get('/api/artistProfiles/'+user_id);
+  artistFactory.readArtistProfile = function(artist_id){
+    return $http.get('/api/artistProfiles/'+artist_id);
   };
 
 //
-  artistFactory.readAristPhoto = function(user_id){
-    return $http.get('/api/artistPhotos/'+user_id);
+  artistFactory.readAristPhoto = function(artist_id){
+    return $http.get('/api/artistPhotos/'+artist_id);
   };
 
   return artistFactory;

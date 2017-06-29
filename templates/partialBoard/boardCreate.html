@@ -1,24 +1,40 @@
-<div class="container">
-  <div  class="list-contents"style="padding:25px; margin-top:5%;">
-    <h2>새 글 쓰기</h2>
-    <form ng-submit="addBoard(title, content)">
-      <div class="form-group">
-        <select class="form-control" name="mySelect" id="mySelect"
-          ng-options="option.name for option in data.availableOptions track by option.id"
-          ng-model="data.selectedOption">
-        </select>
-      </div>
+<div style="padding:50px;">
+  <div style="width:700px; margin:auto;">
+    <div class="text-center" style="padding:15px;">
+      <h2>게시글 작성</h2>
+    </div>
+    <div style="border:1px solid #dcdcdc; padding:15px;">
 
-      <div class="form-group">
-        <input type="title" class="form-control" id="title" ng-model="title" placeholder="제목을 입력해주세요">
-      </div>
+      <form style="padding:15px;" >
+        <div class ="row show-hide-message" ng-show="board.successMsg">
+          <div class="alert alert-success">{{board.successMsg}}</div>
+        </div>
+        <div class ="row show-hide-message" ng-show="board.errorMsg">
+          <div class="alert alert-danger">{{board.errorMsg}}</div>
+        </div>
 
-      <div class="form-group">
-        <textarea class="form-control" rows="5" id="content" ng-model="content" placeholder="내용을 입력해주세요"></textarea>
-      </div>
+        <div class="form-group">
+          <label>카테고리</label>
+          <select  ng-disabled="board.disabled"  class="form-control" name="mySelect" id="mySelect"
+            ng-options="option.name for option in board.data.availableOptions track by option.id"
+            ng-model="board.data.selectedOption">
+          </select>
+        </div>
 
-      <a ui-sref="app.board.category({code: 0})" class="btn btn-default">취소</a>
-      <button type="submit" class="btn btn-success pull-right">등록</button>
-    </form>
+        <div class="form-group">
+          <label>제목</label>
+          <input  ng-disabled="board.disabled" type="title" class="form-control" id="title" ng-model="board.boardData.title" placeholder="제목을 입력해주세요">
+        </div>
+
+
+        <div class="form-group">
+          <label>내용</label>
+          <div id="summernote"></div>
+        </div>
+        <div>
+          <button ng-disabled="board.disabled" style="width:100%" ng-click="board.createBoard(board.boardData)" class="btn btn-enroll">등록</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

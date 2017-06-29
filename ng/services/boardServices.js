@@ -14,6 +14,9 @@ angular.module('boardServices',[])
     return $http.get('api/board/'+board_id);
   };
 
+  boardFactory.createBoard = function(boardData){
+    return $http.post('/api/boardMenu',boardData);
+  };
 
   return boardFactory;
 });

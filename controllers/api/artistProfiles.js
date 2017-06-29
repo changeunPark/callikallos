@@ -50,7 +50,7 @@ catch(ex){
 });
 
 
-router.get('/:user_id', function(req, res, next){
+router.get('/:artist_id', function(req, res, next){
 try{
 
     req.getConnection(function(err, connection) {
@@ -61,10 +61,10 @@ try{
       }
       else {
 
-        var selectSql = 'select my_profile.*, users.profile_image, users.username from my_profile left join users on my_profile.user_id = users.user_id where my_profile.user_id = ?;';
-        var user_id = req.params.user_id;
+        var selectSql = 'select my_profile.*, users.profile_image, users.username, users.email from my_profile left join users on my_profile.user_id = users.user_id where my_profile.user_id = ?;';
+        var artist_id = req.params.artist_id;
 
-        connection.query(selectSql, user_id, function (error, results, next) {
+        connection.query(selectSql, artist_id, function (error, results, next) {
         // databases에서  select 문으로 중복된 사용자 찾아야함.
             if(err){
               console.error('SQL error: ', err);

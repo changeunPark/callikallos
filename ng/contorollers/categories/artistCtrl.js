@@ -21,13 +21,13 @@ angular.module('artistControllers',['userServices', 'artistServices'])
      selectedOption:  {sort: '-created', name: '최신순'} //This sets the default value of the select in the ui
      };
 
-      Artist.readArtists(user_type).then(function(data){
-        if(data.data.success){
-          app.artistDatas = data.data.result;
-        } else {
-          app.errorMsg = data.data.message;
-        }
-      });
+    Artist.readArtists(user_type).then(function(data){
+      if(data.data.success){
+        app.artistDatas = data.data.result;
+      } else {
+        app.errorMsg = data.data.message;
+      }
+    });
 })
 
 .controller('uploadCtrl', function ($http, $timeout, $scope, Artist, $state) {
@@ -190,10 +190,16 @@ angular.module('artistControllers',['userServices', 'artistServices'])
       };
 })
 
-.controller('artistPhotoCtrl', function ($timeout, Artist, $state, $scope) {
+.controller('artistPhotoCtrl', function (Artist, $stateParams) {
+
     var app = this;
-      var user_id = $scope.main.user.user_id;
-      Artist.readArtistProfile(user_id).then(function(data){
+    var artist_id = $stateParams.artist_id;
+
+      this.contactArtist = function(){
+        console.log('작동 중');
+      };
+
+      Artist.readArtistProfile(artist_id).then(function(data){
         if(data.data.success){
           app.artistData = data.data.result;
         } else {
@@ -201,7 +207,7 @@ angular.module('artistControllers',['userServices', 'artistServices'])
         }
       });
 
-      Artist.readAristPhoto(user_id).then(function(data){
+      Artist.readAristPhoto(artist_id).then(function(data){
         if(data.data.success){
           app.artistPhotos = data.data.result;
         } else {

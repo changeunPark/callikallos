@@ -1,6 +1,6 @@
 <div id="mainContent" class="container">
-  <uib-tabset active="activeJustified" justified="true">
-    <uib-tab index="0" heading="작가">
+  <div class="row">
+    <div class="col-sm-4">
       <div class ="row show-hide-message" ng-show="artistPhoto.successMsg">
         <div class="alert alert-success">{{artistPhoto.successMsg}}</div>
       </div>
@@ -8,66 +8,58 @@
         <div class="alert alert-danger">{{artistPhoto.errorMsg}}</div>
       </div>
 
-  					<div  id="subContent">
-              <div class="text-center">
-                <div class="image-default">
-                </div>
-                <div>
-                <img style="width:150px; height:150px;"class="img-responsive center-block" ng-src="{{artistPhoto.artistData.profile_image}}">
-              </div>
-
-                <div>
-                  <div>
-                    <h4>{{artistPhoto.artistData.username}}</h4>
-                  </div>
-                  <div>
-                    <p>{{artistPhoto.artistData.short_info}}</p>
-                  </div>
-                  <div>
-                    <p>{{artistPhoto.artistData.detail_info}}</p>
-                  </div>
-                  <div>
-                    <p>{{artistPhoto.artistData.social_site}}</p>
-                  </div>
-                  <div>
-                    <p>{{artistPhoto.artistData.public_email}}</p>
-                  </div>
-                </div>
-              </div>
+      <div style="border:1px solid #dcdcdc; padding:25px;">
+          <div class="media">
+            <div class="media-left media-middle">
+              <img style="width:70px; height:70px;  border-radius: 10px;" ng-src="{{artistPhoto.artistData.profile_image}}">
             </div>
-    </uib-tab>
-  </uib-tabset>
-
-
-  <uib-tabset active="activeJustified" justified="true">
-    <uib-tab index="0" heading="작품">
-          <div  id="subContent">
-            <div class="row container-fluid">
-              <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="photo in artistPhoto.artistPhotos">
-                <div class="card">
-                      <div class="card-image">
-                        <a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
-                          <img class="img-responsive" ng-src="{{photo.photo_path}}">
-                        </a>
-                      </div>
-                      <div class="card-content">
-                          <p>{{photo.photo_title}}</p>
-                      </div>
-                      <div class="card-action">
-                         <!-- <span class="glyphicon glyphicon-heart" aria-hidden="true">{{photo.opinion_count}}</span> -->
-                          <div class="row">
-                            <div class="col-xs-6 col-sm-6" style="text-align:left">
-                             <span class="text-left">{{photo.description}}</span>
-                           </div>
-                           <div class="col-xs-6 col-sm-6" style="text-align:right">
-                              <i class="fa fa-heart" aria-hidden="true" style="color:#E96725;"></i>  {{photo.view}}
-                           </div>
-                         </div>
-                      </div>
-                  </div>
-                </div>
+            <div class="media-body media-bottom">
+              <P class="media-heading">&nbsp;<i class="fa fa-user fa-lg" aria-hidden="true"></i>&nbsp;{{artistPhoto.artistData.username}}</P>
+              <a ng-click="artistPhoto.contactArtist()"><p>&nbsp;<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;{{artistPhoto.artistData.email}}</p></a>
             </div>
+          </div>
       </div>
-    </uib-tab>
-  </uib-tabset>
+      <div style="border:1px solid #dcdcdc; padding:25px; margin-top: 25px;">
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <form name="outerForm" class="tab-form-demo">
+        <uib-tabset active="activeJustified" justified="true">
+          <uib-tab index="0" heading="작품">
+
+              <div class="row container-fluid">
+                <div class="col-sm-6" ng-repeat="photo in artistPhoto.artistPhotos">
+                  <div class="card">
+                        <div class="card-image">
+                          <a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
+                            <img class="img-responsive" ng-src="{{photo.photo_path}}">
+                          </a>
+                        </div>
+                        <div class="card-content">
+                            <p>{{photo.photo_title}}</p>
+                        </div>
+                        <div class="card-action">
+                           <!-- <span class="glyphicon glyphicon-heart" aria-hidden="true">{{photo.opinion_count}}</span> -->
+                            <div class="row">
+                              <div class="col-xs-6 col-sm-6" style="text-align:left">
+                               <span class="text-left">{{photo.description}}</span>
+                             </div>
+                             <div class="col-xs-6 col-sm-6" style="text-align:right">
+                                <i class="fa fa-heart" aria-hidden="true" style="color:#E96725;"></i>  {{photo.view}}
+                             </div>
+                           </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </uib-tab>
+        </uib-tabset>
+      </form>
+
+    </div>
+  </div>
+
+
+
 </div>

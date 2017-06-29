@@ -21,6 +21,7 @@
 }
 
 
+
 div.image-default img {
   border-radius: 5px;
   margin-top: 10px;
@@ -75,7 +76,7 @@ font-size: 100%;
 #body {
     width: 100%;
     min-height: 100%;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
 }
 
 #footer {
@@ -769,19 +770,16 @@ vertical-align: middle;
 /*	--------------------------------------------------
               전체 스크롤 메뉴 커스텀
 -------------------------------------------------- */
-
-div.scrollmenu {
-
 /*	--------------------------------------------------
 z-index: 1;
 position: fixed; /* Set the navbar to fixed position
 top: 63px; /* Position the navbar at the top of the page
 -------------------------------------------------- */
 
+div.scrollmenu {
     width:100%;
     background-color: #ffffff;
-    border-top: 1px solid #bdbdbd;
-    border-bottom: 1px solid #bdbdbd;
+    border-bttom: 1px solid transparent;
     overflow: auto;
     white-space: nowrap;
 }
@@ -807,46 +805,6 @@ div.scrollmenu a.active {
 }
 
 
-/*	--------------------------------------------------
-      보드 스크롤 메뉴 커스텀
--------------------------------------------------- */
-
-div#board.scrollmenu {
-    width:100%;
-    background-color: #e96725;
-    border: 0px;
-    overflow: auto;
-    white-space: nowrap;
-}
-
-div#board.scrollmenu a {
-    display: inline-block;
-    color: #ffffff;
-    text-align: center;
-    padding: 20px;
-    text-decoration: none;
-    margin-right: -5px;
-    font-size: 1.1em;
-}
-
-div#board.scrollmenu a.active > span{
-  border-bottom: 1.5px solid #ffffff;
-  padding: 0;
-}
-
-div#board.scrollmenu a:hover > span{
-  border-bottom: 1.5px solid #ffffff;
-  padding: 0;
-}
-
-
-div#board.scrollmenu a:hover {
-    color: #ffffff
-}
-
-div#board.scrollmenu a.active {
-    color: #ffffff;
-}
 
 /*	--------------------------------------------------
 <!-- board profile-img 위치 조정 -->

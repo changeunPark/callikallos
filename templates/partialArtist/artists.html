@@ -1,44 +1,30 @@
-  <div class="container">
-    <div class="container-fluid">
-        <form class="navbar-form navbar-right hidden-xs ">
-          <input type="text" class="form-control" ng-model="search" placeholder="검색어를 입력해주세요.">
-            <select class="form-control" name="mySelect" id="mySelect"
-              ng-options="option.name for option in artists.data.availableOptions track by option.sort"
-              ng-model="artists.data.selectedOption" >
-            </select>
-        </form>
-    </div>
+<div class="container">
+      <div class="container-fluid">
+          <form class="navbar-form navbar-right hidden-xs ">
+            <input type="text" class="form-control" ng-model="search" placeholder="검색어를 입력해주세요.">
+              <select class="form-control" name="mySelect" id="mySelect"
+                ng-options="option.name for option in artists.data.availableOptions track by option.sort"
+                ng-model="artists.data.selectedOption" >
+              </select>
+          </form>
+
+      </div>
 
       <div class="row container-fluid">
         <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="user in artists.artistDatas">
-          <div class="namecard-container">
-            <div class="namecard">
-
-                  <div class="namecard-header">
-                    <div class="namecard-image">
-                      <a ui-sref="app.artist.show({artist_id: user.user_id})">
-                        <img class="img-responsive" ng-src="{{user.profile_image}}" >
-                      </a>
-                    </div>
-                  </div>
-
-                  <div class="namecardContainer">
-                    <div class="namecard-action" >
-                      <div style="color:#000000;">
-                        <h4><span>{{user.username}}</span></h4>
-                      </div>
-                      <div>
-                        <h5><span>{{user.description}}</span></h5>
-                      </div>
-                    </div>
-                    <div>
-                      <h5><span>{{user.short_info}}</span></h5>
-                    </div>
-                  </div>
+          <div class="card">
+                <div class="card-image">
+                  <a ui-sref="app.artist.show({artist_id: user.user_id})">
+                    <img class="img-responsive" ng-src="{{user.profile_image}}">
+                    <span class="card-author">{{user.username}}</span>
+                  </a>
+                </div>
+                <div class="card-action">
+                      <div class="text-center" >
+                       <span >{{user.description}}</span>
+                     </div>
+                   </div>
+                </div>
             </div>
-          </div>
-        </div>
       </div>
-
-
-  </div>
+</div>

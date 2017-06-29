@@ -18,7 +18,7 @@
 								<div class="media">
 								  <div class="media-body media-bottom">
 										<div style="font-weight:bold;">
-								      <h1 class="media-heading">{{board.boardDatas.title}}제목입니다.</h1>
+								      <h1 class="media-heading">{{board.boardDatas.title}}</h1>
 										</div>
 										<div style="margin-top: 15px; margin-bottom: 15px; color:#969696;  font-size:0.9em;">
 								    	<span>{{board.boardDatas.created | date : 'yyyy년 MM월 dd일'}}</span><div class="bar"></div><span><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{board.boardDatas.view}}</span>
@@ -29,26 +29,22 @@
 								  </div>
 								</div>
 
-								<div>
-									<p>{{board.boardDatas.content}}.</p>
-								</div>
+								<p ng-bind-html="board.htmlcontent | to_trusted">
+								</p>
 					</div>
 
 
 						<div style="margin-top:100px; margin-bottom: 5px;">
 
-						<div id="summernote"></div>
-							<div class="media" style="padding:5px;">
-								<div class="media-body media-bottom">
-									<div style="color:#e96725;">
-										<p>댓글 0</p>
-									</div>
-
-								</div>
-								<div class="media-right">
-									<button class="btn btn-enroll">댓글 작성</button>
-								</div>
-							</div>
+						<div style="color:#e96725;">
+							<p>댓글 0</p>
+						</div>
+						<div ng-show="main.isLoggedIn">
+							<div id="summernote"></div>
+						</div>
+						<div class="" >
+							<button style="width:100%;" class="btn btn-enroll">댓글 작성</button>
+						</div>
 						</div>
 
 

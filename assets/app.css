@@ -59,7 +59,7 @@ body {
 #body {
   width: 100%;
   min-height: 100%;
-  background-color: #f5f5f5;
+  background-color: #fff;
 }
 #footer {
   padding: 25px 10px 25px 10px;
@@ -597,16 +597,15 @@ div.textarea {
 /*	--------------------------------------------------
               전체 스크롤 메뉴 커스텀
 -------------------------------------------------- */
-div.scrollmenu {
 /*	--------------------------------------------------
 z-index: 1;
 position: fixed; /* Set the navbar to fixed position
 top: 63px; /* Position the navbar at the top of the page
 -------------------------------------------------- */
+div.scrollmenu {
   width: 100%;
   background-color: #fff;
-  border-top: 1px solid #bdbdbd;
-  border-bottom: 1px solid #bdbdbd;
+  border-bttom: 1px solid transparent;
   overflow: auto;
   white-space: nowrap;
 }
@@ -625,39 +624,6 @@ div.scrollmenu a:hover {
 }
 div.scrollmenu a.active {
   background-color: #e96725;
-  color: #fff;
-}
-/*	--------------------------------------------------
-      보드 스크롤 메뉴 커스텀
--------------------------------------------------- */
-div#board.scrollmenu {
-  width: 100%;
-  background-color: #e96725;
-  border: 0px;
-  overflow: auto;
-  white-space: nowrap;
-}
-div#board.scrollmenu a {
-  display: inline-block;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-  text-decoration: none;
-  margin-right: -5px;
-  font-size: 1.1em;
-}
-div#board.scrollmenu a.active > span {
-  border-bottom: 1.5px solid #fff;
-  padding: 0;
-}
-div#board.scrollmenu a:hover > span {
-  border-bottom: 1.5px solid #fff;
-  padding: 0;
-}
-div#board.scrollmenu a:hover {
-  color: #fff;
-}
-div#board.scrollmenu a.active {
   color: #fff;
 }
 /*	--------------------------------------------------
