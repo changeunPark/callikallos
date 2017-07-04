@@ -31,7 +31,7 @@ angular.module('gallertControllers',['galleryServices'])
     });
 })
 
-.controller('galleryPhotoCtrl', function ($scope, $stateParams, Gallery) {
+.controller('galleryPhotoCtrl', function ($stateParams, Gallery, Comment, $scope, $window, $state) {
 
    var app = this;
    var photo_id = $stateParams.photo_id;
@@ -54,6 +54,38 @@ angular.module('gallertControllers',['galleryServices'])
      }
    });
 
+   Comment.readComment(photo_id).then(function(data){
+     if(data.data.success){
+       app.commentData = data.data.result;
+       console.log(app.commentData);
+     } else {
+       app.errorMsg = data.data.message;
+     }
+   });
+
+   this.createComment = function(data){
+       if(!$scope.main.user.user_id){
+         $scope.main.login();
+       } else {
+         if(!data){
+           $window.alert('댓글을 입력해주세요.');
+         } else {
+           var commentData = {
+             comment : data,
+             user_id : $scope.main.user.user_id,
+             photo_id : photo_id
+           };
+
+           Comment.createComment(commentData).then(function(data){
+             if(data.data.success){
+               $state.reload();
+             } else {
+
+             }
+           });
+         }
+       }
+  };
 });
 
 

@@ -49,6 +49,7 @@ app.use('/api/resend', require('./controllers/api/user/resend'));
 
 // =============================================================================== //
 app.use('/api/comment', require('./controllers/api/comment'));
+app.use('/api/commentBoard', require('./controllers/api/commentBoard'));
 // =============================================================================== //
 app.use('/api/uploadTemp', require('./controllers/api/uploadTemp'));
 app.use('/api/uploadDisplay', require('./controllers/api/uploadDisplay'));

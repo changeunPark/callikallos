@@ -1,136 +1,131 @@
-<!-- gallery.ctrl -->
-<div  id="mainContent" class="container" style="width:50%;">
-		<div>
-					<div class="navbar-form container">
-						<div class="navbar-left">
-							 <h3>#{{galleryphoto.photoData.photo_id}}. <strong>{{galleryphoto.photoData.photo_title}}</strong></h3>
-	 							<span>{{galleryphoto.photoData.description}}</span>
- 								<div class="bar"></div>
-								 <span>{{galleryphoto.photoData.created | date : 'yyyy년 MM월 dd일'}}</span>
-								<div class="bar"></div>
-							 <span>조회 {{galleryphoto.photoData.view}}</span>
-						</div>
-						<div class="navbar-right" ng-show="userArticle">
-							<div class="form-group navbar-btn">
-								<a ui-sref="app.galleryphoto.edit({photo_id: photo.photo_id})" class="btn btn-success">Edit  </a>
-								<a ng-click="deletePhoto({id: photo.board_id})" class="btn btn-danger">Delete </a>
+<div id="mainContent" class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <form name="outerForm" class="tab-form-demo">
+        <uib-tabset active="activeJustified" justified="true">
+          <uib-tab index="0" heading="작품">
+						<div>
+										<div class="navbar-form container">
+											<div class="navbar-left">
+												 <h3>#{{galleryphoto.photoData.photo_id}}. <strong>{{galleryphoto.photoData.photo_title}}</strong></h3>
+													<span>{{galleryphoto.photoData.description}}</span>
+													<div class="bar"></div>
+													 <span>{{galleryphoto.photoData.created | date : 'yyyy년 MM월 dd일'}}</span>
+													<div class="bar"></div>
+												 <span>조회 {{galleryphoto.photoData.view}}</span>
+											</div>
+											<div class="navbar-right" ng-show="userArticle">
+												<div class="form-group navbar-btn">
+													<a ui-sref="app.galleryphoto.edit({photo_id: photo.photo_id})" class="btn btn-success">Edit  </a>
+													<a ng-click="deletePhoto({id: photo.board_id})" class="btn btn-danger">Delete </a>
+												</div>
+											</div>
+										</div>
+
+									<div class="navbar-form container">
+										<div class="photo container-fluid">
+											<div class="photo-image">
+													<img class="img-responsive center-block" ng-src="{{galleryphoto.photoData.photo_path}}" alt="{{galleryphoto.photoData.photo_title}}"><span class="mask"></span>
+													<span class="photo-author">Copyright {{galleryphoto.photoData.created | date : 'yyyy'}}. {{galleryphoto.photoData.username}} all rights reserved.</span>
+											</div>
+										</div>
+									</div>
+									<div class="navbar-form container text-center">
+										<h4>{{galleryphoto.photoData.photo_detail}}</h4>
+									</div>
+
 							</div>
-						</div>
-					</div>
-					<br>
-				<br>
-
-				<div class="navbar-form container">
-					<div class="photo container-fluid">
-						<div class="photo-image">
-								<img class="img-responsive center-block" ng-src="{{galleryphoto.photoData.photo_path}}" alt="{{galleryphoto.photoData.photo_title}}"><span class="mask"></span>
-								<span class="photo-author">Copyright {{galleryphoto.photoData.created | date : 'yyyy'}}. {{galleryphoto.photoData.username}} all rights reserved.</span>
-						</div>
-					</div>
-				</div>
-				<div class="navbar-form container text-center">
-					<h4>{{galleryphoto.photoData.photo_detail}}</h4>
-				</div>
-				<div class="col-sm-12 author_border">
-					<!-- Media middle -->
-					<div class="media">
-					  <div class="media-left">
-					    <img ng-src="{{galleryphoto.photoData.profile_image}}" class="media-object" style="width:60px; height:60px;">
-					  </div>
-					  <div class="media-body media-bottom">
-					    <h4 class="media-heading">{{galleryphoto.photoData.username}}</h4>
-					    <p>{{galleryphoto.photoData.author_detail}}</p>
-					  </div>
-					</div>
-				</div>
-		</div>
-
-
-
-<!--  댓글 기능 추가해야합니다.-->
-<!-- 댓글 기능 -->
-	<div class="content-coment" ng-controller="commentCtrl as comment" style="margin-top:100px;">
-		<!-- 사용자가 로그인 하였을 때-->
-			<div ng-if="main.isLoggedIn" class="col-sm-12">
-				<form name="commentForm" >
-						<div class="input-group " ng-class = "{'has-success': (commentForm.comment.$valid && !commentForm.comment.$pristine), 'has-error': (!commentForm.comment.$valid && !commentForm.comment.$pristine) ||
-				      (!commentForm.comment.$valid && commentForm.$submitted)}">
-						    <textarea class="form-control custom-control" rows="2" style="resize:none" placeholder="댓글은 1,000자까지 작성할 수 있으며 주제와 무관한 댓글, 악성 댓글은 삭제될 수 있습니다."
-						    	id="comment"  name = "comment" ng-model="comment.commentData"></textarea>
-						    <span ng-click="comment.createComment({comment:comment.commentData, photo_id: galleryphoto.photoData.photo_id})" class="input-group-addon btn btn-primary">댓글 작성</span>
-						</div>
-				</form>
-		</div>
-
-		<!-- 사용자가 로그인 하지않았을 때-->
-			<div ng-if="!main.isLoggedIn"class="col-sm-12">
-				<form name="commentForm" novalidate>
-						<div class="input-group " ng-class = "{'has-success': (commentForm.comment.$valid && !commentForm.comment.$pristine), 'has-error': (!commentForm.comment.$valid && !commentForm.comment.$pristine) ||
-							(!commentForm.comment.$valid && commentForm.$submitted)}">
-								<textarea ng-disabled="!main.isLoggedIn"  class="form-control custom-control" rows="2" style="resize:none" placeholder="로그인 후 댓글 작성이 가능합니다."
-									id="comment"  name = "comment" required=""></textarea>
-									<p class="help-block" ng-show="(!commentForm.comment.$pristine && commentForm.comment.$error.required) || (commentForm.$submitted && commentForm.comment.$error.required)">This filed is required</p>
-								<span ng-disabled="!main.isLoggedIn"  ng-click="galleryphoto.createComment(comment, commentForm.$valid)" class="input-group-addon btn btn-primary">댓글 작성</span>
-						</div>
-				</form>
-		</div>
-
-		<br>
-
-				<div class="col-sm-12 comment_border" ng-init="getComment()">
-								<div ng-show="photo.comment_count">
-									<p>댓글 {{photo.comment_count}}</p>
-								</div>
-
-								<div class="comment_list_border" ng-repeat="comment in comments">
-									<div class="" style="float:right" ng-show="comment[1]">
-										<a ng-click="deleteComment({comment_id: comment[0].comment_id})" class="btn btn-danger">Delete</a>
-									</div>
-
-									<div class="author_thmb">
-								 		<a ui-sref="app.artist.show({artist_id: comment[0].user_id})">
-												<img ng-src="{{comment[0].profile_image}}" alt=""><span class="mask"></span>
-										</a>
-									</div>
-									<!-- [D] 작가 설명 없을시 .desc 삭제 -->
-									<!-- [D] 두줄까지 노출. 두줄 이상은 말줄임 -->
-									<!-- <p class="desc">오늘도 어둠 속에서 빛나는 색이 되기를 reddatbyeol@naver.com</p> -->
-									<div class="author_txt">
-										<p><em>{{comment[0].username}}</em> {{comment[0].created | date : 'yyyy년 MM월 dd일'}} </p>
-										<p>{{comment[0].content}}</p>
-									</div>
-							</div>
-			</div>
-	</div>
-
 
 <!-- <p>관련 작품</p> -->
-			<div class="container-fluid">
-				<p>관련 작품</p>
-			</div>
-			<div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="photo in galleryphoto.photosData">
-				<div class="card">
-							<div class="card-image">
-								<a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
-									<img class="img-responsive" ng-src="{{photo.photo_path}}">
-									<span class="card-author">By {{photo.username}}</span>
-								</a>
-							</div>
-							<div class="card-content">
-									<p>{{photo.photo_title}}</p>
-							</div>
-							<div class="card-action">
-									<div class="row">
-										<div class="col-xs-6 col-sm-6" style="text-align:left">
-										 <span class="text-left">{{photo.description}}</span>
-									 </div>
-									 <div class="col-xs-6 col-sm-6" style="text-align:right">
-											<i class="fa fa-heart" aria-hidden="true" style="color:#E96725;"></i>  {{photo.view}}
-									 </div>
-								 </div>
-							</div>
+										<div class="container-fluid">
+											<p>{{photo.username}}작가의 다른 작품</p>
+										</div>
+										<div class="col-xs-12 col-sm-6" ng-repeat="photo in galleryphoto.photosData">
+											<div class="card">
+														<div class="card-image">
+															<a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
+																<img class="img-responsive" ng-src="{{photo.photo_path}}">
+															</a>
+														</div>
+														<div class="card-content">
+																<p>{{photo.photo_title}}</p>
+														</div>
+														<div class="card-action">
+																<div class="row">
+																	<div class="col-xs-6 col-sm-6" style="text-align:left">
+																	 <span class="text-left">{{photo.description}}</span>
+																 </div>
+																 <div class="col-xs-6 col-sm-6" style="text-align:right">
+																		<i class="fa fa-heart" aria-hidden="true" style="color:#E96725;"></i>  {{photo.view}}
+																 </div>
+															 </div>
+														</div>
+												</div>
+											</div>
+                </uib-tab>
+              </uib-tabset>
+            </form>
+
+    </div>
+
+<div class="clearfix visible-xs"></div>
+    <div class="col-sm-4">
+      <div class ="row show-hide-message" ng-show="artistPhoto.successMsg">
+        <div class="alert alert-success">{{artistPhoto.successMsg}}</div>
+      </div>
+      <div class ="row show-hide-message" ng-show="artistPhoto.errorMsg">
+        <div class="alert alert-danger">{{artistPhoto.errorMsg}}</div>
+      </div>
+
+      <div style="border:1px solid #dcdcdc; padding:25px; margin-top:75px;">
+				<div class="media">
+					<div class="media-left media-middle">
+            <a ui-sref="app.artist.show({artist_id: galleryphoto.photoData.user_id})">
+  						<img style="width:70px; height:70px;  border-radius: 10px;" ng-src="{{galleryphoto.photoData.profile_image}}">
+            </a>
+					</div>
+					<div class="media-body media-bottom">
+						<P class="media-heading">&nbsp;<i class="fa fa-user fa-lg" aria-hidden="true"></i>&nbsp;{{galleryphoto.photoData.username}}</P>
+						<a ng-click="artistPhoto.contactArtist()"><p>&nbsp;<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;{{galleryphoto.photoData.email}}</p></a>
 					</div>
 				</div>
+      </div>
 
 
+<!-- 댓글 -->
+
+			<div class="content-coment">
+				<!-- 사용자가 로그인 하였을 때-->
+        <div style="margin-top:15px; color:#e96725;">
+          <p>댓글 {{galleryphoto.commentData.length}}</p>
+        </div>
+        <div>
+						<form ng-show="main.isLoggedIn" name="commentForm">
+                <div style="padding:0px; margin-bottom:5px;"class="form-group"  ng-class = "{'has-success': (commentForm.comment.$valid && !commentForm.comment.$pristine), 'has-error': (!commentForm.comment.$valid && !commentForm.comment.$pristine) ||
+									(!commentForm.comment.$valid && commentForm.$submitted)}">
+                  <textarea class="form-control"  placeholder="댓글은 1,000자까지 작성할 수 있으며 주제와 무관한 댓글, 악성 댓글은 삭제될 수 있습니다."
+                    id="comment"  name = "comment" ng-model="comment.commentData"></textarea>
+               </div>
+						</form>
+          </div>
+          <div>
+            <button ng-click="galleryphoto.createComment(comment.commentData);" style="width:100%;" class="btn btn-enroll" >댓글 작성</button>
+          </div>
+				<br>
+						<div class="comment_border">
+								<div class="comment_list_border" ng-repeat="comment in galleryphoto.commentData">
+                  <div class="media" style="padding:5px;">
+                    <div class="media-left media-middle">
+                        <img style="width:50px; height:50px;  border-radius: 10px;" ng-src="{{comment.profile_image}}">
+                    </div>
+                    <div class="media-body media-bottom">
+                      <P class="media-heading">&nbsp;<em>{{comment.username}}</em> {{comment.created | date : 'yyyy년 MM월 dd일'}}</P>
+                      <p>{{comment.content}}</p>
+                    </div>
+                  </div>
+							</div>
+					</div>
+			</div>
+    </div>
+  </div>
 </div>

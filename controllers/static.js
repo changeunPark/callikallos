@@ -30,5 +30,11 @@ router.get('/', function (req, res) {
     res.sendfile('layouts/app.html');
 });
 
+module.exports = function (req, res, next){
+  if(req.headers['x-access-token']){
+  } else {
+    next();
+  }
+};
 
 module.exports = router;

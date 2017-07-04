@@ -102,8 +102,8 @@ $urlRouterProvider.otherwise('/');
             views:{
               'content@': {
                 templateUrl: 'isLoggedIn/artistPhotos.html',
-                controller: 'artistPhotoCtrl',
-                controllerAs: 'artistPhoto',
+                controller: 'anArtistPhotoCtrl',
+                controllerAs: 'anArtistPhoto',
                 authenticated: false
               }
             }
@@ -242,7 +242,7 @@ $urlRouterProvider.otherwise('/');
              .state('app.artist.show', {
                url: '/artist:artist_id',
                views:{
-                 'content@':{
+                 'contents@app.artist':{
                    templateUrl: '/partialArtist/artist.html',
                    controller: 'artistPhotoCtrl',
                    controllerAs: 'artistPhoto',
@@ -254,7 +254,7 @@ $urlRouterProvider.otherwise('/');
            .state('app.gallery.show', {
              url: '/photo_type=:photo_type/photo:photo_id',
              views:{
-               'content@':{
+               'contents@app.gallery':{
                  templateUrl: '/partialGallery/photo.html',
                  controller: 'galleryPhotoCtrl',
                  controllerAs: 'galleryphoto',

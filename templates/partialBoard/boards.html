@@ -1,6 +1,5 @@
-    <div style="padding:50px;">
 			<div style="width:700px; margin:auto;">
-        <form class="hidden-xs">
+        <form class="hidden-xs" style="padding:10px;">
           <input style="width:100%;" type="text" class="form-control" ng-model="search" placeholder="검색어를 입력해주세요.">
         </form>
             <div class="row">
@@ -22,12 +21,12 @@
                 </div>
 
                 <div class="col-sm-4 text-right">
-                  <a ui-sref="app.board.create" class="btn btn-enroll">게시물 등록</a>
+                  <a ng-click="boards.createBoard();" class="btn btn-enroll">게시물 등록</a>
                 </div>
             </div>
 
 
-            <div style="margin-top:25px; margin-bottom:25px; border:1px solid#dcdcdc">
+            <div style="margin-top:25px; margin-bottom:25px; border:1px solid rgba(231, 231, 231, 1);">
             </div>
 
     <!-- 커뮤니티 정보 -->
@@ -36,7 +35,7 @@
                   <div id="communityContent" class="row">
                       <div class="col-sm-8">
                         <div id="listTitle" class="">
-                          <a  ui-sref="app.board.show({board_id: board.board_id})" >
+                          <a  ui-sref="app.board.show({board_id: board.board_id})" >z
                             {{board.title.substring(0, 30)}}
                           </a>
                         </div>
@@ -68,4 +67,3 @@
                </div>
             </div>
         </div>
-    </div>

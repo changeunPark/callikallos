@@ -134,6 +134,8 @@ angular.module('artistControllers',['userServices', 'artistServices'])
 .controller('artistProfileCtrl', function ($timeout, Artist, $state, $scope) {
 
     var app = this;
+    var user_id = $scope.main.user.user_id;
+
     app.data = {
      availableOptions: [
        {id: '0', name: '카테고리를 선택해주세요.'},
@@ -144,8 +146,19 @@ angular.module('artistControllers',['userServices', 'artistServices'])
      selectedOption: {id: '0', name: '카테고리를 선택해주세요.'} //This sets the default value of the select in the ui
      };
 
+
+     Artist.readArtistProfile(user_id).then(function(data){
+       if(data.data.success){
+         app.artistData = data.data.result;
+       } else {
+         app.errorMsg = data.data.message;
+       }
+     });
+
+
   // 작가 프로필 생성
       this.updateAristProfile = function(artistData){
+        console.log("작동 중");
         app.errorMsg = false;
         if(!artistData){
           app.errorMsg = '필수기재사항을 입력해주세요.';
@@ -157,7 +170,7 @@ angular.module('artistControllers',['userServices', 'artistServices'])
           } else {
             app.artistData = artistData;
             app.artistData.user_id =  $scope.main.user.user_id;
-            app.artistData.user_type =  app.data.selectedOption.id;
+            // app.artistData.user_type =  app.data.selectedOption.id;
 
             Artist.updateAristProfile(app.artistData).then(function(data){
               if(data.data.success){
@@ -177,27 +190,35 @@ angular.module('artistControllers',['userServices', 'artistServices'])
         }
       };
 
-      this.readAristProfile = function(){
-        var user_id = $scope.main.user.user_id;
-        Artist.readArtistProfile(user_id).then(function(data){
-          if(data.data.success){
-            app.artistData = data.data.result;
-          } else {
-            app.errorMsg = data.data.message;
-          }
-        });
-
-      };
 })
 
-.controller('artistPhotoCtrl', function (Artist, $stateParams) {
+// 작가 자신의 프로필
+.controller('anArtistPhotoCtrl', function (Artist, $stateParams,  $scope) {
+    var app = this;
+    var user_id = $scope.main.user.user_id;
 
+      Artist.readArtistProfile(user_id).then(function(data){
+        if(data.data.success){
+          app.artistData = data.data.result;
+        } else {
+          app.errorMsg = data.data.message;
+        }
+      });
+
+      Artist.readAristPhoto(user_id).then(function(data){
+        if(data.data.success){
+          app.artistPhotos = data.data.result;
+        } else {
+          app.errorMsg = data.data.message;
+        }
+      });
+})
+
+
+// 여러 작가들의 프로필
+.controller('artistPhotoCtrl', function (Artist, $stateParams) {
     var app = this;
     var artist_id = $stateParams.artist_id;
-
-      this.contactArtist = function(){
-        console.log('작동 중');
-      };
 
       Artist.readArtistProfile(artist_id).then(function(data){
         if(data.data.success){
@@ -214,6 +235,4 @@ angular.module('artistControllers',['userServices', 'artistServices'])
           app.errorMsg = data.data.message;
         }
       });
-
-
 });

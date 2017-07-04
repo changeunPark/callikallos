@@ -101,9 +101,9 @@ try{
         var updateValue = {
           short_info:req.body.short_info,
           detail_info:req.body.detail_info,
-          social_site:req.body.social_site,
-          public_email:req.body.public_email,
-          user_type: req.body.user_type,
+          // social_site:req.body.social_site,
+          // public_email:req.body.public_email,
+          // user_type: req.body.user_type,
         };
         var user_id = req.body.user_id;
 

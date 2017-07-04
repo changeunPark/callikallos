@@ -11,7 +11,8 @@ angular.module('boardControllers',['boardServices'])
     $scope.headers = data.data;
   });
 })
-.controller('boardsCtrl', function($stateParams, Board){
+
+.controller('boardsCtrl', function($stateParams, Board, $scope, $state){
   var app = this;
   var board_type = $stateParams.code;
 
@@ -26,13 +27,24 @@ angular.module('boardControllers',['boardServices'])
 
    Board.readBoards(board_type).then(function(data){
      app.boardDatas = data.data.result;
-
    });
+
+   this.createBoard = function(data){
+       if(!$scope.main.user.user_id){
+         $scope.main.login();
+       } else {
+         $state.go("app.board.create");
+       }
+  };
+
+
 })
 
-.controller('boardCtrl', function($stateParams, Board, $scope, $http, $state, $timeout){
+.controller('boardCtrl', function($stateParams, Board, $scope, $http, $state, $timeout, Comment, $window){
     // 보드 아이디 전송
     var app = this;
+    var board_id = $stateParams.board_id;
+
     app.data = {
      availableOptions: [
        {id: '0', name: '카테고리를 선택해주세요.'},
@@ -43,8 +55,41 @@ angular.module('boardControllers',['boardServices'])
      selectedOption: {id: '0', name: '카테고리를 선택해주세요.'} //This sets the default value of the select in the ui
      };
 
-    $(document).ready(function() {
+    Comment.readBoardComment(board_id).then(function(data){
+      if(data.data.success){
+        app.commentData = data.data.result;
+      } else {
+        app.errorMsg = data.data.message;
+      }
+    });
 
+     this.createComment = function(data){
+         if(!$scope.main.user.user_id){
+           $scope.main.login();
+         } else {
+           if(!data){
+             $window.alert('댓글을 입력해주세요.');
+           } else {
+             var commentData = {
+               comment : data,
+               user_id : $scope.main.user.user_id,
+               board_id : board_id
+             };
+
+             Comment.createComment(commentData).then(function(data){
+               if(data.data.success){
+                 $state.reload();
+               } else {
+
+               }
+             });
+           }
+         }
+    };
+
+
+
+    $(document).ready(function() {
       $('#summernote').summernote({
         lang: 'ko-KR', // default: 'en-US'
         height : 100, // 에디터의 높이
@@ -102,8 +147,8 @@ angular.module('boardControllers',['boardServices'])
     };
 
 
-    var board_id = $stateParams.board_id;
     Board.readBoard(board_id).then(function(data){
+// 오류를 잡아야하는데 어떤식으로 잡아야하지?
       if(data.data.success){
         app.boardDatas = data.data.result;
         app.htmlcontent = data.data.result.content;

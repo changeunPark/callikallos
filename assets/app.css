@@ -1,7 +1,7 @@
 /*	--------------------------------------------------
                 <!-- 전체 적용--!>
                  배경 color: #e96725;
-                 선 #dcdcdc;
+                 선 rgba(231, 231, 231, 1);
                   글자 #949494;
 -------------------------------------------------- */
 .image-cropper {
@@ -83,6 +83,9 @@ body {
   font-size: 1em;
   font-weight: 200;
   text-shadow: 1px 1px 2px #000;
+}
+.jumbotron {
+  margin: 0px;
 }
 div#main-banner {
   background: #e96725; /* For browsers that do not support gradients */
@@ -605,7 +608,7 @@ top: 63px; /* Position the navbar at the top of the page
 div.scrollmenu {
   width: 100%;
   background-color: #fff;
-  border-bttom: 1px solid transparent;
+  border-bottom: 1px solid #e7e7e7;
   overflow: auto;
   white-space: nowrap;
 }

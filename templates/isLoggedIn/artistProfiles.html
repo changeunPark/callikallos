@@ -90,7 +90,7 @@
     </uib-tab>
 
     <uib-tab index="1" heading="작가 정보">
-      <div id="subContent" ng-init="artistProfile.readAristProfile()">
+      <div id="subContent">
             <div class ="row show-hide-message" ng-show="artistProfile.successMsg">
               <div class="alert alert-success">{{artistProfile.successMsg}}</div>
             </div>
@@ -98,22 +98,21 @@
               <div class="alert alert-danger">{{artistProfile.errorMsg}}</div>
             </div>
             <form ng-submit="artistProfile.updateAristProfile(artistProfile.artistData)">
-                  <div class="form-group">
-                    <label for="username">한 줄 소개</label><span>(필수)</span>
-                    <input ng-disabled="artistProfile.disabled"   type="short_info" ng-model="artistProfile.artistData.short_info" class="form-control" id="username"  placeholder="내용을 입력해주세요.">
+                  <div class="row">
+                    <div class="form-group col-sm-6">
+                      <label for="username">한 줄 소개</label><span>(필수)</span>
+                      <input ng-disabled="artistProfile.disabled"   type="short_info" ng-model="artistProfile.artistData.short_info" class="form-control" id="username"  placeholder="내용을 입력해주세요.">
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="email">대표 사이트</label>
+                      <input ng-disabled="artistProfile.disabled"  type="username" ng-model="artistProfile.artistData.social_site" class="form-control" id="username" placeholder="ex) 개인 블로그 및 소셜네트워크 서비스">
+                    </div>
                   </div>
 
                   <div class="form-group">
                     <label for="pwd">상세소개</label><span>(필수)</span>
                     <textarea ng-disabled="artistProfile.disabled"   class="form-control" ng-model="artistProfile.artistData.detail_info"  rows="5" id="content" ng-model="content" placeholder="내용을 입력해주세요"></textarea>
                   </div>
-
-                  <div class="row">
-                    <div class="form-group col-sm-4">
-                      <label for="email">대표 사이트</label>
-                      <input ng-disabled="artistProfile.disabled"  type="username" ng-model="artistProfile.artistData.social_site" class="form-control" id="username" placeholder="ex) 개인 블로그 및 소셜네트워크 서비스">
-                    </div>
-
                     <!-- <div class="form-group col-sm-4">
                       <label for="pwd">전문 분야</label> <span style="color:#E96725;"><tt>[{{artistProfile.artistData.type_name}}]</tt></span>
                       <select ng-disabled="artistProfile.disabled"  class="form-control" name="mySelect" id="mySelect"
@@ -121,9 +120,6 @@
                         ng-model="artistProfile.data.selectedOption">
                       </select>
                     </div> -->
-
-                  </div>
-
                   <div id="makeBorder"></div>
 
                   <div class="form-group text-center">

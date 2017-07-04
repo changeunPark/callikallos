@@ -84,7 +84,7 @@ try{
       }
       else {
 
-        var selectSql = 'select B.*, (select username from users where user_id = B.user_id) as username, (select profile_image from users where user_id = B.user_id) as profile_image, (select count(*) from comment where photo_id = B.photo_id) as comment_count, (select description from photo_type where code = B.photo_type) as description, (select short_info from my_profile where user_id = B.user_id) as author_detail from my_photos B where photo_id = ?;';
+        var selectSql = 'select B.*, (select username from users where user_id = B.user_id) as username, (select email from users where user_id = B.user_id) as email, (select profile_image from users where user_id = B.user_id) as profile_image, (select count(*) from comment where photo_id = B.photo_id) as comment_count, (select description from photo_type where code = B.photo_type) as description, (select short_info from my_profile where user_id = B.user_id) as author_detail from my_photos B where photo_id = ?;';
         var photo_id = req.params.photo_id;
         var updateRecord = 'update my_photos set view = view +1 where photo_id = ?;';
 

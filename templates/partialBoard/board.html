@@ -1,14 +1,11 @@
-<!-- 게시물 정보 -->
-		<div style="padding:50px;">
 			<div style="width:700px; margin:auto;">
 				<div style="border:1px solid #dcdcdc; padding:25px;">
 								<!-- Right-aligned -->
 
 								<div class="media">
 								  <div class="media-left">
-										<a ui-sref="app.artist.show({artist_id: boardDatas.user_id})">
 											<img class="img-rounded" style="width:50px; height:50px;" ng-src="{{board.boardDatas.profile_image}}" alt="">
-										</a>								  </div>
+									</div>
 								  <div class="media-body media-middle">
 								    <h4 class="media-heading">{{board.boardDatas.username}}</h4>
 								  </div>
@@ -34,43 +31,37 @@
 					</div>
 
 
-						<div style="margin-top:100px; margin-bottom: 5px;">
-
+					<div style="margin-top:100px; margin-bottom: 5px;">
 						<div style="color:#e96725;">
-							<p>댓글 0</p>
+							<p>댓글 {{board.commentData.length}}</p>
 						</div>
-						<div ng-show="main.isLoggedIn">
-							<div id="summernote"></div>
-						</div>
+						<div>
+								<form ng-show="main.isLoggedIn" name="commentForm">
+		                <div style="padding:0px; margin-bottom:5px;"class="form-group"  ng-class = "{'has-success': (commentForm.comment.$valid && !commentForm.comment.$pristine), 'has-error': (!commentForm.comment.$valid && !commentForm.comment.$pristine) ||
+											(!commentForm.comment.$valid && commentForm.$submitted)}">
+		                  <textarea class="form-control"  placeholder="댓글은 1,000자까지 작성할 수 있으며 주제와 무관한 댓글, 악성 댓글은 삭제될 수 있습니다."
+		                    id="comment"  name = "comment" ng-model="comment.commentData"></textarea>
+		               </div>
+								</form>
+		          </div>
+
 						<div class="" >
-							<button style="width:100%;" class="btn btn-enroll">댓글 작성</button>
+							<button ng-click="board.createComment(comment.commentData);" style="width:100%;" class="btn btn-enroll" >댓글 작성</button>
 						</div>
+					</div>
+
+					<div style="margin-top:50px;"class="comment_border">
+							<div class="comment_list_border" ng-repeat="comment in board.commentData">
+								<div class="media" style="padding:5px;">
+									<div class="media-left media-middle">
+											<img style="width:50px; height:50px;  border-radius: 10px;" ng-src="{{comment.profile_image}}">
+									</div>
+									<div class="media-body media-bottom">
+										<P class="media-heading">&nbsp;<em>{{comment.username}}</em> {{comment.created | date : 'yyyy년 MM월 dd일'}}</P>
+										<p>{{comment.content}}</p>
+									</div>
+								</div>
 						</div>
-
-
-
-								<div ng-show="board.comment_count">
-										<p>댓글 {{board.comment_count}}</p>
-										<br>
-								</div>
-
-								<div class="comment_border" ng-init="getComment()">
-												<div class="comment_list_border" ng-repeat="comment in comments">
-														<div class="" style="float:right" ng-show="comment[1]">
-															<a ng-click="deleteComment({comment_id: comment[0].comment_id})" class="btn btn-danger">Delete</a>
-														</div>
-
-														<div class="author_thmb">
-															<a ui-sref="app.photos.show({id:comment[0].user_id})">
-																<img ng-src="{{comment[0].profile_image}}" alt=""><span class="mask"></span>
-															</a>
-														</div>
-
-														<div class="author_txt">
-															<p><em>{{comment[0].username}}</em> {{comment[0].created | date : 'yyyy년 MM월 dd일'}} </p>
-															<p>{{comment[0].content}}</p>
-														</div>
-												</div>
-								</div>
+				</div>
 			</div>
 </div>
