@@ -30,9 +30,7 @@ try{
           var selectValue = [
           'user_id',
           'username',
-          'password',
-          'permission',
-          'active'];
+          'password'];
           var username = req.body.username;
 
           connection.query(selectSql, [selectValue, username], function (err, user, next) {
@@ -49,11 +47,14 @@ try{
                     res.status(201).send({success: false, message: '올바른 비밀번호를 입력해주세요.'});
                   } else if(!valid){
                     res.status(201).send({success: false, message: '비밀번호가 일치하지 않습니다.'});
-                  } else if(!user[0].active){
-                    res.status(201).send({success: false, message: '이메일 인증이 확인되지않았습니다.', expired:true});
-                  } else{
+                  }
+// 이메일 인증 시스템 오류
+                  // else if(!user[0].active){
+                  //   res.status(201).send({success: false, message: '이메일 인증이 확인되지않았습니다.', expired:true});
+                  // }
+                  else{
                     var token = jwt.sign({username:user[0].username, user_id:user[0].user_id}, config.secret, {expiresIn: '6h'});
-                    res.status(201).send({success: true, message: '안녕하세요.'+user[0].username+'접속 중입니다.', token:token});
+                    res.status(201).send({success: true, message: '안녕하세요.'+user[0].username+'님, 접속 중입니다.', token:token});
                   }
                 });
               }

@@ -29,12 +29,24 @@ angular.module('userControllers',['userServices'])
             if(data.data.success){
               app.disabled = true;
               app.successMsg = data.data.message;
-              $timeout(function(){
-                $("#register").modal('hide');
-                app.regData = null;
-                app.isLoggedIn = false;
-                $state.go('app');
-              },3000);
+              Auth.login(app.regData).then(function(data){
+                if(data.data.success){
+                  app.disabled = true;
+                  app.successMsg = data.data.message;
+                  $timeout(function() {
+                    $state.go('app');
+                  },1000);
+                }else {
+                  if(data.data.expired){
+                    app.expired = true;
+                    app.disabled = true;
+                    app.errorMsg = data.data.message;
+                  } else {
+                    app.disabled = false;
+                    app.errorMsg = data.data.message;
+                  }
+                }
+              });
             }else {
               app.disabled = false;
               app.errorMsg = data.data.message;
@@ -46,7 +58,6 @@ angular.module('userControllers',['userServices'])
              app.loading = false; // Stop bootstrap loading icon
              app.errorMsg = '올바른 정보를 입력해주세요.'; // Display error if valid returns false
         }
-
       };
 
 })

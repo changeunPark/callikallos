@@ -2,6 +2,8 @@ var app = angular.module('app');
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 $urlRouterProvider.otherwise('/');
 // $locationProvider.html5Mode(true);
+$locationProvider.hashPrefix(''); // by default '!'
+$locationProvider.html5Mode(true);
 
  $stateProvider
            .state('app', {
@@ -45,7 +47,6 @@ $urlRouterProvider.otherwise('/');
                templateUrl: '/isLoggedOut/registerStep2.html',
                authenticated: false
             })
-
 
             .state('resetusername',
             {

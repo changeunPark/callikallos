@@ -29,9 +29,10 @@ router.use(connection(mysql, {
   database : mysqlInfo.database
 }, 'single'));
 
-router.get('/', function (req, res) {
-    res.sendfile('layouts/app.html');
-});
+// router.get('/', function (req, res) {
+//     res.sendfile('layouts/app.html');
+// });
+
 
 router.use(function(req, res, next){
   var token = req.body.token || req.body.query || req.headers['x-access-token'];

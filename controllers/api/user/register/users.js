@@ -44,13 +44,13 @@ router.post('/', function(req, res, next){
             var password = hash;
 
             var insertSql = 'INSERT INTO users set ?';
-            var tempToken = jwt.sign({username:req.body.username, email:req.body.email}, config.secret, {expiresIn: '24h'});
+            // var tempToken = jwt.sign({username:req.body.username, email:req.body.email}, config.secret, {expiresIn: '24h'});
 
             var insertValue = {
                                 username: req.body.username,
                                 password: password,
                                 email:req.body.email,
-                                temporarytoken:tempToken
+                                // temporarytoken:tempToken
                                };
 
                 connection.query(insertSql, insertValue, function (error, results, next) {
@@ -63,24 +63,24 @@ router.post('/', function(req, res, next){
                         res.status(201).send(error);
                       }
                     } else{
+// 이메일 인증 시스텝 보류
+                      // var email = {
+                      //   from: 'callikallos@gmail.com',
+                      //   to: req.body.email,
+                      //   subject:'캘리칼로스 이메일 인증관련 메일입니다.',
+                      //   text: '안녕하세요 '+ req.body.username + ', 캘리칼로스에 가입하신걸 환영합니다. http://callikallos/activate/' + insertValue.temporarytoken,
+                      //   html: '안녕하세요 <strong>'+ req.body.username + '</strong>, <br><br>캘리칼로스에 회원가입하신걸 진심으로 감사드립니다.<br> 이메일 인증을 위해 아래의 링크를 클릭해 회원가입을 완료해주세요.<br><a href="http://localhost:3000/#!/activate/'+insertValue.temporarytoken+'">http://localhost:3000/activate</a>'
+                      // };
+                      //
+                      // client.sendMail(email, function(err, info){
+                      //   if(err){
+                      //     console.log(err);
+                      //   } else {
+                      //     console.log('Message sent:' + info.response);
+                      //   }
+                      // });
 
-                      var email = {
-                        from: 'callikallos@gmail.com',
-                        to: req.body.email,
-                        subject:'캘리칼로스 이메일 인증관련 메일입니다.',
-                        text: '안녕하세요 '+ req.body.username + ', 캘리칼로스에 가입하신걸 환영합니다. http://callikallos/activate/' + insertValue.temporarytoken,
-                        html: '안녕하세요 <strong>'+ req.body.username + '</strong>, <br><br>캘리칼로스에 회원가입하신걸 진심으로 감사드립니다.<br> 이메일 인증을 위해 아래의 링크를 클릭해 회원가입을 완료해주세요.<br><a href="http://localhost:3000/#!/activate/'+insertValue.temporarytoken+'">http://localhost:3000/activate</a>'
-                      };
-
-                      client.sendMail(email, function(err, info){
-                        if(err){
-                          console.log(err);
-                        } else {
-                          console.log('Message sent:' + info.response);
-                        }
-                      });
-
-                      res.status(201).send({success: true, message: '아이디가 생성되었습니다. 아이디 인증을 위한 이메일을 확인해주세요.'});
+                      res.status(201).send({success: true, message: '아이디가 생성되었습니다.'});
                     }
                 });
               }

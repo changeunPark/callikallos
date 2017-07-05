@@ -57,6 +57,14 @@ app.use('/api/uploadDisplay', require('./controllers/api/uploadDisplay'));
 app.use('/api/uploadDisplayTemp', require('./controllers/api/uploadDisplayTemp'));
 // =============================================================================== //
 
+
+app.all('/*', function(req, res, next) {
+    // Just send the index.html for other files to support HTML5Mode
+    res.sendFile('layouts/app.html', { root: __dirname });
+});
+
+
+
 // app.use(require('./auth'));
 app.listen(3000, function () {
     console.log('Server listening on', 3000);
