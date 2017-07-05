@@ -17,19 +17,28 @@ angular.module('mainControllers',['authServices', 'userServices'])
 
     if(Auth.isLoggedIn()){
       app.isLoggedIn = true;
+
       Auth.getUser().then(function(data){
-        if(data.data.permission === 'admin') {
-          app.permission = true;
-          app.user = data.data;
-          app.loadme = true;
-        } else if(data.data.permission === 'artist') {
-          app.permission = true;
-          app.user = data.data;
-          app.loadme = true;
-        } else {
-          app.user = data.data;
-          app.loadme = true;
-        }
+        app.user = data.data;
+        User.getPermission().then(function(data){
+          if(data.data.success){
+            if(data.data.permission === 'admin'){
+              app.authorized = true;
+              app.loadme = true;
+            } else if(data.data.permission === 'artist'){
+              app.permission = true;
+              app.loadme = true;
+            } else {
+              app.permission = false;
+              app.authorized = false;
+              app.loadme = true;
+            }
+          } else {
+            app.permission = false;
+            app.authorized = false;
+            app.loadme = true;
+          }
+        });
       });
     } else {
       app.user = false;

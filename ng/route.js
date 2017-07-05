@@ -9,7 +9,7 @@ $urlRouterProvider.otherwise('/');
              views:{
                'header': {
                templateUrl: '/menues/mainMenu.html',
-               controller: 'MainMenuController'
+               controller: 'mainMenuController'
                },
                'content': {
                templateUrl: '/main/home.html'
@@ -18,6 +18,14 @@ $urlRouterProvider.otherwise('/');
                templateUrl: '/company/footer.html'
                }
              }
+            })
+
+            .state('management', {
+              url:'/management',
+              templateUrl: '/management/management.html',
+              controller: 'managementCtrl',
+              controllerAs: 'management',
+              permission: 'admin'
             })
 
             .state('registerStep1',
@@ -91,7 +99,6 @@ $urlRouterProvider.otherwise('/');
                 controller: 'profileCtrl',
                 controllerAs: 'profile',
                 authenticated: false
-
                }
              }
             })
@@ -313,4 +320,17 @@ $urlRouterProvider.otherwise('/');
            }
          });
 
+});
+
+app.run(function($rootScope, User, $state){
+  $rootScope.$on('$stateChangeStart',  function(event, toState, toParams, fromState, fromParams, options){
+    if(toState.permission === 'admin'){
+      User.getPermission().then(function(data){
+      });
+    } else {
+    }
+  });
+  $rootScope.$on('$stateChangeError',  function(event, toState, toParams, fromState, fromParams, error){
+    $state.go('app');
+  });
 });

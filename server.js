@@ -9,6 +9,7 @@ app.use(express.static('image'));
 app.use('/', require('./controllers/static'));
 
 
+app.use('/api/permission', require('./controllers/api/management/management'));
 // 사용자 및 작가 정보
 app.use('/api/userProfiles', require('./controllers/api/userProfiles'));
 app.use('/api/artistProfiles', require('./controllers/api/artistProfiles'));

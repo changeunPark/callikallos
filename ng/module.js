@@ -8,6 +8,7 @@ angular.module('app',[
     'gallertControllers',
     'commentControllers',
     'boardControllers',
+    'managementControllers',
     'uiCropper'
 ]).config(function($httpProvider){
   $httpProvider.interceptors.push('AuthInterceptors');

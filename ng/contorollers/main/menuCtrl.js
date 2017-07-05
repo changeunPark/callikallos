@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('MainMenuController', function ($http, $scope) {
+.controller('mainMenuController', function ($http, $scope) {
   $http.get('/api/header').then(function(response){
     $scope.headers = response.data;
   });

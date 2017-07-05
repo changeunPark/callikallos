@@ -1,5 +1,6 @@
 // privacy
 var mysqlInfo = require('../mysql');
+var config = require('./api/privacy/config');
 
 var express = require('express');
 var router = express.Router();
@@ -9,6 +10,8 @@ var mysql = require('mysql');
 var connection = require('express-myconnection'); // express-myconnection module
 
 var bodyParser = require('body-parser');
+
+var jwt = require('jsonwebtoken');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:true}));
@@ -30,11 +33,20 @@ router.get('/', function (req, res) {
     res.sendfile('layouts/app.html');
 });
 
-module.exports = function (req, res, next){
-  if(req.headers['x-access-token']){
+router.use(function(req, res, next){
+  var token = req.body.token || req.body.query || req.headers['x-access-token'];
+  if(token){
+    jwt.verify(token, config.secret, function(err, decoded){
+      if(err){
+        res.json({success:false, message:'Token invalid'});
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
   } else {
     next();
   }
-};
+});
 
 module.exports = router;
