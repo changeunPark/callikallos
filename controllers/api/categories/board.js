@@ -44,7 +44,6 @@ try{
 				var query = {
           title: req.body.title,
           content: req.body.content
-
 				};
 				var updateRecord = 'UPDATE board SET ? WHERE board_id = ?';
 				// connection.query('UPDATE * FROM employee WHERE id = ?', [id], function (err, employee) {

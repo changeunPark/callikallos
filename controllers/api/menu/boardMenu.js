@@ -10,7 +10,7 @@ router.post('/', function(req, res, next){
           return next(err);
         }
         else {
-
+            console.log(req.body);
               if(req.body.title === undefined || req.body.title === null || req.body.title === '' || req.body.content === undefined || req.body.content === null || req.body.content === '')
               {
                 res.status(401).send({success: false, message: '올바르지 않은 정보입니다.'});

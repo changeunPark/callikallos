@@ -4,6 +4,7 @@
     "angular": "^1.6.1",
     "angular-animate": "^1.6.4",
     "angular-sanitize": "^1.6.4",
+    "base64-img": "^1.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.0",
     "compression": "^1.6.2",

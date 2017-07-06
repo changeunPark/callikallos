@@ -20,7 +20,6 @@ router.use(morgan('dev'));
 router.use(express.static(__dirname + '/../assets'));
 router.use(express.static(__dirname + '/../templates'));
 router.use(express.static(__dirname + '/../node_modules'));
-router.use(express.static(__dirname + '/../bower_components'));
 
 router.use(connection(mysql, {
   host     : mysqlInfo.host,
@@ -28,11 +27,6 @@ router.use(connection(mysql, {
   password : mysqlInfo.password,
   database : mysqlInfo.database
 }, 'single'));
-
-// router.get('/', function (req, res) {
-//     res.sendfile('layouts/app.html');
-// });
-
 
 router.use(function(req, res, next){
   var token = req.body.token || req.body.query || req.headers['x-access-token'];

@@ -36,26 +36,30 @@
 
     </div>
     <div class="col-sm-4">
-      <div class ="row show-hide-message" ng-show="artistPhoto.successMsg">
-        <div class="alert alert-success">{{artistPhoto.successMsg}}</div>
-      </div>
-      <div class ="row show-hide-message" ng-show="artistPhoto.errorMsg">
-        <div class="alert alert-danger">{{artistPhoto.errorMsg}}</div>
-      </div>
-
-      <div style="border:1px solid #dcdcdc; padding:25px; margin-top:75px;">
-          <div class="media">
-            <div class="media-left media-middle">
-              <img style="width:70px; height:70px;  border-radius: 10px;" ng-src="{{artistPhoto.artistData.profile_image}}">
-            </div>
-            <div class="media-body media-bottom">
-              <P class="media-heading">&nbsp;<i class="fa fa-user fa-lg" aria-hidden="true"></i>&nbsp;{{artistPhoto.artistData.username}}</P>
-              <a ng-click="artistPhoto.contactArtist()"><p>&nbsp;<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;{{artistPhoto.artistData.email}}</p></a>
-            </div>
+      <uib-tabset active="activeJustified" justified="true">
+        <uib-tab index="0" heading="프로필" >
+          <div class ="row show-hide-message" ng-show="artistPhoto.successMsg">
+            <div class="alert alert-success">{{artistPhoto.successMsg}}</div>
           </div>
-      </div>
-      <div style="border:1px solid #dcdcdc; padding:25px; margin-top: 25px;">
-      </div>
+          <div class ="row show-hide-message" ng-show="artistPhoto.errorMsg">
+            <div class="alert alert-danger">{{artistPhoto.errorMsg}}</div>
+          </div>
+
+          <div class="artist-card">
+              <div class="media">
+                <div class="media-left media-middle">
+                  <img ng-src="{{artistPhoto.artistData.profile_image}}">
+                </div>
+                <div class="media-body media-bottom">
+                  <P class="media-heading">&nbsp;<i class="fa fa-user fa-lg" aria-hidden="true"></i>&nbsp;{{artistPhoto.artistData.username}}</P>
+                  <a ng-click="artistPhoto.contactArtist()"><p>&nbsp;<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;{{artistPhoto.artistData.email}}</p></a>
+                </div>
+              </div>
+          </div>
+          <div style="border:1px solid #dcdcdc; padding:25px; margin-top: 25px;">
+          </div>
+        </uib-tab>
+      </uib-tabset>
     </div>
 
 

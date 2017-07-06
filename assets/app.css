@@ -4,12 +4,23 @@
                  선 rgba(231, 231, 231, 1);
                   글자 #949494;
 -------------------------------------------------- */
-.image-cropper {
-  position: relative;
-  overflow: hidden;
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+  background-color: #e96725;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1em;
 }
-.image-cropper img {
-  position: relative;
+div.artist-card {
+  border: 1px solid #dcdcdc;
+  padding: 15px;
+  margin-top: -5px;
+}
+div.artist-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
 }
 .cropArea {
   background: #e4e4e4;

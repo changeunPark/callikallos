@@ -4,10 +4,14 @@ var bodyParser = require('body-parser');
 var app = express();
 
 app.use(compression());
-app.use(bodyParser.json());
-app.use(express.static('image'));
-app.use('/', require('./controllers/static'));
+// app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
+
+app.use(express.static('image'));
+app.use('/uploadImage', require('./controllers/api/summernote'));
+app.use('/', require('./controllers/static'));
 
 app.use('/api/permission', require('./controllers/api/management/management'));
 // 사용자 및 작가 정보

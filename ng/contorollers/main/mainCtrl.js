@@ -193,7 +193,7 @@ angular.module('mainControllers',['authServices', 'userServices'])
 // 사용자의 권한 여부 확인
   this.upload = function(){
   app.choiceMade = true;
-    if(app.user.permission === 'artist'){
+    if(app.authorized === true || app.permission === true) {
       $state.go('app.artistProfiles');
     } else {
       User.checkPermission(app.user.username).then(function(data){
