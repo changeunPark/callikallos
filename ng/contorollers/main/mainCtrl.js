@@ -13,40 +13,42 @@ angular.module('mainControllers',['authServices', 'userServices'])
   });
 
   $rootScope.$on('$stateChangeStart', function(){
-    if(!checkSession)checkSession();
-
-    if(Auth.isLoggedIn()){
-      app.isLoggedIn = true;
-
-      Auth.getUser().then(function(data){
-        app.user = data.data;
-        User.getPermission().then(function(data){
-          if(data.data.success){
-            if(data.data.permission === 'admin'){
-              app.authorized = true;
-              app.loadme = true;
-            } else if(data.data.permission === 'artist'){
-              app.permission = true;
-              app.loadme = true;
+    if(!checkSession) {
+      checkSession();
+    } else {
+      if(Auth.isLoggedIn()){
+        app.isLoggedIn = true;
+        app.loadme = true;
+        Auth.getUser().then(function(data){
+          app.user = data.data;
+          app.loadme = true;
+          User.getPermission().then(function(data){
+            if(data.data.success){
+              if(data.data.permission === 'admin'){
+                app.authorized = true;
+                app.loadme = true;
+              } else if(data.data.permission === 'artist'){
+                app.permission = true;
+                app.loadme = true;
+              } else {
+                app.permission = false;
+                app.authorized = false;
+                app.loadme = true;
+              }
             } else {
               app.permission = false;
               app.authorized = false;
               app.loadme = true;
             }
-          } else {
-            app.permission = false;
-            app.authorized = false;
-            app.loadme = true;
-          }
+          });
         });
-      });
-    } else {
-      app.user = false;
-      app.isLoggedIn = false;
-      app.loadme = true;
+      } else {
+        app.user = false;
+        app.isLoggedIn = false;
+        app.loadme = true;
+      }
     }
   });
-
 
   var checkSession = function(){
     if(Auth.isLoggedIn()){

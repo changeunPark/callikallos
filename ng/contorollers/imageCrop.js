@@ -1,15 +1,16 @@
 angular.module('app')
   .controller('ImageCropCtrl', function($scope, $http) {
     var app = this;
-    $scope.myImage='';
-    $scope.myCroppedImage='';
+    app.myImage='';
+    app.myCroppedImage='';
 
     var handleFileSelect=function(evt) {
+      $scope.imageuploaded = false;
       var file=evt.currentTarget.files[0];
       var reader = new FileReader();
       reader.onload = function (evt) {
         $scope.$apply(function($scope){
-          $scope.myImage=evt.target.result;
+          app.myImage=evt.target.result;
         });
       };
       reader.readAsDataURL(file);
@@ -36,7 +37,12 @@ angular.module('app')
         } else {
           var blob = decodeBase64Image($scope.myCroppedImage);
           $http.post('/uploadImage', blob).then(function(data){
-            console.log(data.data);
+            if(data.data.success){
+              console.log(data.data.filePath);
+              $scope.imageuploaded = true;
+            } else {
+
+            }
           });
         }
 

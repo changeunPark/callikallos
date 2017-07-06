@@ -30,7 +30,7 @@ angular.module('artistControllers',['userServices', 'artistServices'])
     });
 })
 
-.controller('uploadCtrl', function ($http, $timeout, $scope, Artist, $state) {
+.controller('uploadPhotoCtrl', function ($http, $timeout, $scope, Artist, $state) {
     var app = this;
 
     app.data = {
@@ -42,7 +42,8 @@ angular.module('artistControllers',['userServices', 'artistServices'])
      ],
      selectedOption: {id: '0', name: '카테고리를 선택해주세요.'} //This sets the default value of the select in the ui
      };
-    // 파일의 경로만 저장하기
+
+// 파일의 경로만 저장하기 메인 이미지 만들기
     this.file = {};
 
     this.mainPhotoChanged = function(files) {
@@ -86,6 +87,61 @@ angular.module('artistControllers',['userServices', 'artistServices'])
         });
       };
 
+// 썸네일 이미지 만들기
+      app.myImage='';
+      app.myCroppedImage='';
+
+      var handleFileSelect=function(evt) {
+        $scope.imageuploaded = false;
+        var file=evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+          $scope.$apply(function($scope){
+            app.myImage=evt.target.result;
+          });
+        };
+        reader.readAsDataURL(file);
+      };
+        angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+
+        function decodeBase64Image(dataString) {
+          var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+
+          if (matches.length !== 3) {
+            return new Error('Invalid input string');
+          } else {
+            var file = {
+              type : matches[1],
+              data : matches[2]
+            };
+            return file;
+          }
+        }
+
+        app.readCropImage = function(data){
+          app.disabled = true;
+          $scope.$emit('LOAD');
+          if(data.base64Url === '' || data.base64Url === null || data.base64Url === undefined){
+            app.disabled = false;
+            console.log('이미지를 선택해주세요.');
+          } else {
+            var blob = decodeBase64Image($scope.myCroppedImage);
+            $http.post('/uploadImage', blob).then(function(data){
+              if(data.data.success){
+                app.disabled = false;
+                $scope.$emit('UNLOAD');
+                app.successMsg = data.data.message;
+                app.thumbnailPath = data.data.filePath;
+                $scope.imageuploaded = true;
+              } else {
+                app.disabled = false;
+              }
+            });
+          }
+        };
+
+
+
 // 작가 작품 업로드
       this.createPhoto = function(uploadData){
         app.disabled = false;
@@ -102,12 +158,15 @@ angular.module('artistControllers',['userServices', 'artistServices'])
             app.errorMsg = '작품 이미지를 선택해주세요.';
           } else if(app.data.selectedOption.id === '0'){
             app.errorMsg = '작품의 종류를 선택해주세요.';
+          } else if(app.thumbnailPath === undefined || app.thumbnailPath === null || app.thumbnailPath === '') {
+            app.errorMsg = '썸네일 이미지를 선택해주세요.';
           } else {
 
             app.uploadData = uploadData;
             app.uploadData.user_id = $scope.main.user.user_id;
             app.uploadData.photo_type = app.data.selectedOption.id;
             app.uploadData.photo_path = app.mainImagePath;
+            app.uploadData.photo_thumbnail = app.thumbnailPath;
 
             Artist.createAristPhoto(app.uploadData).then(function(data){
               if(data.data.success){

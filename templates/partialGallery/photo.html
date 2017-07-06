@@ -1,9 +1,6 @@
-<div id="mainContent" class="container">
+<div class="container">
   <div class="row">
     <div class="col-sm-8">
-      <form name="outerForm" class="tab-form-demo">
-        <uib-tabset active="activeJustified" justified="true">
-          <uib-tab index="0" heading="작품">
 						<div>
 										<div class="navbar-form container">
 											<div class="navbar-left">
@@ -44,7 +41,7 @@
 											<div class="card">
 														<div class="card-image">
 															<a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
-																<img class="img-responsive" ng-src="{{photo.photo_path}}">
+																<img class="img-responsive" ng-src="{{photo.photo_thumbnail}}">
 															</a>
 														</div>
 														<div class="card-content">
@@ -62,17 +59,11 @@
 														</div>
 												</div>
 											</div>
-                </uib-tab>
-              </uib-tabset>
-            </form>
-
     </div>
 
 <div class="clearfix visible-xs"></div>
     <div class="col-sm-4">
-
-
-        <uib-tabset active="activeJustified" justified="true">
+        <uib-tabset active="activeJustified" justified="true" style="margin-top:50px;">
           <uib-tab index="0" heading="프로필" >
             <div class ="row show-hide-message" ng-show="artistPhoto.successMsg">
               <div class="alert alert-success">{{artistPhoto.successMsg}}</div>

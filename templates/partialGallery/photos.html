@@ -15,7 +15,7 @@
         <div class="card">
               <div class="card-image">
                 <a ui-sref="app.gallery.show({photo_id: photo.photo_id, photo_type:photo.photo_type})" ui-sref-active="active">
-                  <img class="img-responsive" ng-src="{{photo.photo_path}}">
+                  <img class="img-responsive" ng-src="{{photo.photo_thumbnail}}">
                   <span class="card-author">By {{photo.username}}</span>
                 </a>
               </div>

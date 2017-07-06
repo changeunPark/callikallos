@@ -26,7 +26,8 @@ try{
               photo_title:req.body.title,
               photo_detail:req.body.detail,
               photo_path:req.body.photo_path,
-              photo_type:req.body.photo_type
+              photo_type:req.body.photo_type,
+              photo_thumbnail:req.body.photo_thumbnail
             };
 
             connection.query(insertSql, insertValue, function (error, results, next) {

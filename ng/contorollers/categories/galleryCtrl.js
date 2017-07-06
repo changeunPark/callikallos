@@ -25,6 +25,7 @@ angular.module('gallertControllers',['galleryServices'])
     Gallery.readPhotos(photo_type).then(function(data){
       if(data.data.success){
         app.photoData = data.data.result;
+        console.log(app.photoData);
       } else {
         app.errorMsg = data.data.message;
       }
