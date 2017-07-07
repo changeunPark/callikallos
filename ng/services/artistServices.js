@@ -18,6 +18,10 @@ angular.module('artistServices',[])
 
 // ======================================================================= //
 
+  artistFactory.readAristCrop = function(blob){
+    return $http.post('/uploadImage', blob);
+  };
+  
 // Artist.createPhoto(photoData)
   artistFactory.createAristPhoto = function(photoData){
     return $http.post('/api/artistProfiles', photoData);

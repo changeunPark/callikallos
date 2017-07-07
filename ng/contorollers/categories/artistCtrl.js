@@ -1,4 +1,5 @@
 angular.module('artistControllers',['userServices', 'artistServices'])
+
 .controller('artistTapCtrl', function($scope, Artist){
   // 전체 메뉴 가져오기
   Artist.readArtistTap().then(function(data){
@@ -30,9 +31,8 @@ angular.module('artistControllers',['userServices', 'artistServices'])
     });
 })
 
-.controller('uploadPhotoCtrl', function ($http, $timeout, $scope, Artist, $state) {
+.controller('uploadPhotoCtrl', function ($http, $timeout, $scope, Artist, $state, $window) {
     var app = this;
-
     app.data = {
      availableOptions: [
        {id: '0', name: '카테고리를 선택해주세요.'},
@@ -45,7 +45,7 @@ angular.module('artistControllers',['userServices', 'artistServices'])
 
 // 파일의 경로만 저장하기 메인 이미지 만들기
     this.file = {};
-
+// 메인 작품이미지 업로드 되었는지 보여주기
     this.mainPhotoChanged = function(files) {
           if (files.length > 0 && files[0].name.match(/\.(png|jpeg|jpg)$/)) {
               var file = files[0];
@@ -61,9 +61,10 @@ angular.module('artistControllers',['userServices', 'artistServices'])
               app.mainThumbnail = {};
           }
       };
-
+// 메인 작품 이미지 업로드해서 경로 저장
     this.readPhoto = function(){
-      app.errorMsg = false;
+// 메인 이미지 업로드 여부
+      app.mainPhoto = false;
       app.disabled = true;
       $scope.$emit('LOAD');
       var fd = new FormData();
@@ -74,14 +75,15 @@ angular.module('artistControllers',['userServices', 'artistServices'])
       }).then(function(data){
         if(data.data.success){
           $scope.$emit('UNLOAD');
+          $window.alert(data.data.message);
+          app.mainPhoto = true;
           app.disabled = false;
-          app.successMsg = data.data.message;
           app.mainImagePath = data.data.photo_path;
           app.file = {};
         } else {
           $scope.$emit('UNLOAD');
+          $window.alert(data.data.message);
           app.disabled = false;
-          app.errorMsg = data.data.message;
           app.file = {};
         }
         });
@@ -92,7 +94,6 @@ angular.module('artistControllers',['userServices', 'artistServices'])
       app.myCroppedImage='';
 
       var handleFileSelect=function(evt) {
-        $scope.imageuploaded = false;
         var file=evt.currentTarget.files[0];
         var reader = new FileReader();
         reader.onload = function (evt) {
@@ -118,41 +119,47 @@ angular.module('artistControllers',['userServices', 'artistServices'])
           }
         }
 
+// 썸네일 이미지 로컬디스크에 저장 후 저장 위치 가져오기
         app.readCropImage = function(data){
+          app.thumbnail = false;
           app.disabled = true;
           $scope.$emit('LOAD');
           if(data.base64Url === '' || data.base64Url === null || data.base64Url === undefined){
             app.disabled = false;
-            console.log('이미지를 선택해주세요.');
           } else {
-            var blob = decodeBase64Image($scope.myCroppedImage);
-            $http.post('/uploadImage', blob).then(function(data){
-              if(data.data.success){
-                app.disabled = false;
+              if(!app.mainImagePath){
                 $scope.$emit('UNLOAD');
-                app.successMsg = data.data.message;
-                app.thumbnailPath = data.data.filePath;
-                $scope.imageuploaded = true;
-              } else {
+                $window.alert('작품의 메인 이미지를 업로드해주세요.');
                 app.disabled = false;
+              } else {
+                var blob = decodeBase64Image($scope.myCroppedImage);
+                Artist.readAristCrop(blob).then(function(data){
+                  if(data.data.success){
+                    $scope.$emit('UNLOAD');
+                    $window.alert(data.data.message);
+                    app.thumbnail = true;
+                    app.disabled = false;
+                    app.thumbnailPath = data.data.filePath;
+                  } else {
+                    app.disabled = false;
+                  }
+                });
               }
-            });
           }
         };
 
-
-
 // 작가 작품 업로드
       this.createPhoto = function(uploadData){
-        app.disabled = false;
+        app.disabled = true;
         app.errorMsg = false;
         if(!uploadData){
           app.errorMsg = '빈칸을 모두 입력해주세요.';
+          app.disabled = false;
           app.successMsg = false;
         } else {
           if(app.uploadData.title === undefined || app.uploadData.title === null || app.uploadData.title === '') {
             app.errorMsg = '작품의 제목을 입력해주세요.';
-          } else if(app.uploadData.detail === undefined || app.uploadData.detail === null || app.uploadData.detail === '') {
+          } else if($('#summernote').summernote('code') === '<p><br></p>' || $('#summernote').summernote('code') === null || $('#summernote').summernote('code') === undefined || $('#summernote').summernote('code') === '') {
             app.errorMsg = '작품의 설명을 입력해주세요.';
           } else if(app.mainImagePath === undefined || app.mainImagePath ===  null || app.mainImagePath === ''){
             app.errorMsg = '작품 이미지를 선택해주세요.';
@@ -161,13 +168,14 @@ angular.module('artistControllers',['userServices', 'artistServices'])
           } else if(app.thumbnailPath === undefined || app.thumbnailPath === null || app.thumbnailPath === '') {
             app.errorMsg = '썸네일 이미지를 선택해주세요.';
           } else {
-
-            app.uploadData = uploadData;
-            app.uploadData.user_id = $scope.main.user.user_id;
-            app.uploadData.photo_type = app.data.selectedOption.id;
-            app.uploadData.photo_path = app.mainImagePath;
-            app.uploadData.photo_thumbnail = app.thumbnailPath;
-
+            app.uploadData = {
+              title: uploadData.title,
+              detail: $('#summernote').summernote('code'),
+              user_id: $scope.main.user.user_id,
+              photo_type: app.data.selectedOption.id,
+              photo_path: app.mainImagePath,
+              photo_thumbnail: app.thumbnailPath
+            };
             Artist.createAristPhoto(app.uploadData).then(function(data){
               if(data.data.success){
                 app.successMsg = data.data.message;
@@ -179,14 +187,27 @@ angular.module('artistControllers',['userServices', 'artistServices'])
                 app.errorMsg = data.data.message;
                 app.successMsg = false;
                 app.disabled = false;
-
-
               }
             });
-
           }
         }
       };
+// 작품 설명
+      $(document).ready(function() {
+        $('#summernote').summernote({
+          toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']]
+          ],
+          height : 150,
+          lang : 'ko-KR',
+          placeholder: '작품의 설명을 입력해주세요.',
+        });
+      });
 
 })
 

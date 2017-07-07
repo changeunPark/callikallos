@@ -92,33 +92,11 @@ angular.module('boardControllers',['boardServices'])
     $(document).ready(function() {
       $('#summernote').summernote({
         height : 350,
-        callbacks: {
-            onImageUpload: function(files) {
-                sendFile(files[0]);
-            }
-        },
         lang : 'ko-KR',
         placeholder: '댓글은 1,000자까지 작성할 수 있으며 주제와 무관한 댓글, 악성 댓글은 삭제될 수 있습니다.',
 
       });
     });
-
-    function sendFile(file) {
-            data = new FormData();
-            data.append("file", file);
-            console.log(file);
-            $.ajax({
-                url: '/uploadImage',
-                data: data,
-                cache: false,
-                type: "POST",
-                contentType: false,
-                processData: false,
-                success: function(url) {
-                    $('#summernote').summernote('insertImage', url);
-                }
-            });
-        }
 
     this.createBoard = function(response){
       app.disabled = true;

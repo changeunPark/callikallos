@@ -36,6 +36,7 @@ try{
                   console.error('SQL error: ', err);
                   return next(err);
                 } else{
+                  console.log(results);
                   res.status(201).send({success:true, message:'작품이 등록되었습니다.'});
                 }
             });

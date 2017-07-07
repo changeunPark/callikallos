@@ -1,4 +1,10 @@
 angular.module('gallertControllers',['galleryServices'])
+.filter('to_trusted', ['$sce', function($sce){
+    return function(text) {
+        return $sce.trustAsHtml(text);
+    };
+}])
+
 .controller('galleryTapCtrl', function($scope, Gallery){
   // 전체 메뉴 가져오기
   Gallery.readGalleryTap().then(function(data){
@@ -42,6 +48,8 @@ angular.module('gallertControllers',['galleryServices'])
    Gallery.readPhotoData(photo_id).then(function(data){
      if(data.data.success){
        app.photoData = data.data.result;
+       app.htmlcontent = data.data.result.photo_detail;
+       console.log(app.htmlcontent);
      } else {
        app.errorMsg = data.data.message;
      }
@@ -58,7 +66,6 @@ angular.module('gallertControllers',['galleryServices'])
    Comment.readComment(photo_id).then(function(data){
      if(data.data.success){
        app.commentData = data.data.result;
-       console.log(app.commentData);
      } else {
        app.errorMsg = data.data.message;
      }

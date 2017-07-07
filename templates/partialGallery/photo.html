@@ -28,13 +28,13 @@
 										</div>
 									</div>
 									<div class="navbar-form container text-center">
-										<h4>{{galleryphoto.photoData.photo_detail}}</h4>
+                    <p ng-bind-html="galleryphoto.htmlcontent | to_trusted"></p>
 									</div>
 
 							</div>
 
 <!-- <p>관련 작품</p> -->
-										<div class="container-fluid">
+										<div class="container-fluid" style="margin-top: 100px;">
 											<p>관련 작품</p>
 										</div>
 										<div class="col-xs-12 col-sm-6" ng-repeat="photo in galleryphoto.photosData">
